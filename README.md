@@ -22,37 +22,52 @@ This was a commercial app I released in 2002, eventually making free in 2015.  A
 
 It can be moved to a new computer very easily simply by copying its folder.
 
-## Features
+## Triggers & Actions Reference
 
-### Web Monitoring
-* **Web Compare** - Monitor websites for changes using fuzzy logic (percent changed detection)
-* **Site Monitor** - Track server uptime with ping statistics and timeout detection
-* **Keyword Detection** - Trigger alerts when specific words appear or disappear from pages
+Toolfish uses a powerful event system where **Triggers** determine *when* something happens, and **Actions** determine *what* happens.
 
-### Automation & Scheduling
-* **Global Hotkeys** - Assign any key combination to trigger actions
-* **Macros** - Paste predefined text, IP addresses, or custom messages anywhere
-* **Scheduled Tasks** - Run programs or batch files at specified times or intervals
-* **Process Triggers** - Execute actions when specific applications start or stop
-* **Inactivity Triggers** - Take action after periods of keyboard/mouse inactivity
+### Triggers
 
-### Notifications
-* **Text-to-Speech** - Have Toolfish speak notifications using Windows TTS (SAPI)
-* **Pop-up Messages** - Display custom alert dialogs
-* **Sound Alerts** - Play audio files when events trigger
-* **Email Notifications** - Send emails when events occur
+| Trigger | Description |
+|---------|-------------|
+| **Time** | Run at a specific time with auto-rescheduling options |
+| **Time Range** | Only activate within a specified time window |
+| **Hotkey** | Trigger on any key combination (global hotkeys) |
+| **Inactivity** | Trigger based on keyboard/mouse idle time |
+| **Day Filter** | Limit events to specific days of the week |
+| **Process** | Trigger when a process starts, stops, or has focus |
 
-### System Control
-* **Smart Mute** - Automatically mute your computer audio after inactivity
-* **Volume Control** - Set system and microphone volume levels
-* **Atomic Clock Sync** - Adjust system time from internet time servers
-* **Shutdown/Reboot/Logoff** - Schedule system power actions
+### Actions
 
-### Misc
+| Action | Description |
+|--------|-------------|
+| **Say/Show/Email/Macro Message** | Output text via TTS, popup, email, log, or keystrokes |
+| **Play Sound** | Play a .wav audio file |
+| **Open Website** | Open a URL in your default browser |
+| **Web Compare** | Check if a webpage has changed (conditional) |
+| **Run/Open File** | Execute programs, batch files, or open any file |
+| **Stealth Mode Toggle** | Hide/show the system tray icon |
+| **Check Email** | Monitor a POP3 inbox for new messages (conditional) |
+| **Open/Hide Toolfish Toggle** | Toggle Toolfish window visibility |
+| **Atomic Clock Time Adjust** | Sync system time from an internet time server |
+| **Enable/Disable TTS** | Turn text-to-speech on or off |
+| **Enable/Disable Smart Mute** | Turn the auto-mute feature on or off |
+| **Set System Volume** | Adjust system volume with optional fade |
+| **Set Mic Input Volume** | Adjust microphone input level |
+| **Set Sound Output Device** | Switch to a specific audio output device |
+| **Site Monitor** | Check server uptime and connectivity (conditional) |
+| **Send Command To Application** | Control other windows (close, minimize, send keys) |
+| **Delay** | Wait a specified time before the next action |
+| **Logoff/Shutdown/Reboot** | Power actions for the system |
+| **Leet-Type Toggle** | Enable/disable l33t sp34k typing mode |
+| **Reset Screen Resolutions** | Fix display issues (NVidia workaround) |
+
+## Other Features
+
 * **Keyboard Spy** - Stealth keyboard logging (use responsibly!)
-* **Leet-Type Mode** - Automatically convert typing to "l33t sp34k".  Don't use this feature please.
-* **Fun statistics** - Ever wondered how many miles you've moved your mouse?  Times you've clicked your mouse buttons?
-* Has some built in hotkeys, like Ctrl-Shift-Alt-I will will paste your true IP address.  Check the Event Editor Manager to see the ones it comes with.
+* **Smart Mute** - Automatically mute your computer after inactivity, with optional volume knob control
+* **Fun statistics** - Track how many miles you've moved your mouse, button clicks, and more
+* **Built-in hotkeys** - Comes with useful defaults like Ctrl-Shift-Alt-I to paste your IP address
 
 ## Old Original documentation is [here](https://rtsoft.com/toolfish/index.php) and [here](https://rtsoft.com/toolfish/help.htm)
 
