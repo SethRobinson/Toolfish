@@ -745,6 +745,13 @@ void ProcessMessage(CEvent *p_event, int i_index)
 
                       if (p_event->GetTrigger(i)->GetTriggerType() == C_TRIGGER_INACTIVITY)
                       {
+                          // Don't trigger if something is preventing screensaver (video playback, etc.)
+                          if (IsDisplayRequired())
+                          {
+                              b_run_it = false;
+                              break;
+                          }
+
                           if (p_event->GetTrigger(i)->m_b_check_for_activity)
                           {
                               if (app_glo.GetSecondsInactive() > p_event->GetTrigger(i)->GetRescheduleTimeInSeconds())

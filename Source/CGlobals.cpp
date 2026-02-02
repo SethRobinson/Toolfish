@@ -7,6 +7,8 @@
 #include "demo_util.h"
 #include "..\Shared\CProtection.h"
 #include "CTextParse.h"
+#include <powrprof.h>
+#pragma comment(lib, "PowrProf.lib")
 
 CApplicationGlobals app_glo;
 
@@ -172,8 +174,27 @@ void CApplicationGlobals::DecActiveThreadCount()
 
 
 
+// Check if an application is preventing screensaver/display sleep
+// (e.g., video players like VLC, video calls, etc.)
+bool IsDisplayRequired()
+{
+    EXECUTION_STATE state = 0;
+    // SystemExecutionState = 16
+    if (CallNtPowerInformation((POWER_INFORMATION_LEVEL)16, NULL, 0, &state, sizeof(state)) == 0)
+    {
+        return (state & ES_DISPLAY_REQUIRED) != 0;
+    }
+    return false;
+}
+
 bool CApplicationGlobals::TimeToMute()
 {
+    // Don't mute if something is preventing screensaver (video playback, etc.)
+    if (IsDisplayRequired())
+    {
+        return false;
+    }
+
   	if ( (m_timer_mute.GetTimerStart()+m_timer_mute.GetInterval()) <= (int)GetTickCount())
   {
         //same as interval_reached but we don't want to reset the timer

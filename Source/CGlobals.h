@@ -154,5 +154,8 @@ extern CApplicationGlobals app_glo;
 
 void SetTrayBlinking(bool b_blink_on, long i_code);
 
+// Check if an app is preventing screensaver (video playback, etc.)
+bool IsDisplayRequired();
+
 
 
