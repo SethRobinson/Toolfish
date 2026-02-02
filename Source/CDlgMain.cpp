@@ -307,15 +307,11 @@ CHAR * st_version = "(98/ME Non-Unicode Build)";
        {
          //let's log on to rtsoft's server and check the registration code if possible
            AfxBeginThread(CheckForUpdate, 0);
-  
        }
    
         BuildHotKeyInfo();
         SetupKeyboardOverlay();
-
         LoadButtons();
- 
-
        return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -332,7 +328,6 @@ void CDlgMain::LoadButtons()
   // m_but_events.SetPressedStyle(CButtonST::BTNST_PRESSED_TOPBOTTOM, FALSE);
    // m_but_events.SizeToContent();
    //m_but_events.DrawBorder(false, false);
-   
 
    
    m_but_mute.SetTooltipText(_T("Have your compute automatically lower the volume when you're away."));
@@ -357,7 +352,9 @@ void CDlgMain::LoadButtons()
    m_but_options.SetAlign(CButtonST::ST_ALIGN_VERT, FALSE);
 
    m_but_suggestion.SetTooltipText(_T("Desperately need a feature implemented and don't mind testing it out?  Let us know!"));
-   m_but_suggestion.SetURL(_T("http://rtsoft.com/pages/feedback.php?game=Toolfish&version=2.30"));
+   CString feedbackUrl;
+   feedbackUrl.Format(_T("http://rtsoft.com/pages/feedback.php?game=Toolfish&version=%.2f"), C_F_VERSION);
+   m_but_suggestion.SetURL(feedbackUrl);
    m_but_suggestion.DrawTransparent();
    m_but_suggestion.SetBitmaps(_T("gui\\but_suggest.bmp"), RGB(255,255,255), 0,0);
    m_but_suggestion.SetAlign(CButtonST::ST_ALIGN_VERT, FALSE);

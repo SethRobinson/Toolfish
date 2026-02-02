@@ -73,10 +73,11 @@ It can be moved to a new computer very easily simply by copying its folder.
 ## History
 
 
-**V2.30 Feb 2nd, 2026** 
+**V2.31 Feb 2nd, 2026** 
 * Added "Set audio output device" action.
 * Added "modify volume knob sensitivity" option to the Smart Mute menu.
 * Added "Duplicate" to Event Manager dialog.
+* "Inactivity" detection improved, now monitors gamepads and detects Windows' "display required' state (watching movies, etc)
 * Source code released.
 
 ## Building from Source
