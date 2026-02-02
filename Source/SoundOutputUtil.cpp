@@ -151,11 +151,15 @@ bool SetDefaultOutputDevice(const char* partialName)
         return false;
     }
 
+    // Initialize COM for this thread (we're running on a background thread)
+    CoInitialize(NULL);
+
     std::vector<SoundOutputDevice> devices = EnumerateOutputDevices();
     
     if (devices.empty())
     {
         LogMsg(_T("Sound output: No active output devices found."));
+        CoUninitialize();
         return false;
     }
 
@@ -183,6 +187,7 @@ bool SetDefaultOutputDevice(const char* partialName)
         std::string deviceList = GetOutputDeviceListString();
         uni deviceListUni(deviceList.c_str());
         LogMsg(_T("Available devices:\r\n%s"), deviceListUni.GetAuto());
+        CoUninitialize();
         return false;
     }
 
@@ -209,6 +214,7 @@ bool SetDefaultOutputDevice(const char* partialName)
     if (FAILED(hr) || !pPolicyConfig)
     {
         LogMsg(_T("Unable to change sound output device - this feature may not be supported on your version of Windows."));
+        CoUninitialize();
         return false;
     }
 
@@ -225,8 +231,10 @@ bool SetDefaultOutputDevice(const char* partialName)
     if (FAILED(hr))
     {
         LogMsg(_T("Failed to set sound output device (error: 0x%08X)."), hr);
+        CoUninitialize();
         return false;
     }
 
+    CoUninitialize();
     return true;
 }
