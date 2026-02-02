@@ -1,3 +1,5 @@
 #pragma once
 
-bool global_registry( bool return_only, bool add );
+bool global_registry( bool return_only, bool add, bool as_admin = false );
+bool CreateAdminStartupTask(const CString& exePath);
+bool DeleteAdminStartupTask();

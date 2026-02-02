@@ -90,6 +90,18 @@ CDlgMain::CDlgMain(CWnd* pParent /*=NULL*/)
        g_b_minimized = false;
          //startup fullscreen
       ShowWindow(SW_SHOW);
+      
+      // If -show flag is present (e.g. after elevation restart), force window to foreground
+      if (str_command.Find(_T("-show")) != -1)
+      {
+          // Use multiple methods to ensure window comes to front
+          ShowWindow(SW_RESTORE);
+          SetWindowPos(&wndTopMost, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+          SetWindowPos(&wndNoTopMost, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+          SetForegroundWindow();
+          BringWindowToTop();
+          SetFocus();
+      }
      }  else
      {
        g_b_minimized = true;

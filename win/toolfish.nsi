@@ -138,6 +138,13 @@ CreateDirectory "$SMPROGRAMS\${_TITLE_}"
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   CreateShortCut "$SMPROGRAMS\${_TITLE_}\${_TITLE_}.lnk" "$INSTDIR\toolfish.exe" "" "$INSTDIR\toolfish.exe"
+  
+  ; Create a VBScript to launch Toolfish as admin (with UAC prompt)
+  FileOpen $0 "$INSTDIR\RunAsAdmin.vbs" w
+  FileWrite $0 "Set UAC = CreateObject($\"Shell.Application$\")$\r$\n"
+  FileWrite $0 "UAC.ShellExecute $\"toolfish.exe$\", $\"$\", $\"$INSTDIR$\", $\"runas$\", 1$\r$\n"
+  FileClose $0
+  CreateShortCut "$SMPROGRAMS\${_TITLE_}\${_TITLE_} (As Admin).lnk" "wscript.exe" '"$INSTDIR\RunAsAdmin.vbs"' "$INSTDIR\toolfish.exe"
   WriteIniStr "$SMPROGRAMS\${_TITLE_}\Report a bug or make a comment.url" "InternetShortcut" "URL" "http://www.rtsoft.com/pages/feedback_app.htm?game=${_TITLE_}&version=${_VERSION_}"
   CreateShortCut "$SMPROGRAMS\${_TITLE_}\What's new in this version.lnk" "$INSTDIR\whatsnew.txt" ; use defaults for parameters, icon, etc.
   CreateShortCut "$SMPROGRAMS\${_TITLE_}\Help.lnk" "$INSTDIR\docs\help.htm" ; use defaults for parameters, icon, etc.
@@ -190,6 +197,7 @@ Section "Uninstall"
 
   Delete "$INSTDIR\toolfish.exe"
   Delete "$INSTDIR\whatsnew.txt"
+  Delete "$INSTDIR\RunAsAdmin.vbs"
  
   Delete "$INSTDIR\Uninstall.exe"
   Delete "$INSTDIR\sm.dll"
@@ -201,6 +209,9 @@ Section "Uninstall"
 
   DeleteRegValue HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "Toolfish"
 
+  ; Remove Task Scheduler task (for admin startup feature)
+  ; The /F flag forces deletion without confirmation, fails silently if task doesn't exist
+  nsExec::ExecToLog 'schtasks /Delete /TN "Toolfish" /F'
 
   DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${_TITLE_}"
   Delete "$SMPROGRAMS\${_TITLE_}\*.*"

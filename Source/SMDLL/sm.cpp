@@ -184,39 +184,32 @@ void SafeSend(const CHAR * p_msg)
 						
 
 
-DLL_EXPORT LRESULT WINAPI KeyboardProc(
-  int code,       // hook code
-  WPARAM wParam,  // virtual-key code
-  LPARAM lParam   // keystroke-message information
+// Low-level keyboard hook callback
+// Unlike WH_KEYBOARD, this doesn't require DLL injection and works with both 32-bit and 64-bit apps
+DLL_EXPORT LRESULT CALLBACK LowLevelKeyboardProc(
+  int nCode,      // hook code
+  WPARAM wParam,  // WM_KEYDOWN, WM_KEYUP, WM_SYSKEYDOWN, or WM_SYSKEYUP
+  LPARAM lParam   // pointer to KBDLLHOOKSTRUCT
   )
- {					   
-//log_msg("Got keyboard");
-                                                                         
-  if (code < 0) // do not process message 
-return CallNextHookEx(h_hook, code, wParam, lParam);
+{
+    if (nCode < 0)
+        return CallNextHookEx(h_hook, nCode, wParam, lParam);
 
-         
+    if (nCode == HC_ACTION)
+    {
+        KBDLLHOOKSTRUCT* pkbhs = (KBDLLHOOKSTRUCT*)lParam;
+        
+        // Only process key-down events (WM_KEYDOWN or WM_SYSKEYDOWN)
+        // WH_KEYBOARD_LL doesn't send repeated events for held keys like WH_KEYBOARD did
+        if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)
+        {
+            // Post the virtual key code to the main app
+            // Use 0 for lParam since the main app primarily needs the vkCode
+            PostMessage(g_main_hwnd, WM_USER+500, pkbhs->vkCode, 0);
+        }
+    }
 
-     
- if ( (lParam & 0x80000000) || (lParam & 0x40000000) )
-  return CallNextHookEx(h_hook, code, wParam, lParam);
-   
-  
-  //            if ( (code == HC_ACTION)  /*&& !(HIWORD(lParam) & (KF_UP|KF_PREV)) */)   
-   
- if (code == HC_ACTION && !(lParam & 0x80000000))
-
-  {
- 
-    PostMessage(g_main_hwnd,WM_USER+500,wParam,lParam);
-  
-  }                       
-  
- 
-      
-      return CallNextHookEx(h_hook, code, wParam, lParam);
- 
-  
+    return CallNextHookEx(h_hook, nCode, wParam, lParam);
 }
 
 
@@ -450,10 +443,14 @@ DLL_EXPORT bool WINAPI install_hook(HINSTANCE dll_hinstance, HWND hinstance_app)
         log_msg("Error, g_hModule is null");
         return false;
     }
-     h_hook = SetWindowsHookEx(WH_KEYBOARD, KeyboardProc, g_hModule, 0);
+    
+    // Use WH_KEYBOARD_LL (low-level hook) instead of WH_KEYBOARD
+    // This doesn't require DLL injection, so it works with both 32-bit and 64-bit apps
+    // Pass NULL for hModule since low-level hooks don't need to be injected
+    h_hook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, g_hModule, 0);
     if (!h_hook)								
 	{
-	    log_msg("Unable to set the keyboard hook.");
+	    log_msg("Unable to set the low-level keyboard hook.");
 //	 return false;
 	}                                                                              
 

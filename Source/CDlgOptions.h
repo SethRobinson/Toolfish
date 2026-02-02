@@ -28,6 +28,7 @@ public:
 	BOOL	m_b_trim_log;
 	BOOL	m_b_disable_tts;
 	BOOL	m_b_boot_stealth;
+	BOOL	m_b_boot_admin;
 	BOOL	m_b_enable_tray;
 	BOOL	m_b_enable_blink_email;
 	BOOL	m_b_enable_blink_webpage;
@@ -57,6 +58,7 @@ protected:
 	afx_msg void OnBDisableTts();
 	afx_msg void OnBootLoad();
 	afx_msg void OnBootStealth();
+	afx_msg void OnBootAdmin();
 	afx_msg void OnSmtpConfigure();
 	afx_msg void OnBEnableTray();
 	//}}AFX_MSG

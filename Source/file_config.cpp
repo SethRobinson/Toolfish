@@ -44,6 +44,7 @@ bool D_LOAD_FUNCTION_NAME (CConfig *sys)
         wcscpy(sys->m_st_email, L"Toolfish <toolfish@yourdomain.com>");
         sys->m_smtp_logon = CConfig::AuthLoginMethod;
         sys->m_i_smtp_port = 25;
+        sys->m_b_disable_tts = true;  // disable text to speech by default
         
 
         return true; //no error

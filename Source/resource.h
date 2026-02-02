@@ -295,6 +295,9 @@
 #define IDC_VOLUME_KNOB_GROUP           1206
 #define IDC_DEVICE_LIST                 1207
 #define IDC_DEVICE_MATCH                1208
+#define IDC_BOOT_ADMIN                  1209
+#define IDC_ADMIN_EXPLANATION           1210
+#define IDC_ADMIN_STATUS                1211
 #define ID_MENU_EXIT                    32772
 #define ID_MENU_OPTIONS                 32773
 #define ID_MENU_COPY                    32774
@@ -328,7 +331,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        208
 #define _APS_NEXT_COMMAND_VALUE         32800
-#define _APS_NEXT_CONTROL_VALUE         1209
+#define _APS_NEXT_CONTROL_VALUE         1212
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

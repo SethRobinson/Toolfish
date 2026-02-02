@@ -30,6 +30,7 @@ CDlgOptions::CDlgOptions(CWnd* pParent /*=NULL*/)
 	m_b_trim_log = FALSE;
 	m_b_disable_tts = FALSE;
 	m_b_boot_stealth = FALSE;
+	m_b_boot_admin = FALSE;
 	m_b_enable_tray = FALSE;
 	m_b_enable_blink_email = FALSE;
 	m_b_enable_blink_webpage = FALSE;
@@ -48,6 +49,7 @@ void CDlgOptions::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_TRIM_LOG, m_b_trim_log);
 	DDX_Check(pDX, IDC_B_DISABLE_TTS, m_b_disable_tts);
 	DDX_Check(pDX, IDC_BOOT_STEALTH, m_b_boot_stealth);
+	DDX_Check(pDX, IDC_BOOT_ADMIN, m_b_boot_admin);
 	DDX_Check(pDX, IDC_B_ENABLE_TRAY, m_b_enable_tray);
 	DDX_Check(pDX, IDC_BLINK_EMAIL, m_b_enable_blink_email);
 	DDX_Check(pDX, IDC_BLINK_WEBPAGE, m_b_enable_blink_webpage);
@@ -65,6 +67,7 @@ BEGIN_MESSAGE_MAP(CDlgOptions, CBkDialogST)
 	ON_BN_CLICKED(IDC_B_DISABLE_TTS, OnBDisableTts)
 	ON_BN_CLICKED(IDC_BOOT_LOAD, OnBootLoad)
 	ON_BN_CLICKED(IDC_BOOT_STEALTH, OnBootStealth)
+	ON_BN_CLICKED(IDC_BOOT_ADMIN, OnBootAdmin)
 	ON_BN_CLICKED(IDC_SMTP_CONFIGURE, OnSmtpConfigure)
 	ON_BN_CLICKED(IDC_B_ENABLE_TRAY, OnBEnableTray)
 	//}}AFX_MSG_MAP
@@ -83,11 +86,22 @@ BOOL CDlgOptions::OnInitDialog()
     m_i_log_lines = glo.m_i_trim_lines;
     m_b_disable_tts = glo.m_b_disable_tts;
     m_b_boot_stealth = glo.m_b_boot_stealth;
+    m_b_boot_admin = glo.m_b_boot_admin;
     m_b_enable_tray = !glo.m_b_tray_disable_blinking;
     m_b_enable_blink_webpage = !glo.m_b_tray_no_trigger_on_webcompare;
     m_b_enable_blink_email = !glo.m_b_tray_no_trigger_on_email;
     m_b_detect_IP_address_server_side = !glo.m_b_server_ip_disabled;
     m_b_minimize_on_close = glo.m_b_minimize_on_close;
+
+    // Show current elevation status
+    if (IsUserAnAdmin())
+    {
+        SetDlgItemText(IDC_ADMIN_STATUS, _T("(Running as Admin)"));
+    }
+    else
+    {
+        SetDlgItemText(IDC_ADMIN_STATUS, _T("(Not Admin)"));
+    }
 
     UpdateData(D_TO_WINDOW);
     ProcessGray();
@@ -106,6 +120,7 @@ void CDlgOptions::OnOK()
    glo.m_i_trim_lines = m_i_log_lines;
    glo.m_b_disable_tts = m_b_disable_tts != 0;
    glo.m_b_boot_stealth = m_b_boot_stealth != 0;
+   glo.m_b_boot_admin = m_b_boot_admin != 0;
    
    glo.m_b_tray_disable_blinking = m_b_enable_tray != 1; //reversed on purpose
    glo.m_b_tray_no_trigger_on_webcompare = m_b_enable_blink_webpage != 1; //reversed on purpose
@@ -115,8 +130,29 @@ void CDlgOptions::OnOK()
    
    ProcessGray();
 
-   global_registry(false, glo.m_b_boot_load);
- 	FileConfigSave(&glo);
+   // Handle startup registration
+   if (glo.m_b_boot_admin && glo.m_b_boot_load)
+   {
+       // User wants admin startup
+       if (IsUserAnAdmin())
+       {
+           global_registry(false, true, true);
+           // Error message is shown by CreateAdminStartupTask if it fails
+       }
+       else
+       {
+           MessageBox(_T("You need to run Toolfish as administrator to enable admin startup.\n\nPlease restart Toolfish as administrator and try again."),
+               _T("Toolfish"), MB_OK | MB_ICONWARNING);
+           glo.m_b_boot_admin = false;  // Reset since we couldn't enable it
+       }
+   }
+   else
+   {
+       // Normal registry-based startup (or disabled)
+       global_registry(false, glo.m_b_boot_load, false);
+   }
+   
+   FileConfigSave(&glo);
 
     
     app_glo.ActivateSpeech(!glo.m_b_disable_tts);
@@ -131,14 +167,12 @@ void CDlgOptions::ProcessGray()
   UpdateData(D_TO_VAR);
   
   ((CWnd*)GetDlgItem(IDC_LOG_LINES))->EnableWindow(m_b_trim_log);
-     ((CWnd*)GetDlgItem(IDC_BOOT_STEALTH))->EnableWindow(m_b_boot_load);
- 
-
+  ((CWnd*)GetDlgItem(IDC_BOOT_STEALTH))->EnableWindow(m_b_boot_load);
+  ((CWnd*)GetDlgItem(IDC_BOOT_ADMIN))->EnableWindow(m_b_boot_load);
+  ((CWnd*)GetDlgItem(IDC_ADMIN_EXPLANATION))->EnableWindow(m_b_boot_load);
      
-    ((CWnd*)GetDlgItem(IDC_BLINK_WEBPAGE))->EnableWindow(m_b_enable_tray);
-      ((CWnd*)GetDlgItem(IDC_BLINK_EMAIL))->EnableWindow(m_b_enable_tray);
-
-
+  ((CWnd*)GetDlgItem(IDC_BLINK_WEBPAGE))->EnableWindow(m_b_enable_tray);
+  ((CWnd*)GetDlgItem(IDC_BLINK_EMAIL))->EnableWindow(m_b_enable_tray);
 }
 
 
@@ -238,6 +272,77 @@ void CDlgOptions::OnBootStealth()
 
         }
     }
+}
+
+void CDlgOptions::OnBootAdmin() 
+{
+    UpdateData(D_TO_VAR);
+
+    if (m_b_boot_admin)
+    {
+        // Check if we're already running as admin
+        if (!IsUserAnAdmin())
+        {
+            // Need elevation to create the scheduled task
+            if (MessageBox(
+                _T("Running as Admin at startup requires creating a scheduled task with administrator privileges.\n\n")
+                _T("This allows Toolfish to work with games and apps that run elevated (like Genshin Impact).\n\n")
+                _T("Would you like to restart Toolfish as administrator now to enable this?"),
+                _T("Elevation Required"),
+                MB_YESNO | MB_ICONQUESTION) == IDYES)
+            {
+                // Save current settings first
+                glo.m_b_boot_load = m_b_boot_load != 0;
+                glo.m_b_boot_admin = TRUE;  // Set this to true so it's remembered
+                FileConfigSave(&glo);
+
+                // Get current exe path and restart elevated
+                TCHAR exePath[MAX_PATH];
+                GetModuleFileName(NULL, exePath, MAX_PATH);
+                
+                // Use -waitpid to tell the new instance to wait for us to exit
+                // Use -show to force window to foreground so user sees the restart
+                CString params;
+                params.Format(_T("-show -waitpid:%d"), GetCurrentProcessId());
+                
+                // Allow the new process to take foreground (otherwise Windows blocks it)
+                AllowSetForegroundWindow(ASFW_ANY);
+                
+                SHELLEXECUTEINFO sei = { sizeof(sei) };
+                sei.fMask = SEE_MASK_NOCLOSEPROCESS;  // Get process handle
+                sei.lpVerb = _T("runas");
+                sei.lpFile = exePath;
+                sei.lpParameters = params;
+                sei.nShow = SW_SHOWNORMAL;
+                
+                if (ShellExecuteEx(&sei))
+                {
+                    // Exit current instance immediately
+                    ExitProcess(0);
+                }
+                else
+                {
+                    // User cancelled UAC or it failed
+                    glo.m_b_boot_admin = FALSE;
+                    FileConfigSave(&glo);
+                    m_b_boot_admin = FALSE;
+                    UpdateData(D_TO_WINDOW);
+                    MessageBox(
+                        _T("Failed to restart as administrator. The admin startup option has been disabled."),
+                        _T("Error"),
+                        MB_OK | MB_ICONWARNING);
+                }
+            }
+            else
+            {
+                // User declined, uncheck the box
+                m_b_boot_admin = FALSE;
+                UpdateData(D_TO_WINDOW);
+            }
+        }
+        // If already admin, the task will be created when OK is clicked
+    }
+    ProcessGray();
 }
 
 void CDlgOptions::OnSmtpConfigure() 

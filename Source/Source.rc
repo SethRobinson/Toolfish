@@ -295,34 +295,38 @@ BEGIN
     CONTROL         "Open in new browser window",IDC_NEW,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,40,171,14
 END
 
-IDD_OPTIONS DIALOG 0, 0, 192, 260
+IDD_OPTIONS DIALOG 0, 0, 192, 295
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Options"
 FONT 8, "MS Sans Serif"
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,7,239,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,135,239,50,14
+    DEFPUSHBUTTON   "OK",IDOK,7,274,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,274,50,14
     CONTROL         "Automatically load at boot (recommended)",IDC_BOOT_LOAD,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,149,8
-    CONTROL         "Trim toolfish_log.txt to",IDC_TRIM_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,127,84,10
-    EDITTEXT        IDC_LOG_LINES,93,126,27,13,ES_AUTOHSCROLL
-    LTEXT           "lines on startup",IDC_STATIC,125,128,48,8
-    PUSHBUTTON      "Configure Default Text To Speech Voice",IDC_VOICE_CONFIGURE,21,162,151,14
+    CONTROL         "Trim toolfish_log.txt to",IDC_TRIM_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,162,84,10
+    EDITTEXT        IDC_LOG_LINES,93,161,27,13,ES_AUTOHSCROLL
+    LTEXT           "lines on startup",IDC_STATIC,125,163,48,8
+    PUSHBUTTON      "Configure Default Text To Speech Voice",IDC_VOICE_CONFIGURE,21,197,151,14
     CONTROL         "Disable all text to speech, unload Microsoft SAPI",IDC_B_DISABLE_TTS,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,143,170,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,178,170,10
     CONTROL         "Start in Stealth Mode (totally invisible)",IDC_BOOT_STEALTH,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,34,149,8
-    GROUPBOX        "Load at boot options",IDC_GROUPBOX,7,21,178,28
-    PUSHBUTTON      "Configure Outgoing Mail (SMTP) Server",IDC_SMTP_CONFIGURE,21,183,151,14
-    CONTROL         "Enable Tray Notifications",IDC_B_ENABLE_TRAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,55,164,15
-    GROUPBOX        "Tray Notification Options",IDC_GROUPBOX1,7,72,178,41
+    GROUPBOX        "Load at boot options",IDC_GROUPBOX,7,21,178,52
+    CONTROL         "Run as Admin at startup",IDC_BOOT_ADMIN,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,47,90,8
+    LTEXT           "",IDC_ADMIN_STATUS,106,47,70,8
+    LTEXT           "(Required for games/apps that run elevated)",IDC_ADMIN_EXPLANATION,24,58,155,8
+    PUSHBUTTON      "Configure Outgoing Mail (SMTP) Server",IDC_SMTP_CONFIGURE,21,218,151,14
+    CONTROL         "Enable Tray Notifications",IDC_B_ENABLE_TRAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,79,164,15
+    GROUPBOX        "Tray Notification Options",IDC_GROUPBOX1,7,96,178,41
     CONTROL         "Blink when a webpage is updated",IDC_BLINK_WEBPAGE,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,84,149,8
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,108,149,8
     CONTROL         "Blink when new email is received",IDC_BLINK_EMAIL,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,97,149,8
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,121,149,8
     CONTROL         "Detect IP address server side",IDC_B_DETECT_IP_SERVER_SIDE,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,201,170,14
-    CONTROL         "Minimize on close",IDC_B_MINIMIZE_ON_CLOSE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,218,170,14
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,236,170,14
+    CONTROL         "Minimize on close",IDC_B_MINIMIZE_ON_CLOSE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,253,170,14
 END
 
 IDD_ABOUT DIALOGEX 0, 0, 232, 164
@@ -1304,7 +1308,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 185
         TOPMARGIN, 7
-        BOTTOMMARGIN, 253
+        BOTTOMMARGIN, 288
     END
 
     IDD_ABOUT, DIALOG

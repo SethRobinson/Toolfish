@@ -85,6 +85,36 @@ BOOL CSource::InitInstance()
         //COM library may have already been initialized in this thread, happens when using some debuggers..
         //assert(0); //big time error
     }
+
+    // Check for -waitpid: parameter (used when restarting elevated)
+    // This makes us wait for the old instance to exit before continuing
+    {
+        CString strCommand(GetCommandLine());
+        int waitPidPos = strCommand.Find(_T("-waitpid:"));
+        if (waitPidPos != -1)
+        {
+            // Extract the PID
+            CString pidStr = strCommand.Mid(waitPidPos + 9);
+            int spacePos = pidStr.Find(_T(' '));
+            if (spacePos != -1)
+                pidStr = pidStr.Left(spacePos);
+            
+            DWORD pid = (DWORD)_ttoi(pidStr);
+            if (pid != 0)
+            {
+                // Wait for the old process to exit (up to 10 seconds)
+                HANDLE hProcess = OpenProcess(SYNCHRONIZE, FALSE, pid);
+                if (hProcess != NULL)
+                {
+                    WaitForSingleObject(hProcess, 10000);
+                    CloseHandle(hProcess);
+                }
+                // Small additional delay to ensure cleanup
+                Sleep(500);
+            }
+        }
+    }
+
 #ifndef _DEBUG
     
     //check for another instance of this running
@@ -139,11 +169,26 @@ BOOL CSource::InitInstance()
           return 0;
       }
     }
-    //I remove the key first.  In the off chance they've moved the dir of toolfish 
-     global_registry(false, false);
-  
-    //process load at boot stuff
-     global_registry(false, glo.m_b_boot_load);
+    //Process load at boot stuff
+    //If using admin mode (Task Scheduler), only update if we're actually running as admin
+    //Otherwise we'd delete the task and not be able to recreate it
+    if (glo.m_b_boot_admin && glo.m_b_boot_load)
+    {
+        // Using Task Scheduler - only update if running elevated
+        if (IsUserAnAdmin())
+        {
+            // Remove old registry entry if present, then create/update task
+            global_registry(false, false, false);  // Clean up registry
+            global_registry(false, true, true);    // Create task
+        }
+        // If not admin, leave the existing task alone
+    }
+    else
+    {
+        // Using normal registry method - safe to update anytime
+        global_registry(false, false, false);  // Remove old entry (in case dir moved)
+        global_registry(false, glo.m_b_boot_load, false);  // Add registry entry if enabled
+    }
    
      
      //first things first.  Copy protection.

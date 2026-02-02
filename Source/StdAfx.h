@@ -32,7 +32,9 @@
 #include <afxsock.h>		// MFC socket extensions
 //#include <winsock.h>
 #include <afxtempl.h>		
-#include <afxpriv.h>		
+#include <afxpriv.h>
+#include <shellapi.h>		// For ShellExecuteEx
+#include <shlobj.h>			// For IsUserAnAdmin		
 
 
 // Commonly used project headers (for PCH optimization)
