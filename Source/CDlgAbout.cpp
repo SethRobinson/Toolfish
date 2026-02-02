@@ -94,13 +94,7 @@ BOOL CDlgAbout::OnInitDialog()
 	CBkDialogST::OnInitDialog();
   SetBitmap(_T("gui\\background.bmp"));
            CString cst_temp;
-#ifdef _UNICODE
-           WCHAR wc_char = app_glo.GetBuild();
-           cst_temp.Format(_T("%s V%.2f%c by Seth & Akiko Robinson."), app_glo.GetAppName(), app_glo.GetVersion(), wc_char);
-
-#else
-           cst_temp.Format(_T("%s V%.2f%c by Seth & Akiko Robinson."), app_glo.GetAppName(), app_glo.GetVersion(),  app_glo.GetBuild());
-#endif         
+           cst_temp.Format(_T("%s V%.2f by Seth & Akiko Robinson."), app_glo.GetAppName(), app_glo.GetVersion());         
          ((CStatic*)GetDlgItem(IDC_ABOUT_STATIC))->SetWindowText(cst_temp);
  	
 	// TODO: Add extra initialization here

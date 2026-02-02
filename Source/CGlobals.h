@@ -19,7 +19,7 @@ void LogMsg(char * lpFormat, ...);
 #endif
 const int C_MAX_URL_SIZE = 2024;
 
-const float C_F_VERSION = 2.10f;
+const float C_F_VERSION = 2.30f;
 
 //these macros assume 1 equals a second, like with CTime
 
@@ -73,7 +73,6 @@ class CApplicationGlobals
 private:
    TCHAR m_st_program_name[20];
    float m_f_version;
-   char m_c_build;
    HWND m_main_hWnd;
    HWND m_dialog_hWnd;
    CEventList *m_p_events;
@@ -131,7 +130,6 @@ public:
     int GetLastNewEmailCount(){return m_i_last_new_email_count;}
     void SetLastNewEmailCount(int i_new){m_i_last_new_email_count = i_new;}
     int GetActiveThreadCount();
-    char GetBuild(){return m_c_build;}
     void ShutDownMessageCheck();
     void RetrieveIPAddress();
     TCHAR * GetHomeDir(){return (TCHAR*)&m_st_home_dir;}

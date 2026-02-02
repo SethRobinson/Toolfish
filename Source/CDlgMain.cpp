@@ -281,12 +281,12 @@ BOOL CDlgMain::OnInitDialog()
 	 app_glo.ActivateSpeech(!glo.m_b_disable_tts);
 	
 #ifdef _UNICODE
-CHAR * st_version = "(Windows Vista/7/8/10 Build)";
+CHAR * st_version = "";
 #else
 CHAR * st_version = "(98/ME Non-Unicode Build)";
 
 #endif 
-     sprintf(st_temp, "*** %s V%.2f%c Started %s ***", uni(app_glo.GetAppName()).to_st(), app_glo.GetVersion(), app_glo.GetBuild(), st_version);
+     sprintf(st_temp, "*** %s V%.2f Started %s ***", uni(app_glo.GetAppName()).to_st(), app_glo.GetVersion(), st_version);
      log_msg(st_temp);
 	
      GetLocalAddress((char*)&st_temp);
@@ -348,7 +348,7 @@ void CDlgMain::LoadButtons()
    m_but_options.SetAlign(CButtonST::ST_ALIGN_VERT, FALSE);
 
    m_but_suggestion.SetTooltipText(_T("Desperately need a feature implemented and don't mind testing it out?  Let us know!"));
-   m_but_suggestion.SetURL(_T("http://rtsoft.com/pages/feedback.php?game=Toolfish&version=2.10a"));
+   m_but_suggestion.SetURL(_T("http://rtsoft.com/pages/feedback.php?game=Toolfish&version=2.30"));
    m_but_suggestion.DrawTransparent();
    m_but_suggestion.SetBitmaps(_T("gui\\but_suggest.bmp"), RGB(255,255,255), 0,0);
    m_but_suggestion.SetAlign(CButtonST::ST_ALIGN_VERT, FALSE);

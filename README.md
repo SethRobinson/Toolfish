@@ -51,6 +51,7 @@ It can be moved to a new computer very easily simply by copying its folder.
 ### Misc
 * **Keyboard Spy** - Stealth keyboard logging (use responsibly!)
 * **Leet-Type Mode** - Automatically convert typing to "l33t sp34k".  Don't use this feature please.
+* **Fun statistics** - Ever wondered how many miles you've moved your mouse?  Times you've clicked your mouse buttons?
 * Has some built in hotkeys, like Ctrl-Shift-Alt-I will will paste your true IP address.  Check the Event Editor Manager to see the ones it comes with.
 
 ## Old Original documentation is [here](https://rtsoft.com/toolfish/index.php) and [here](https://rtsoft.com/toolfish/help.htm)
@@ -71,7 +72,12 @@ It can be moved to a new computer very easily simply by copying its folder.
 
 ## History
 
-**V2.10 Feb 2nd, 2026** - Source code release
+
+**V2.30 Feb 2nd, 2026** 
+* Added "Set audio output device" action.
+* Added "modify volume knob sensitivity" option to the Smart Mute menu.
+* Added "Duplicate" to Event Manager dialog.
+* Source code released.
 
 ## Building from Source
 

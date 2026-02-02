@@ -19,7 +19,6 @@ CApplicationGlobals::CApplicationGlobals()
 {
     memset(this, 0, sizeof(CApplicationGlobals));
     _tcscpy(m_st_program_name, _T("Toolfish"));
-    m_c_build = 'a';
     m_f_version = C_F_VERSION;
     m_p_events = new CEventList();
     _tcscpy(m_ws_last_url_compared, _T("(none)"));

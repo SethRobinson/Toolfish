@@ -331,7 +331,7 @@ CAPTION "About Toolfish"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     LTEXT           "Toolfish by Seth A. Robinson",IDC_ABOUT_STATIC,7,54,177,8,SS_NOPREFIX
-    LTEXT           "Copyright (C) 2002-2021; Robinson Technologies",IDC_STATIC,7,70,161,8
+    LTEXT           "Copyright (C) 2002-2026; Robinson Technologies",IDC_STATIC,7,70,161,8
     DEFPUSHBUTTON   "OK",IDOK,93,143,50,14,WS_GROUP
     PUSHBUTTON      "www.rtsoft.com",IDC_BUT_RTSOFT,7,123,62,14
     PUSHBUTTON      "Help",IDC_TOOLFISH_HELP,5,89,46,25
