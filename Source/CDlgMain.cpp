@@ -90,18 +90,6 @@ CDlgMain::CDlgMain(CWnd* pParent /*=NULL*/)
        g_b_minimized = false;
          //startup fullscreen
       ShowWindow(SW_SHOW);
-      
-      // If -show flag is present (e.g. after elevation restart), force window to foreground
-      if (str_command.Find(_T("-show")) != -1)
-      {
-          // Use multiple methods to ensure window comes to front
-          ShowWindow(SW_RESTORE);
-          SetWindowPos(&wndTopMost, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-          SetWindowPos(&wndNoTopMost, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-          SetForegroundWindow();
-          BringWindowToTop();
-          SetFocus();
-      }
      }  else
      {
        g_b_minimized = true;
@@ -321,6 +309,21 @@ CHAR * st_version = "(98/ME Non-Unicode Build)";
         BuildHotKeyInfo();
         SetupKeyboardOverlay();
         LoadButtons();
+        
+    // If -show flag is present (e.g. after elevation restart), force window to foreground
+    CString str_command(GetCommandLine());
+    if (str_command.Find(_T("-show")) != -1)
+    {
+        // Center the window on screen
+        CenterWindow();
+        
+        // Bring window to front
+        ShowWindow(SW_SHOW);
+        SetForegroundWindow();
+        BringWindowToTop();
+        SetActiveWindow();
+    }
+        
        return TRUE;  // return TRUE  unless you set the focus to a control
 }
 

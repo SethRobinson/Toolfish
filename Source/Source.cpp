@@ -170,24 +170,30 @@ BOOL CSource::InitInstance()
       }
     }
     //Process load at boot stuff
-    //If using admin mode (Task Scheduler), only update if we're actually running as admin
-    //Otherwise we'd delete the task and not be able to recreate it
-    if (glo.m_b_boot_admin && glo.m_b_boot_load)
+    // Only update startup configuration if we can do it properly:
+    // - Admin startup requires elevation
+    // - Normal startup can be done anytime
+    
+    if (glo.m_b_boot_load && glo.m_b_boot_admin)
     {
-        // Using Task Scheduler - only update if running elevated
+        // Admin startup mode - only update if elevated
         if (IsUserAnAdmin())
         {
-            // Remove old registry entry if present, then create/update task
-            global_registry(false, false, false);  // Clean up registry
-            global_registry(false, true, true);    // Create task
+            // Deletes registry entry and creates/updates task
+            global_registry(false, true, true);
         }
-        // If not admin, leave the existing task alone
+        // If not admin, leave everything alone (task already exists)
     }
-    else
+    else if (glo.m_b_boot_load && !glo.m_b_boot_admin)
     {
-        // Using normal registry method - safe to update anytime
-        global_registry(false, false, false);  // Remove old entry (in case dir moved)
-        global_registry(false, glo.m_b_boot_load, false);  // Add registry entry if enabled
+        // Normal startup mode - deletes task (if any) and creates registry entry
+        global_registry(false, true, false);
+    }
+    else if (!glo.m_b_boot_load)
+    {
+        // Startup disabled - clean up both task and registry
+        global_registry(false, false, true);   // Delete task
+        global_registry(false, false, false);  // Delete registry
     }
    
      

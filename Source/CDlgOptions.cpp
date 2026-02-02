@@ -130,25 +130,58 @@ void CDlgOptions::OnOK()
    
    ProcessGray();
 
-   // Handle startup registration
-   if (glo.m_b_boot_admin && glo.m_b_boot_load)
+   // Handle startup registration - 3 cases:
+   // 1. Admin startup enabled (boot_load && boot_admin) - need task, no registry
+   // 2. Normal startup enabled (boot_load && !boot_admin) - need registry, no task
+   // 3. Startup disabled (!boot_load) - no task, no registry
+   
+   if (glo.m_b_boot_load && glo.m_b_boot_admin)
    {
-       // User wants admin startup
+       // Check if the logged-in user is actually an admin
+       // (Task Scheduler can only auto-elevate users who are already admins)
+       if (!IsLoggedInUserAdmin())
+       {
+           CString userName = GetLoggedInUserName();
+           CString msg;
+           msg.Format(
+               _T("The current user '%s' is not a member of the Administrators group.\n\n")
+               _T("Windows Task Scheduler can only auto-elevate users who are already administrators. ")
+               _T("For non-admin users, it will create the startup task but Toolfish will NOT have admin privileges.\n\n")
+               _T("To fix this, add '%s' to the Administrators group:\n")
+               _T("1. Open Computer Management (run 'compmgmt.msc')\n")
+               _T("2. Go to Local Users and Groups > Groups > Administrators\n")
+               _T("3. Add '%s' to this group\n")
+               _T("4. Log out and back in\n\n")
+               _T("Do you want to continue anyway? (Toolfish will start at login but without admin privileges)"),
+               (LPCTSTR)userName, (LPCTSTR)userName, (LPCTSTR)userName);
+           
+           if (MessageBox(msg, _T("User Not Administrator"), MB_YESNO | MB_ICONWARNING) != IDYES)
+           {
+               // User cancelled - revert setting
+               glo.m_b_boot_admin = false;
+               m_b_boot_admin = FALSE;
+               UpdateData(D_TO_WINDOW);
+               FileConfigSave(&glo);
+               CBkDialogST::OnOK();
+               return;
+           }
+       }
+       
+       // CASE 1: Admin startup - need elevation to create task
        if (IsUserAnAdmin())
        {
+           // Deletes registry, creates task
            global_registry(false, true, true);
-           // Error message is shown by CreateAdminStartupTask if it fails
        }
        else
        {
-           // Not running as admin - offer to restart elevated
+           // Need to restart elevated
            if (MessageBox(
                _T("Creating an admin startup task requires administrator privileges.\n\n")
                _T("Would you like to restart Toolfish as administrator now?"),
                _T("Elevation Required"),
                MB_YESNO | MB_ICONQUESTION) == IDYES)
            {
-               // Save settings and restart elevated
                FileConfigSave(&glo);
                
                TCHAR exePath[MAX_PATH];
@@ -171,14 +204,20 @@ void CDlgOptions::OnOK()
                    ExitProcess(0);
                }
            }
-           // If user declined or restart failed, continue without admin startup
+           // User declined - revert setting
            glo.m_b_boot_admin = false;
        }
    }
+   else if (glo.m_b_boot_load && !glo.m_b_boot_admin)
+   {
+       // CASE 2: Normal startup - deletes task, creates registry
+       global_registry(false, true, false);
+   }
    else
    {
-       // Normal registry-based startup (or disabled)
-       global_registry(false, glo.m_b_boot_load, false);
+       // CASE 3: Startup disabled - deletes both task and registry
+       global_registry(false, false, true);   // Delete task
+       global_registry(false, false, false);  // Delete registry
    }
    
    FileConfigSave(&glo);
