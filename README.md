@@ -4,9 +4,13 @@ A powerful Windows system tray utility for web monitoring, hotkeys, macros, and 
 
 ## [Download latest version](https://rtsoft.com/ToolfishFullInstaller.exe) (For Windows, signed by RTsoft)
 
-## Screenshot
+## Screenshots
 
-![Toolfish Main Screen](screenshots/main_screen.png)
+<p align="center">
+  <a href="screenshots/main_screen.png"><img src="screenshots/main_screen.png" width="32%" /></a>
+  <a href="screenshots/toolfish_ss2.gif"><img src="screenshots/toolfish_ss2.gif" width="32%" /></a>
+  <a href="screenshots/toolfish_ss3.gif"><img src="screenshots/toolfish_ss3.gif" width="32%" /></a>
+</p>
 
 ## Description
 
