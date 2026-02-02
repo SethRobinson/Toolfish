@@ -20,6 +20,7 @@
 #include "CDlgActionLeet.h"
 #include "DlgMicVolume.h"
 #include "CDlgActionRez.h"
+#include "CDlgActionSoundOutput.h"
 
 const int C_ACTION_MAX_NAME_SIZE = 50;
 
@@ -94,6 +95,7 @@ enum eActionTypes
 	C_ACTION_LEET = 16,
 	C_ACTION_MIC_VOLUME = 17,
     C_ACTION_CHANGE_REZ = 18,
+    C_ACTION_SOUND_OUTPUT = 19,
 
     //Add more above
     C_ACTION_TYPES_COUNT
@@ -131,6 +133,7 @@ public:
         _tcscpy(m_action[C_ACTION_LEET].st_name, _T("Leet-Type Toggle"));
 		_tcscpy(m_action[C_ACTION_MIC_VOLUME].st_name, _T("Set Mic Input Volume"));
         _tcscpy(m_action[C_ACTION_CHANGE_REZ].st_name, _T("Reset screen resolutions (NVidia fix)"));
+        _tcscpy(m_action[C_ACTION_SOUND_OUTPUT].st_name, _T("Set Sound Output Device"));
 
 	   }
 
@@ -227,6 +230,13 @@ public:
                        p_dlg = new CDlgActionRez();
                        //set it up 
                        ((CDlgActionRez*)p_dlg)->SetActionPointer(p_action);
+                   }
+                   else
+                   if (i_action_type == C_ACTION_SOUND_OUTPUT)
+                   {
+                       p_dlg = new CDlgActionSoundOutput();
+                       //set it up 
+                       ((CDlgActionSoundOutput*)p_dlg)->SetActionPointer(p_action);
                    }
                    else
 

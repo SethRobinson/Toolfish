@@ -19,6 +19,7 @@
 #include "process.h"
 #include <direct.h>
 #include "MicAdjust.h"
+#include "SoundOutputUtil.h"
 
 
 extern bool g_b_tray_active;
@@ -552,6 +553,12 @@ void ProcessMessage(CEvent *p_event, int i_index)
                        glo.m_b_key_overlay_active = !glo.m_b_key_overlay_active;
                        SetupKeyboardOverlay();
                        }
+                     if (p_event->GetAction(i)->GetActionType() == C_ACTION_SOUND_OUTPUT)
+                      {
+                          // Set the sound output device by substring match
+                          uni deviceMatch(p_event->GetAction(i)->GetFilename());
+                          SetDefaultOutputDevice(deviceMatch.to_st());
+                      }
                      
      
        }                                                                         

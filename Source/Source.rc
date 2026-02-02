@@ -1138,6 +1138,23 @@ BEGIN
     LTEXT           "This control has no settings.  It forces the video card to reset the primary graphics adapter.\n\nSeems weird, but by assigning it to a hotkey, you can recover from the ""blank screen"" NVidia card issue.",IDC_STATIC,68,41,177,65
 END
 
+IDD_ACTION_SOUND_OUTPUT DIALOGEX 0, 0, 290, 210
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Set Sound Output Device"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "This action changes your default sound output device.",IDC_STATIC,7,7,276,10
+    LTEXT           "Available output devices (click to copy to match field):",IDC_STATIC,7,22,200,10
+    LISTBOX         IDC_DEVICE_LIST,7,34,276,70,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Device name to match (substring, case-insensitive):",IDC_STATIC,7,112,200,10
+    EDITTEXT        IDC_DEVICE_MATCH,7,124,276,14,ES_AUTOHSCROLL
+    LTEXT           "Enter any part of a device name above. The first matching device will be selected when the action runs.",IDC_STATIC,7,144,276,18
+    LTEXT           "Tip: You can type anything here - it doesn't have to match a device shown above. This allows you to configure devices that may be connected later.",IDC_STATIC,7,166,276,26
+    DEFPUSHBUTTON   "OK",IDOK,7,192,57,14
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,226,192,57,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1645,6 +1662,14 @@ BEGIN
         RIGHTMARGIN, 314
         TOPMARGIN, 7
         BOTTOMMARGIN, 183
+    END
+
+    IDD_ACTION_SOUND_OUTPUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 283
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
     END
 END
 #endif    // APSTUDIO_INVOKED

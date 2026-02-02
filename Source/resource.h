@@ -83,6 +83,7 @@
 #define IDR_FOLDER_OPEN                 204
 #define IDR_FISH_ALARM                  205
 #define IDR_FISH_ONETIME                206
+#define IDD_ACTION_SOUND_OUTPUT         207
 #define IDC_ABOUT                       1000
 #define IDC_EVENTS                      1001
 #define IDC_KEY_LOG                     1002
@@ -291,6 +292,8 @@
 #define IDC_VOLUME_KNOB_MULTIPLIER      1204
 #define IDC_VOLUME_KNOB_SHIFT_ONLY      1205
 #define IDC_VOLUME_KNOB_GROUP           1206
+#define IDC_DEVICE_LIST                 1207
+#define IDC_DEVICE_MATCH                1208
 #define ID_MENU_EXIT                    32772
 #define ID_MENU_OPTIONS                 32773
 #define ID_MENU_COPY                    32774
@@ -322,9 +325,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        204
+#define _APS_NEXT_RESOURCE_VALUE        208
 #define _APS_NEXT_COMMAND_VALUE         32800
-#define _APS_NEXT_CONTROL_VALUE         1207
+#define _APS_NEXT_CONTROL_VALUE         1209
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
