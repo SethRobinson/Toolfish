@@ -1,0 +1,182 @@
+
+What's new in V2.10 (June 28th, 2021)
+
+* Fixed instant crash on startup that happened when it tried to figure out its real IP address, HTTP 0.9 requests are no longer accepted these days I guess
+* Installer now installs to %LocalAppData%\toolfish, it no longer requires admin privileges
+* Added "$CLIPBOARD_URL$" dynamic token, it formats whatever is in your clipboard without the http:// or https:// part. This let me open a URL
+with VLC and have it work, as the http:// part as a parm (to load a movie url) would screw it up before
+
+Note:  If you're upgrading and don't want to lose events you've made, you'll need to copy the old ones from
+Program Files (x86)\Toolfish\events to %LocalAppData%\toolfish\events
+
+
+What's new in V2.09 (Oct 5th, 2015)
+
+* Added "Set Microphone Volume" action
+* BUGFIX: No longer crashes when you hit cancel after adding a blank action/trigger
+* dll/exe is now officially signed with the RTsoft certificate
+* Made free
+
+What's new in V2.08 (Nov 7th, 2009)
+
+* Unmutes the volume (if it was muted by Toolfish) when app is exited
+* DRM removed
+
+What's new in V2.07 (May 9th, 2008)
+
+* Various optimizations for Vista and Vista64
+* Text to speech works better with Vista's new voices
+
+What's new in V2.06 build a (April 24th, 2007)
+
+* Rebuilt in VS2005
+* Installer redone with NSIS
+* Windows 95/98 no longer supported (2.05 last version supported)
+* Bug fixed where "ignore if run more than 5 minutes late" option wouldn't work properly
+
+What's new in V2.05 build a (December 11th, 2004)
+
+* Added new "Remind me in..." wizard, for setting up quick reminders in convenient intervals using a pop-up menu.
+* Event viewer now shows the exact time until it will be run (if applicable)
+
+
+What's new in V2.04 build c (September 24th, 2004)
+
+* Added "Reverse mode" operation to site monitor function, this way you can perform an operation if
+  a site is UP rather than just if it is down. (useful for ftp'ing 'online/offline' jpgs)
+* Added logon/password web authentication support to file compares, this way I can use Toolfish to update my dynamic
+  ZoneEdit account every ten minutes.  (the new options are on the WebCompare dialog)
+* The URL used for web compares and site checks is now fully 'token aware', you can use things like
+  $IP_ADDRESS$ and it will be able to accurately send your current IP address in a URL.
+* F1 now brings up help instead of showing an error message
+
+What's new in V2.03 build b (August 22nd, 2004)
+
+* Emailer system can now accept the from address in the format of "Seth <seth@rtsoft.com>", some
+systems will reject email that isn't in this format.
+
+
+What's new in V2.03 build a (July 4th, 2004)
+
+* Ignores ip 6.0.*.* now when detecting IP address
+* Added "Detect IP address server-side" option (defaults to on), this is generally more accurate if you're behind a firewall or router
+* When using "Run program" it now switches to the applications directory first
+* Added new option "Maximize" to the Send to application action
+* Tray will stop blinking when a URL is launched from a pop-up notification window
+* BUGFIX: Web compare no longer gets a 'malformed request' response on some websites
+* Able to detect, ignore and warn of corrupted events upon load
+* Error logging code improved
+* Added "Minimize on close" option, can be enabled in options. (requested by Mark Fassett)
+
+What's new in V2.02 build a (December 8th, 2003)
+
+* The Send Command To App event now supports sending a SPACE to an app (before this was missing from the list)
+* Fixed obscure crash related to using the "Enable/disable text to speech" option from the tray bar
+* Day filters are now checked against the time the event was scheduled to run, (if there was a time trigger) rather than
+  when it actually did run.  Makes them behave more like you would expect. 
+* WebCompare tweaked: Now even 1 byte changes will register a 1% change, rather than
+  0.2% or so which wouldn't get triggered, as 1% was the minimum you could set it for.
+  (thanks to Mark Fassett for this one)
+* Button graphics no longer sometimes load with glitches, special thanks to David Calabro for
+  the fix
+
+
+What's new in V2.01 build b (June 6th, 2003)
+
+* Fixed bug where a very, very deformed email header could cause a memory read
+error that could crash Toolfish
+
+
+What's new in V2.02 build a (June 7th, 2003)
+
+* Fixed Toolfish crash that happened if using a web compare by date with a page that
+  did not have a last-modified header.
+
+What's new in V2.01 build a (May 28th, 2003)
+
+* Fixed bug in the Timer trigger with the "Ignore if more than 5 minutes late" option,
+  it caused some events with long reschedule times to be completely missed.
+* Now properly detects location of Mozilla as a default browser from registry, before it was
+  thrown by missing quotes. (IE used quotes around the filename)
+* Added new token $CLIPBOARD$, let's you use the current text on the clipboard anywhere
+  tokens can be used.
+* The open website action now supports tokens.
+* Fixed a few doc typos
+
+  
+
+What's new in V2.00 build a (Febuary 26th, 2003)
+----------------------
+* Added Site Monitor action
+* Added Site Monitor wizard
+* Added support for SMTP authentication (Auth Login, MD5, Plain Logon supported)
+* Emails Toolfish send are now much less prone to get spam-filtered.
+* Toolfish now supports file attachments when sending email!
+* Added Fun Stuff button to the main dialog
+* Added "Leet-Speak" option to the Fun Stuff menu
+* Added	Keyboard and mouse statistics to the fun stuff menu
+* Added "If process exists..." trigger
+* Fixed small memory leak dealing with actions
+* Added Send Command to application action
+* Events with no triggers at all do not run unless they are manually run.  (before
+  they would trigger every second with a warning message)
+* Changed name to Toolfish Utility Suite
+* Added "Enable/Disable Toolfish Text To Speech" action
+* Added option to the one time reminder wizard to disable rather than delete the event (cneal)
+* Fixed a small problen with how CoInitialize was used
+* Changed the in-app instructions on the Run/Open file action to make it
+  clearer it can be used for MP3's, a playlist or other media files
+* While waiting for threads to end as you're shutting down, new events will not be allowed
+  to start
+* Added "Set System Volume" action with smooth fading support
+* Added "Enable/Disable Smart Mute" action
+* Added "Ignore if run more than five minutes late" option to the Time Trigger
+* Added "Check email" wizard
+* Added "Show emails only" option from main Toolfish dialog  
+* The add web compare wizard was updated, it now also shows any custom notification you
+  added in the pop-up window too.  If the URL isn't detected in it, it adds it at the
+  end for easy hot-clicking.
+* One time events (Events marked to self distruct after the first time they run) now have
+  a special icon in the event manager
+* Added tray icon blinking, configurable from the option menu
+* Popup message windows are now a custom rather than windows system style.  Supports
+  cut and paste, clickable hotlinks and use any custom font sizes/settings previously
+  set for the event. (full unicode support)
+* Clicking Clear on the main window is now permenent.  (all the text used to come back
+  after a restart) (Suggestion by Mark Fassett)
+* Added "Read clipboard text out loud " option to the tray right click menu.
+* "FW:" is now also now stripped off when announcing emails.  (Thanks WC)
+* The hotkey to hide toolfish now works even when stealthed.  (thanks WC)
+* Added tree control to the Event Manager.  Supports creating folders, drag
+  and drop movement and multiple selection via shift-click or Ctrl-clicking.
+* Added mail filtering options to the email check action, this way people can choose
+  to only get certain kinds of email announced or ignore spam.
+* Added the standard windows "X" to close on a few dialog boxes
+* Added "Atomic Clock Time Adjust" avent
+* The Add Web Compare wizard is now the "Event Wizard", clicking it let's you
+  choose from multiple wizards.
+* Added "Delete after running event" option to the event editor
+* Added the "One Time Reminder" wizard.
+* When announcing email subjects by voice, it now strips "RE:" from the begginning
+* Added a way to easily mute Toolfish's talking to the right click menu of the tray icon.
+* Added a way to easily enable/disable Smartmute on the tray icon right click menu
+* Added Day Filter trigger
+* Added the 'Recurrent Reminder" wizard
+* Added the "Atomic Clock Time Adjustment Wizard"
+* The Check Mail action provides more detailed information in the case of errors
+* Fixed some doc typos (Thanks Akolade)
+* Added Logoff/Shutdown/Reboot action
+* Fixed bug where the Open Website Action could revert to rtsoft.com
+* Added "Open in new browser window" option to Open Website action (mfasset)
+* Added "Open in new browser" option to the Web Compare Wizard (mfasset)
+* Added Leet-Type Toggle action (WC or Cneal) so it can be setup with a hotkey
+
+What's new in V1.01 build a (December 18th, 2002)
+----------------------
+Very minor maintenance release to fix a few annoying problems.  A much larger
+update is also in the works.
+
+* Email check action is now more reliable, processes malformed emails much better
+* Fixed problem where sometimes the bitmap transparency wouldn't be draw correctly
+* Faster to minimize/maximize
+* Small fix to the upgrade check winsock code

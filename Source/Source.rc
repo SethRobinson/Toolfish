@@ -1,0 +1,1902 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Source.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SOURCE_DIALOG DIALOGEX 0, 0, 524, 338
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Toolfish"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Event Manager",IDC_EVENTS,7,7,70,63
+    PUSHBUTTON      "Keyboard Spy",IDC_KEY_LOG,183,7,70,63
+    PUSHBUTTON      "Options",IDC_OPTIONS,447,7,70,63
+    LTEXT           "Activity Log",IDC_STATIC,7,81,38,8,0,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Smart Mute",IDC_MUTE,359,7,70,63
+    PUSHBUTTON      "Hide To Tray",IDC_OK,334,310,78,24
+    CONTROL         "",IDC_LOG,"RichEdit20W",WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP | 0x9c4,7,95,510,210
+    PUSHBUTTON      "Suggest a feature!",IDC_SUGGEST,271,7,70,63
+    PUSHBUTTON      "Event Wizard",IDC_WIZARD,93,7,70,63
+    PUSHBUTTON      "",IDC_LOGO,441,310,76,24
+    PUSHBUTTON      "(Clear)",IDC_CLEAR,48,78,23,14
+    PUSHBUTTON      "Help",IDC_BUT_HELP,7,310,49,24
+    PUSHBUTTON      "Show Email Only",IDC_EMAILVIEW,99,310,78,24
+    PUSHBUTTON      "Fun Stuff",IDC_FUN,217,310,78,24
+END
+
+IDD_EVENTS DIALOG 0, 0, 494, 282
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Event Manager"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Run now",ID_RUN_NOW,429,173,58,15
+    DEFPUSHBUTTON   "Enable/Disable",ID_ENABLE,429,154,58,15
+    DEFPUSHBUTTON   "Add Event",ID_ADDEVENT,429,97,58,15
+    DEFPUSHBUTTON   "Edit Event",ID_EDITEVENT,429,116,58,15
+    DEFPUSHBUTTON   "Delete",ID_DELETEEVENT,429,135,58,15
+    DEFPUSHBUTTON   "Done",IDOK,195,261,50,14
+    LTEXT           "Events are very powerful tools that can be used to schedule backups, setup macros, hotkey websites and even check to see if websites have been updated.",IDC_STATIC,141,7,346,21
+    PUSHBUTTON      "Event picture",IDC_BUT_PIC,7,7,64,52
+    CONTROL         "Tree1",IDC_TREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_EDITLABELS | TVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,14,61,402,191
+    DEFPUSHBUTTON   "Create Folder",ID_ADD_FOLDER,429,78,58,15
+    LTEXT           "To move events or folders click and drag their icons.  Double click to edit.  To rename a folder or event, highlight it and click F2.",IDC_STATIC,141,33,346,21
+END
+
+IDD_EVENT DIALOGEX 0, 0, 373, 362
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Event Properties"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Done",IDOK,165,341,50,14
+    PUSHBUTTON      "Add",IDC_TRIGGER_ADD,326,155,32,15
+    GROUPBOX        "Setup Trigger (conditions to be met to activate action)",IDC_GROUPBOX1,7,136,359,98
+    GROUPBOX        "Setup Action (if conditions are met, this is what happens)",IDC_GROUPBOX2,7,244,359,89
+    GROUPBOX        "Event Name",IDC_GROUPBOX,7,81,359,50,0,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Delete",IDC_TRIGGER_DELETE,326,209,32,15
+    LISTBOX         IDC_TRIGGER_LIST,18,154,282,70,LBS_NOINTEGRALHEIGHT | LBS_DISABLENOSCROLL | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Edit",IDC_TRIGGER_EDIT,326,181,32,15
+    LTEXT           "Name:",IDC_STATIC,16,112,22,8
+    EDITTEXT        IDC_NAME,44,109,305,15,ES_AUTOHSCROLL | ES_NOHIDESEL
+    LTEXT           "Last Run: ",IDC_STATIC,7,24,34,8
+    CONTROL         "Enabled",IDC_ENABLED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,44,8,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Add",IDC_ACTION_ADD,327,258,32,15
+    PUSHBUTTON      "Delete",IDC_ACTION_DELETE,327,313,32,15
+    LISTBOX         IDC_ACTION_LIST,18,257,282,70,LBS_NOINTEGRALHEIGHT | LBS_DISABLENOSCROLL | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Edit",IDC_ACTION_EDIT,327,284,32,15
+    CONTROL         "Generate event name automatically (uncheck this to give a more descriptive custom  name)",IDC_EVENT_NAME,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,92,332,12
+    PUSHBUTTON      "D",IDC_TRIGGER_DOWN,307,192,15,18
+    PUSHBUTTON      "U",IDC_TRIGGER_UP,307,164,15,18
+    PUSHBUTTON      "D",IDC_ACTION_DOWN,307,297,15,18
+    PUSHBUTTON      "U",IDC_ACTION_UP,307,269,15,18
+    LTEXT           "Never",IDC_LAST_RUN,43,24,323,9
+    EDITTEXT        IDC_FILENAME,64,7,251,15,ES_AUTOHSCROLL | ES_READONLY | NOT WS_TABSTOP
+    PUSHBUTTON      "Rename",IDC_RENAME,321,7,45,15
+    CONTROL         "Quiet Mode (much less information will be shown on the activity log about this event as it runs)",IDC_QUIET,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,52,339,12
+    CONTROL         "Auto delete this event after being run (Except if run by clicking Run from the Event Manager)",IDC_AUTO_DELETE_AFTER_RUNNING,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,65,339,12
+    LTEXT           "Next Run: ",IDC_STATIC,7,36,35,8
+    LTEXT           "Unknown (only applicable to time triggers)",IDC_NEXT_RUN,43,36,323,9
+END
+
+IDD_MUTE DIALOGEX 0, 0, 246, 122
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Smart Mute Options"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Idle time before changing volume:",IDC_STATIC,7,38,112,10
+    EDITTEXT        IDC_TIME,120,34,37,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Slider1",IDC_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,61,76,141,11
+    LTEXT           "Idle Volume",IDC_STATIC,12,78,43,11
+    LTEXT           "0",IDC_STATIC,67,67,12,8
+    LTEXT           "100",IDC_STATIC,186,68,20,8
+    DEFPUSHBUTTON   "Ok",IDC_OK,7,100,57,14
+    CONTROL         "In seconds",IDC_RADIO_SECONDS,"Button",BS_AUTORADIOBUTTON,171,38,47,9
+    CONTROL         "In minutes",IDC_RADIO_MINUTES,"Button",BS_AUTORADIOBUTTON,171,51,47,9
+    GROUPBOX        "Timing",IDC_GROUPBOX,165,27,63,38
+    CONTROL         "Enable Smart Muting",IDC_MUTE_ENABLED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,85,12
+    DEFPUSHBUTTON   "Cancel",IDC_CANCEL,182,100,57,14
+END
+
+IDD_TRIGGER DIALOG 0, 0, 186, 114
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Add Trigger"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,93,50,14
+    LTEXT           "What kind of trigger would you like to create?",IDC_STATIC,7,7,172,15
+    LISTBOX         IDC_LIST,7,27,172,58,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,129,93,50,14
+END
+
+IDD_TRIGGER_TIME DIALOGEX 0, 0, 173, 300
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Time Trigger Properties"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,279,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,110,279,50,14
+    CONTROL         "DateTimePicker2",IDC_TIME,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,49,138,63,14
+    LTEXT           "A time trigger allows you to make an event happen on a certain date or time.  ",IDC_STATIC,7,7,153,21
+    GROUPBOX        "Next check at...",IDC_GROUPBOX,7,32,153,128
+    CONTROL         "Auto reschedule after being run",IDC_RESCHEDULE_ACTIVE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,165,114,14
+    GROUPBOX        "Auto Reschedule Settings",IDC_GROUPBOX1,7,203,153,67
+    LTEXT           "Run again in",IDC_STATIC,14,222,41,8
+    EDITTEXT        IDC_RESCHEDULE_TIME,61,219,37,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Minutes",IDC_RADIO_MINUTES,"Button",BS_AUTORADIOBUTTON,104,227,43,8
+    CONTROL         "Seconds",IDC_RADIO_SECONDS,"Button",BS_AUTORADIOBUTTON,104,214,43,8
+    CONTROL         "Hours",IDC_RADIO_HOURS,"Button",BS_AUTORADIOBUTTON,104,240,43,8
+    CONTROL         "Days",IDC_RADIO_DAYS,"Button",BS_AUTORADIOBUTTON,104,251,43,8
+    CONTROL         "MonthCalendar1",IDC_MONTHCALENDAR1,"SysMonthCal32",MCS_NOTODAY | WS_TABSTOP,19,47,127,84,WS_EX_STATICEDGE
+    CONTROL         "Ignore if run more than 5 minutes late",IDC_IGNORE_LATE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,182,135,15
+END
+
+IDD_ACTION_MESSAGE DIALOG 0, 0, 514, 314
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Say/Show/Email/Macro Message"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_RICHEDIT,"RichEdit20W",WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP | 0x84,7,38,500,225
+    CONTROL         "Send message to output log",IDC_B_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,271,104,15
+    CONTROL         "Pop up a message box",IDC_B_POPUP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,123,271,92,15
+    CONTROL         "Say it",IDC_B_SAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,222,273,33,10
+    PUSHBUTTON      "Hear it now",IDC_HEAR,257,271,43,15
+    CONTROL         "Send to focus (macro)",IDC_B_MACRO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,318,271,86,15
+    CONTROL         "Email",IDC_B_EMAIL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,411,271,37,15
+    PUSHBUTTON      "Email Settings",IDC_EMAIL,451,270,56,15
+    PUSHBUTTON      "Choose Font",IDC_FONT,436,7,71,14
+    PUSHBUTTON      "Feel free to use dynamic tokens.",IDC_TOKEN,320,19,111,15
+    DEFPUSHBUTTON   "OK",IDOK,7,293,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,457,293,50,14
+    LTEXT           "A message can be any size.  Unicode is fully supported under XP/2000.",IDC_STATIC,7,7,230,13
+    LTEXT           "The checkboxes at the bottom control how this message is used, choose one or any combination.",IDC_STATIC,7,22,308,8
+END
+
+IDD_ACTION DIALOG 0, 0, 186, 186
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Add Action"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,165,50,14
+    LTEXT           "What kind of action would you like to create?",IDC_STATIC,7,7,172,15
+    LISTBOX         IDC_LIST,7,27,172,132,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,129,165,50,14
+END
+
+IDD_ACTION_SOUND DIALOG 0, 0, 309, 73
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Play a sound"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_FILENAME,7,27,280,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,7,47,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,252,47,50,14
+    LTEXT           "Enter a sound file to play.  (.wav format)",IDC_STATIC,7,7,295,15
+    PUSHBUTTON      "...",IDC_BROWSE,290,27,12,13
+END
+
+IDD_KEY_LOG DIALOG 0, 0, 244, 122
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Keystroke Logging Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,101,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,187,101,50,14
+    CONTROL         "Enable keystroke logging",IDC_B_KEY_LOG_ACTIVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,95,11
+    GROUPBOX        "Keystroke Logging Options",IDC_GROUPBOX,7,21,230,56
+    LTEXT           "Filename to log to:",IDC_STATIC,13,39,57,11
+    EDITTEXT        IDC_KEY_LOG_FILE,74,39,126,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_LOG_BROWSE,201,39,10,12
+    PUSHBUTTON      "View Log File",IDC_VIEW_LOG,75,55,60,16
+    PUSHBUTTON      "Delete Log File",IDC_DELETE_LOG,137,55,61,16
+    CONTROL         "Enable logging of all programs run (will use the filename above)",IDC_B_PROG_LOG,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,82,230,11
+END
+
+IDD_TRIGGER_HOTKEY DIALOG 0, 0, 291, 164
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Hotkey"
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_COMBO,66,61,138,123,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Alt",IDC_B_ALT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,80,90,24,10
+    CONTROL         "Ctrl",IDC_B_CTRL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,118,90,26,10
+    CONTROL         "Shift",IDC_B_SHIFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,161,90,31,10
+    CONTROL         "Also allow key to 'pass through' to the application (usually you DON'T want this!)",IDC_PASS_THROUGH,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,107,266,13
+    DEFPUSHBUTTON   "OK",IDOK,7,143,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,234,143,50,14
+    GROUPBOX        "What key(s) need to be hit to trigger this?",IDC_GROUPBOX,7,44,277,86
+    LTEXT           "A hotkey trigger is useful for macros or playing a .wav quick or anything you'd like.  First set the main key, then check alt, control or shift if those also need to be held down.",IDC_STATIC,7,7,277,33
+    LTEXT           "Main key:",IDC_STATIC,21,62,32,8
+END
+
+IDD_ACTION_WEBSITE DIALOG 0, 0, 295, 82
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Open Website"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_FILENAME,7,23,251,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,7,61,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,238,61,50,14
+    LTEXT           "Opens a website or any kind of URL.",IDC_STATIC,7,7,231,12
+    PUSHBUTTON      "Open",IDC_TEST,263,22,23,14
+    CONTROL         "Open in new browser window",IDC_NEW,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,40,171,14
+END
+
+IDD_OPTIONS DIALOG 0, 0, 192, 260
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,239,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,239,50,14
+    CONTROL         "Automatically load at boot (recommended)",IDC_BOOT_LOAD,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,149,8
+    CONTROL         "Trim toolfish_log.txt to",IDC_TRIM_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,127,84,10
+    EDITTEXT        IDC_LOG_LINES,93,126,27,13,ES_AUTOHSCROLL
+    LTEXT           "lines on startup",IDC_STATIC,125,128,48,8
+    PUSHBUTTON      "Configure Default Text To Speech Voice",IDC_VOICE_CONFIGURE,21,162,151,14
+    CONTROL         "Disable all text to speech, unload Microsoft SAPI",IDC_B_DISABLE_TTS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,143,170,10
+    CONTROL         "Start in Stealth Mode (totally invisible)",IDC_BOOT_STEALTH,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,34,149,8
+    GROUPBOX        "Load at boot options",IDC_GROUPBOX,7,21,178,28
+    PUSHBUTTON      "Configure Outgoing Mail (SMTP) Server",IDC_SMTP_CONFIGURE,21,183,151,14
+    CONTROL         "Enable Tray Notifications",IDC_B_ENABLE_TRAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,55,164,15
+    GROUPBOX        "Tray Notification Options",IDC_GROUPBOX1,7,72,178,41
+    CONTROL         "Blink when a webpage is updated",IDC_BLINK_WEBPAGE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,84,149,8
+    CONTROL         "Blink when new email is received",IDC_BLINK_EMAIL,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,97,149,8
+    CONTROL         "Detect IP address server side",IDC_B_DETECT_IP_SERVER_SIDE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,201,170,14
+    CONTROL         "Minimize on close",IDC_B_MINIMIZE_ON_CLOSE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,218,170,14
+END
+
+IDD_ABOUT DIALOGEX 0, 0, 232, 164
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About Toolfish"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Toolfish by Seth A. Robinson",IDC_ABOUT_STATIC,7,54,177,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2002-2021; Robinson Technologies",IDC_STATIC,7,70,161,8
+    DEFPUSHBUTTON   "OK",IDOK,93,143,50,14,WS_GROUP
+    PUSHBUTTON      "www.rtsoft.com",IDC_BUT_RTSOFT,7,123,62,14
+    PUSHBUTTON      "Help",IDC_TOOLFISH_HELP,5,89,46,25
+    PUSHBUTTON      "Button1",IDC_LOGO,7,7,150,41
+    PUSHBUTTON      "Button3",IDC_RTSOF,188,7,37,53
+END
+
+IDD_ACTION_COMPARE DIALOG 0, 0, 359, 297
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Web Compare Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,276,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,302,276,50,14
+    EDITTEXT        IDC_FILENAME,7,45,314,13,ES_AUTOHSCROLL
+    LTEXT           "Web Compare let's you check a web page for changes.  The first check will simply cache the page for future comparisons.  If a notification is triggered, the rest of the actions in this event will be run.",IDC_STATIC,7,7,345,19
+    PUSHBUTTON      "Test",IDC_TEST,329,45,23,14
+    LTEXT           "URL of website to keep track of:",IDC_STATIC,8,34,231,9
+    EDITTEXT        IDC_EDIT_CONTEST_PERCENT,153,131,21,12,ES_AUTOHSCROLL
+    LTEXT           "%",IDC_STATIC,177,134,8,11
+    GROUPBOX        "What has to change to trigger a change notification?",IDC_GROUPBOX,7,115,345,113
+    CONTROL         "If the content has changed more than ",IDC_CHECK_CONTENT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,133,137,10
+    CONTROL         "If time or date has changed",IDC_CHECK_DATE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,147,102,10
+    CONTROL         "If any of these phrases are found (comma separated)",IDC_CHECK_WORDS_FOUND,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,197,181,10
+    CONTROL         "If any of these phrases are NOT found: (comma separated)",IDC_CHECK_WORDS_NOT_FOUND,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,211,201,10
+    EDITTEXT        IDC_ST_WORDS_FOUND,216,195,127,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ST_WORDS_NOT_FOUND,215,211,128,13,ES_AUTOHSCROLL
+    GROUPBOX        "If NO change is detected then:",IDC_GROUPBOX1,7,237,345,31
+    LTEXT           "Exit event without processing any remaining actions",IDC_STATIC,14,249,277,13
+    LTEXT           "Phrase searches let you find when a wepage has removed or added something you're expecting.  They are case sensitive.  Be careful not to add extra spaces unless you want them to be part of your search.",IDC_STATIC,15,171,332,20
+    CONTROL         "Requires Authentication",IDC_AUTHENTICATION,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,65,92,11
+    LTEXT           "Logon:",IDC_STATIC,15,92,23,11
+    EDITTEXT        IDC_ST_AUTH_LOGON,42,89,121,13,ES_AUTOHSCROLL
+    LTEXT           "Password:",IDC_STATIC,170,92,36,11
+    GROUPBOX        "Authentication Information",IDC_GROUPBOX2,7,78,345,31
+    EDITTEXT        IDC_ST_AUTH_PASSWORD,210,90,133,13,ES_AUTOHSCROLL
+END
+
+IDD_WIZARD DIALOG 0, 0, 409, 278
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Web Compare Wizard"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_FILENAME,18,104,344,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CONTENT_PERCENT,197,151,21,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CHECK_TIME,131,168,21,12,ES_AUTOHSCROLL
+    CONTROL         "Seconds",IDC_RADIO_SECONDS,"Button",BS_AUTORADIOBUTTON,160,170,44,10
+    CONTROL         "Minutes",IDC_RADIO_MINUTES,"Button",BS_AUTORADIOBUTTON,208,170,41,10
+    CONTROL         "Hours",IDC_RADIO_HOURS,"Button",BS_AUTORADIOBUTTON,251,170,35,10
+    CONTROL         "Days",IDC_RADIO_DAYS,"Button",BS_AUTORADIOBUTTON,289,170,32,10
+    CONTROL         "Log it",IDC_LOG_IT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,145,212,33,10
+    CONTROL         "Play sound",IDC_PLAY_SOUND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,184,212,51,10
+    CONTROL         "Pop up a window",IDC_POP_UP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,240,212,71,10
+    CONTROL         "Say (using text to speech)",IDC_SAY_IT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,229,97,10
+    EDITTEXT        IDC_SAY,115,228,279,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Add it!",IDOK,7,257,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,352,257,50,14
+    PUSHBUTTON      "Button1",IDC_PIC,7,7,70,66
+    LTEXT           "While Toolfish offers a ton of power web comparing options some users may find directly using the Event Manager a bit intimidating at first.  Not to worry, the Web Compare Wizard to the rescue!",IDC_STATIC,77,7,318,22
+    LTEXT           "Just set the link to the web page you'd like to check and hit the ""Add It!"" button. That's  it!  An event will be created.  Later you can edit this in the Event Manager to tweak, setup more powerful comparing options or delete it.",IDC_STATIC,76,30,316,27
+    PUSHBUTTON      "Test",IDC_TEST,370,103,23,14
+    GROUPBOX        "Enter the URL of website to monitor/compare ",IDC_GROUPBOX,7,89,395,37
+    GROUPBOX        "How much does a webpage have to change to notify you and how often should I check?",IDC_GROUPBOX1,7,137,395,50
+    LTEXT           "Let me know when the content has changed by at least",IDC_STATIC,14,152,179,10
+    LTEXT           "percent.",IDC_STATIC,225,152,27,8
+    LTEXT           "Check the page for changes every",IDC_STATIC,14,169,115,12
+    LTEXT           "If a change is found what should I do?:",IDC_STATIC,14,212,129,10
+    LTEXT           "Click the TEST button to see exactly what content Toolfish will base the comparisons on.",IDC_STATIC,75,67,316,12
+    GROUPBOX        "If a page has been changed, what should I do?",IDC_GROUPBOX2,7,195,395,52
+    CONTROL         "Open in new browser",IDC_BROWSER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,316,213,83,10
+END
+
+IDD_OKCANCEL DIALOG 0, 0, 289, 82
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Warning!"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,61,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,232,61,50,14
+    CTEXT           "Are you sure you wish to exit Toolfish?  For normal usage, click the ""Hide to tray"" button instead.",IDC_TEXT,7,7,275,50
+END
+
+IDD_THREADS DIALOG 0, 0, 186, 63
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Threads Still Active"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Force Shutdown",IDOK,35,42,114,14
+    LTEXT           "There are 0 events currently being run, please wait as they finish up",IDC_TEXT,7,7,172,25
+END
+
+IDD_NAG DIALOG 0, 0, 233, 164
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Welcome to Toolfish"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Continue",IDOK,88,99,86,14
+    PUSHBUTTON      "Quit to windows",IDCANCEL,88,117,86,14
+    LTEXT           "Thanks for evaluating Toolfish!",IDC_STATIC,64,7,164,13
+    LTEXT           "You have 5 days of your trial period remaining.",IDC_NAG_TEXT,64,25,160,11
+    DEFPUSHBUTTON   "Enter Unlock Key",IDC_ENTER_CODE,88,81,86,14
+    DEFPUSHBUTTON   "Instant Purchase!",IDC_PURCHASE,88,63,86,14
+    LTEXT           "Note:  After  purchasing this screen won't appear.",IDC_STATIC,39,149,156,8
+    PUSHBUTTON      "Button1",IDC_LOGO,7,7,50,53
+END
+
+IDD_UNLOCK DIALOG 0, 0, 218, 116
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Enter Unlock Key"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_KEY,7,54,148,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Unlock!",IDOK,161,54,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,83,95,50,14
+    LTEXT           "After purchasing Toolfish online you should receive your unlock key via email within ten minutes from our automated system.\n\n Please cut and paste it into the box below and click Unlock.",IDC_STATIC,7,7,204,42
+    LTEXT           "Status:",IDC_STATIC,7,76,23,8
+    LTEXT           "Waiting for you! :)",IDC_STATUS,35,76,173,11
+END
+
+IDD_RENAME DIALOG 0, 0, 258, 93
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rename Event Filename"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,72,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,201,72,50,14
+    LTEXT           "Renaming events is never required, but doing so makes it easier to backup certain events or email them to a friend.",IDC_STATIC,7,7,244,21
+    LTEXT           "Enter new filename:",IDC_STATIC,7,55,65,10
+    EDITTEXT        IDC_FILENAME,77,52,174,14,ES_AUTOHSCROLL
+    LTEXT           "To add an event from a backup or friend, just plop it in your toolfish\\events directory.",IDC_STATIC,7,31,244,22
+END
+
+IDD_WELCOME DIALOGEX 0, 0, 383, 236
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Toolfish - What you need to know to get started."
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Next...",IDOK,149,215,89,14
+    LTEXT           "An hourly reminder to take a break and a Web Compare event for the Toolfish and RTSOFT website come pre-installed so you can see Toolfish in action right away. You can disable this stuff in the Event Manager if needed.",IDC_STATIC,81,143,295,23
+    LTEXT           "Toolfish Quick Info (only shown once)",IDC_STATIC,81,7,295,13
+    LTEXT           "Hi there.  Thanks for trying out Toolfish!  I have been using this program for some time for my personal use, I've got tons of pages, macros, hotkeys and reminders setup and I can honestly say it has become something I cannot live without.",IDC_STATIC,81,24,295,27
+    LTEXT           "Toolfish is a 19-in-one talking tray application that tracks websites change, muting based on inactivity, global hotkeys, macros, pasting your true IP address, recording keystrokes, sending emails, tracking keystrokes/mouse movements and more!",IDC_STATIC,81,81,295,29
+    LTEXT           "Toolfish can also perform scheduled tasks and can pass the current date and time to .bat files and such.  Want to run actions if an app is or isn't running?  Can do that too!",IDC_STATIC,81,117,296,18
+    LTEXT           "-Seth A. Robinson",IDC_STATIC,83,198,286,10
+    PUSHBUTTON      "Button1",IDC_PIC,7,15,68,57
+    PUSHBUTTON      "",IDC_BUT_TIP1,57,82,21,15
+    PUSHBUTTON      "",IDC_BUT_TIP2,57,143,21,15
+    LTEXT           "Feel free to use the ""Suggest a feature"" option to drop me a line and let me know what you think.  This can be used to report bugs and just make comments as well as suggest new stuff.",IDC_STATIC,81,54,294,18
+    PUSHBUTTON      "",IDC_BUT_TIP3,57,118,21,15
+    LTEXT           "To get started, use the Event Wizard.  For more complex things or to edit/delete an existing event you can use the Event Manager.",IDC_STATIC,80,173,296,22
+    PUSHBUTTON      "",IDC_BUT_TIP4,57,173,21,15
+END
+
+IDD_VOICE DIALOG 0, 0, 272, 150
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Text To Speech Voice Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,129,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,215,129,50,14
+    GROUPBOX        "Voice Settings",IDC_STATIC,7,7,258,76
+    GROUPBOX        "Test Area",IDC_GROUPBOX1,7,86,258,36
+    EDITTEXT        IDC_TEXT,15,100,204,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Hear it",IDC_HEAR,227,99,31,15
+    CONTROL         "Slider1",IDC_PITCH_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | WS_TABSTOP,21,28,230,11
+    LTEXT           "Pitch",IDC_STATIC,126,17,17,8
+    LTEXT           "Low",IDC_STATIC,24,17,14,8
+    LTEXT           "High",IDC_STATIC,228,17,16,8
+    CONTROL         "Slider1",IDC_PITCH_SPEED,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | WS_TABSTOP,22,66,230,11
+    LTEXT           "Speed",IDC_STATIC,127,55,22,8
+    LTEXT           "Slow",IDC_STATIC,25,55,16,8
+    LTEXT           "Fast",IDC_STATIC,229,55,14,8
+    DEFPUSHBUTTON   "Open Speech Properties",ID_SPEECH_PROPERTIES,95,129,87,14
+END
+
+IDD_TEST DIALOG 0, 0, 493, 308
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "View Content"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,181,287,50,14
+    EDITTEXT        IDC_EDIT,7,49,479,220,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_NOHIDESEL | WS_VSCROLL | WS_HSCROLL
+    PUSHBUTTON      "Open in browser",IDC_HTML,253,287,64,14
+    LTEXT           "Viewing the exact content that Toolfish gathered can help you understand what pages will or will not compare properly.   If you see the content you expected, everything is fine.",IDC_STATIC,7,7,479,18
+    LTEXT           "If you see the website sent an error message instead,  like ""you must enable cookies"" you can understand why it's not working.",IDC_STATIC,7,31,479,11
+END
+
+IDD_TIME_RANGE DIALOG 0, 0, 195, 113
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Time Range Trigger"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,92,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,138,92,50,14
+    LTEXT           "A time range trigger is usually used WITH a regular time trigger.  This way you can have an event repeat every hour, but only 9 to 5 PM for instance.",IDC_STATIC,7,7,181,30
+    CONTROL         "DateTimePicker1",IDC_TIME_START,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,19,63,66,12
+    GROUPBOX        "Only activate if the time is between...",IDC_GROUPBOX,7,46,181,38
+    LTEXT           "and",IDC_STATIC,91,64,13,8
+    CONTROL         "DateTimePicker1",IDC_TIME_END,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,110,63,66,12
+END
+
+IDD_TRIGGER_INACTIVITY DIALOG 0, 0, 338, 129
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Inactivity Trigger"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,108,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,281,108,50,14
+    LTEXT           "Using an inactivity trigger you can make sure nobody is using the computer while doing an event, or make sure someone is using it at the time.  (for instance, to not give ""take a break messages"" if nobody is at the computer)",IDC_STATIC,7,7,324,24
+    GROUPBOX        "Activate the trigger if...",IDC_STATIC,7,69,324,33
+    LTEXT           "If the mouse or keyboard",IDC_STATIC,15,82,79,8
+    CONTROL         "have",IDC_RADIO_HAS,"Button",BS_AUTORADIOBUTTON,103,77,32,10
+    CONTROL         "have not",IDC_RADIO_HAS_NOT,"Button",BS_AUTORADIOBUTTON,102,88,44,10
+    LTEXT           "been touched in the last",IDC_STATIC,150,82,77,8
+    EDITTEXT        IDC_EDIT,232,80,40,14,ES_AUTOHSCROLL
+    LTEXT           "Note:  Only keyboard and mouse are monitored.  The mouse monitor features Anti-Bump technology; this means jittery mouse readings/very slight movements will not incorrectly trigger activity.",IDC_STATIC,7,44,324,19
+    CONTROL         "seconds",IDC_RADIO_SECONDS,"Button",BS_AUTORADIOBUTTON,280,77,41,9
+    CONTROL         "minutes",IDC_RADIO_MINUTES,"Button",BS_AUTORADIOBUTTON,280,88,41,9
+END
+
+IDD_ACTION_RUN DIALOG 0, 0, 273, 191
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Run/Open file"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,170,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,216,170,50,14
+    LTEXT           "This is also useful to schedule backups or other maintence.  You can use Toolfish tokens such as $DATE$, $SHORT_DATE$ and $TIME$ as parms.  $IP_ADDRESS$ and $LAST_COMPARE_URL$ are also valid.",IDC_STATIC,7,36,259,27
+    LTEXT           "Program/batchfile/file to open or run:",IDC_STATIC,7,73,130,13
+    EDITTEXT        IDC_FILENAME,7,86,224,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_BROWSE,234,85,32,14
+    LTEXT           "Optional parameters:",IDC_STATIC,7,108,135,11
+    EDITTEXT        IDC_EDIT_PARMS,7,122,224,14,ES_AUTOHSCROLL
+    CONTROL         "Wait for process (applicable for exe,bat and com extensions only)",IDC_CHECK_WAIT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,140,237,16
+    LTEXT           "This is a powerful tool that let's you not only run programs at certain times but also pretty much any file including .mp3, .mpg, playlists, anything that has a file association that let's Toolfish know which program to use to open/play it.",IDC_STATIC,7,1,259,25
+END
+
+IDD_QUIT DIALOG 0, 0, 264, 79
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Are you sure you wish to quit?"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Quit",IDOK,97,58,70,14
+    PUSHBUTTON      "Cancel",IDCANCEL,187,58,70,14
+    DEFPUSHBUTTON   "Hide to tray",IDHIDE,7,58,70,14
+    LTEXT           "Are you sure you wish to exit Toolfish?  For normal usage, click the ""Hide to tray"" button instead.",IDC_STATIC,7,7,250,17
+    LTEXT           "Tip:  In the options dialog check the ""Minimize on close"" option to  not see this menu.  (you can still quit Toolfish by right clicking its tray icon and choosing exit)",IDC_STATIC,7,31,250,17
+END
+
+IDD_ACTION_STEALTH DIALOG 0, 0, 186, 114
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Toggle Stealth Mode"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,70,93,50,14
+    LTEXT           "The toggle stealth action has no settings.",IDC_STATIC,23,73,131,10
+    LTEXT           "Stealth mode stops the Toolfish tray icon from showing.  It is useful for monitoring children or employees.",IDC_STATIC,7,7,179,20
+    LTEXT           "Please follow local laws as you may be required to let them know they are being monitored if you use the keystroke/application logging features.",IDC_STATIC,7,32,172,30
+END
+
+IDD_ACTION_EMAIL DIALOG 0, 0, 290, 338
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Email Check"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,317,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,233,317,50,14
+    LTEXT           "The Check Email action let's you get notified when a POP3 email box has received new messages.   It only checks, it doesn't delete any email from the server.",IDC_STATIC,7,7,276,20
+    LTEXT           "This is good for people who don't want to run memory hogs like Outlook all the time but still want to know when they got new email.",IDC_STATIC,7,30,276,21
+    LTEXT           "Incoming mail server (POP3) :",IDC_STATIC,20,67,95,9
+    EDITTEXT        IDC_SERVER,119,65,153,12,ES_AUTOHSCROLL
+    LTEXT           "Logon:",IDC_STATIC,20,83,27,11
+    EDITTEXT        IDC_NAME,59,82,89,12,ES_AUTOHSCROLL
+    GROUPBOX        "Email Server Setup",IDC_GROUPBOX,7,52,276,67
+    LTEXT           "Password:",IDC_STATIC,20,100,36,11
+    EDITTEXT        IDC_PASSWORD,59,99,89,12,ES_PASSWORD | ES_AUTOHSCROLL
+    GROUPBOX        "If new email is detected...",IDC_GROUPBOX1,7,245,276,62
+    LTEXT           "If new email is detected, the remaining actions in the event will be run.  (Same as how the Web Compare Action works)",IDC_STATIC,7,208,276,16
+    LTEXT           "In addition, here are some special features you can enable:",IDC_STATIC,7,231,276,13
+    CONTROL         "Say how many new emails were detected",IDC_SAY_COUNT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,257,156,14
+    CONTROL         "Say who each new email is from",IDC_SAY_FROM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,271,156,14
+    CONTROL         "Say the subject of each email",IDC_SAY_SUBJECT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,285,156,14
+    GROUPBOX        "Email Filtering Options",IDC_GROUPBOX2,7,139,276,64
+    CONTROL         "Enable email filtering (useful for ignoring spam if your ISP uses SpamAssassin)",IDC_FILTER_ACTIVE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,126,276,9
+    LTEXT           "in the ",IDC_STATIC,15,170,20,8
+    COMBOBOX        IDC_FILTER_HAVE,15,151,115,35,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "the text",IDC_STATIC,134,153,25,8
+    LTEXT           "field.",IDC_STATIC,102,170,16,8
+    COMBOBOX        IDC_FILTER_FIELD,38,168,57,56,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_FILTER_TEXT,163,151,109,12,ES_AUTOHSCROLL
+    LTEXT           "Note, if you chose body field, keep in mind only the first 2 lines are checked!",IDC_STATIC,13,187,240,8
+END
+
+IDD_EMAIL_SETTINGS DIALOG 0, 0, 246, 265
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Email Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,244,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,189,244,50,14
+    GROUPBOX        "Destination ",IDC_GROUPBOX,7,66,232,34
+    LTEXT           "Send to:",IDC_STATIC,15,80,34,10
+    EDITTEXT        IDC_MAIL_TO,55,79,174,13,ES_AUTOHSCROLL
+    LTEXT           "Sending this message as an email is good for getting notified on your cellphone or pager about a certain update or to be reminded about something.  ",IDC_STATIC,7,7,232,24
+    GROUPBOX        "Extra Settings",IDC_GROUPBOX1,7,137,232,100
+    LTEXT           "From/Return address:",IDC_STATIC,14,153,70,8
+    EDITTEXT        IDC_MAIL_FROM,89,150,139,13,ES_AUTOHSCROLL
+    LTEXT           "Subject:",IDC_STATIC,14,172,70,8
+    EDITTEXT        IDC_MAIL_SUBJECT,89,172,139,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Edit global SMTP settings",ID_EDIT_SMTP,77,244,93,14
+    LTEXT           "Your SMTP (outgoing email) settings must be properly configured for sending email to work.",IDC_STATIC,7,39,232,17
+    LTEXT           "You should use a REAL return email address, otherwise some mail servers will ignore your email.",IDC_STATIC,7,109,232,19
+    LTEXT           "Attached file:",IDC_STATIC,14,216,70,8
+    EDITTEXT        IDC_MAIL_FILE,89,215,125,13,ES_AUTOHSCROLL
+    LTEXT           "You can also send a file with your message.  Leave blank for none.\nIf the file doesn't exist at the time of mailing, it will be ignored.",IDC_STATIC,14,192,219,18
+    PUSHBUTTON      "...",IDC_FIND_FILE,216,214,12,15
+END
+
+IDD_SMTP_SETUP DIALOG 0, 0, 273, 297
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "SMPT Settings for outgoing email support"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_SERVER,61,33,142,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFAULT_EMAIL,77,83,129,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,7,276,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,216,276,50,14
+    LTEXT           "If you plan on using the Send Email features of Toolfish you can specify the SMTP mail server to use here.",IDC_STATIC,7,7,259,22
+    LTEXT           "SMTP Server:",IDC_STATIC,7,35,46,8
+    LTEXT           "Your email address:",IDC_STATIC,7,84,68,10
+    LTEXT           "If you get tired of entering your email address for each Toolfish event that sends mail, just specify it here and it will be the default for new actions.",IDC_STATIC,7,54,233,17
+    GROUPBOX        "Advanced Settings (you probably don't need to worry about these)",IDC_GROUPBOX1,7,110,259,146
+    CONTROL         "My SMTP server requires authentication",IDC_LOGON,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,125,193,12
+    GROUPBOX        "SMTP Authentication Info",IDC_GROUPBOX,16,139,242,68
+    LTEXT           "Username:",IDC_STATIC,23,173,40,10
+    EDITTEXT        IDC_USERNAME,72,172,129,13,ES_AUTOHSCROLL
+    LTEXT           "Password:",IDC_STATIC,24,189,40,10
+    EDITTEXT        IDC_PASSWORD,72,188,129,13,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Authentication\nMethod:",IDC_STATIC,23,151,46,17
+    COMBOBOX        IDC_COMBO,72,156,129,55,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Send all messages MIME encoded",IDC_MIME,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,235,176,14
+    LTEXT           "Use port",IDC_STATIC,15,217,30,11
+    EDITTEXT        IDC_PORT,49,216,23,12,ES_AUTOHSCROLL
+    LTEXT           "for SMTP (usually 25)",IDC_STATIC,78,218,73,10
+    LTEXT           "Derived in part from the RSA Data Security, Inc. MD5 Message-Digest Algorithm",IDC_STATIC,10,260,259,10
+END
+
+IDD_ACTION_TOGGLE DIALOG 0, 0, 186, 137
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Open/Hide Toolfish Toggle"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,70,116,50,14
+    LTEXT           "The Open/Hide Toolfish action has no settings.",IDC_STATIC,18,98,150,8
+    LTEXT           "This is so you can assign a hotkey to open and hide Toolfish.",IDC_STATIC,7,7,179,20
+    LTEXT           "This is nice to quickly checking out what has been updating without touching the mouse.",IDC_STATIC,7,30,179,20
+    LTEXT           "Be aware that if Toolfish is in Stealth Mode it must be ""unstealthed"" before this would work.",IDC_STATIC,7,61,172,16
+END
+
+IDD_INTRO DIALOGEX 0, 0, 335, 207
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Preinstalled Hotkey Info (will only show this once)"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Got it!  Start the program already!",IDOK,104,186,127,14
+    LTEXT           "These global hotkeys are preinstalled, use the Event Manager to look at/change them if you forget.",IDC_STATIC,15,7,312,8
+    LTEXT           "Ctrl-Alt-Shift-I --- This will paste your current true IP address to the active window.",IDC_STATIC,17,23,254,12
+    LTEXT           "Ctrl-Shift-G --- This will open and say Google.com*",IDC_STATIC,17,36,254,12
+    LTEXT           "Ctrl-Alt-Shift-D --- This will open and say Dictionary.com** ",IDC_STATIC,17,49,254,12
+    LTEXT           "Ctrl-Alt-F12 --- This quickly opens/shrinks Toolfish.",IDC_STATIC,17,62,254,12
+    LTEXT           "Ctrl-Alt-Shift-F12 --- This toggles Stealth mode (hides the tray icon)",IDC_STATIC,17,75,254,12
+    LTEXT           "Ctrl-Alt-Shift-N --- Opens notes.txt. Just a quick place to scribble ideas or notes.",IDC_STATIC,17,88,254,12
+    LTEXT           "* Google is a trademark of Google Inc and is not affilitied with Toolfish or Robinson Technologies in any way, it is simply a great website we recommend you visit. ",IDC_STATIC,18,115,310,20
+    LTEXT           "** Dictionary.com is owned by Lexico LLC and is not affilitied with Toolfish or Robinson Technologies in any way, it is simply another great website we recommend you visit. ",IDC_STATIC,18,143,310,20
+END
+
+IDD_WIZARD_ONE_TIME_REMINDER DIALOGEX 0, 0, 284, 250
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "One Time Reminder"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "MonthCalendar1",IDC_MONTHCALENDAR,"SysMonthCal32",MCS_NOTODAY | WS_TABSTOP,128,23,127,84,WS_EX_STATICEDGE
+    CONTROL         "DateTimePicker2",IDC_TIME,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,159,113,63,14
+    EDITTEXT        IDC_TEXT,16,156,247,15,ES_AUTOHSCROLL
+    CONTROL         "Pop up a message box",IDC_B_POPUP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,177,92,15
+    CONTROL         "Say it",IDC_B_SAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,116,180,33,10
+    PUSHBUTTON      "Hear it now",IDC_HEAR,153,177,43,15
+    DEFPUSHBUTTON   "Add this event!",IDOK,7,229,69,14
+    PUSHBUTTON      "Cancel",IDCANCEL,221,229,50,14
+    PUSHBUTTON      "Button1",IDC_PIC,29,45,70,60
+    LTEXT           "This is a quick way to schedule a simple one-time talking reminder, after it is run it is automatically deleted.",IDC_STATIC,7,7,99,49
+    GROUPBOX        "Set the time to take place:",IDC_GROUPBOX,116,7,155,128
+    GROUPBOX        "Enter reminder text:",IDC_GROUPBOX1,7,143,264,56
+    CONTROL         "Instead of deleting the event, just disable it after it runs",IDC_DISABLE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,207,232,15
+END
+
+IDD_ACTION_ATOMIC DIALOG 0, 0, 228, 138
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Atomic Clock Time Adjust"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,117,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,171,117,50,14
+    LTEXT           "This action keeps your computer clock accurate (within about a second) from anywhere in the world by contacting the worlds most accurate time pieces, the atomic clock.",IDC_STATIC,7,7,214,31
+    LTEXT           "Timezone/region information is correctly processed.   Advanced error checking is done to avoid ever setting with bad values.",IDC_STATIC,7,46,214,22
+    GROUPBOX        "Choose (or enter) the NIST time server to communicate with:",IDC_GROUPBOX,7,76,214,33
+    COMBOBOX        IDC_COMBO,15,90,198,64,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_WIZARD_RECURRENT_REMINDER DIALOGEX 0, 0, 284, 330
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Recurrent Reminder"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "MonthCalendar1",IDC_MONTHCALENDAR,"SysMonthCal32",MCS_NOTODAY | WS_TABSTOP,128,23,127,84,WS_EX_STATICEDGE
+    CONTROL         "DateTimePicker2",IDC_TIME,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,159,113,63,14
+    EDITTEXT        IDC_TEXT,16,156,247,15,ES_AUTOHSCROLL
+    CONTROL         "Pop up a message box",IDC_B_POPUP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,177,92,15
+    CONTROL         "Say it",IDC_B_SAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,116,180,33,10
+    PUSHBUTTON      "Hear it now",IDC_HEAR,153,177,43,15
+    DEFPUSHBUTTON   "Add this event!",IDOK,7,309,69,14
+    PUSHBUTTON      "Cancel",IDCANCEL,221,309,50,14
+    PUSHBUTTON      "Button1",IDC_PIC,27,45,70,60
+    LTEXT           "This is a quick way to schedule a simple recurrent talking reminder.",IDC_STATIC,7,7,99,49
+    GROUPBOX        "Set the first time to take place:",IDC_GROUPBOX,116,7,155,128
+    GROUPBOX        "Enter reminder text:",IDC_GROUPBOX1,7,143,264,56
+    GROUPBOX        "Reschedule Settings",IDC_GROUPBOX2,7,205,264,93
+    GROUPBOX        "If you chose daily, on which days?",IDC_GROUPBOX3,20,239,239,47
+    CONTROL         "Monday",IDC_DAY1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,79,254,41,10
+    CONTROL         "Tuesday",IDC_DAY2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,129,254,43,10
+    CONTROL         "Sunday",IDC_DAY0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,30,254,39,10
+    CONTROL         "Wednesday",IDC_DAY3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,184,254,54,10
+    CONTROL         "Thursday",IDC_DAY4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,30,267,45,10
+    LTEXT           "Reschedule",IDC_STATIC,15,219,39,8
+    COMBOBOX        IDC_COMBO,62,218,66,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Friday",IDC_DAY5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,79,267,45,10
+    CONTROL         "Saturday",IDC_DAY6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,129,268,45,10
+END
+
+IDD_TRIGGER_DAY_FILTER DIALOG 0, 0, 248, 121
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Day Filter"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,100,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,191,100,50,14
+    LTEXT           "A day filter trigger allows you to restrict an event from happening except on certain days.  For instance, if you had an existing hourly event that you only wanted to run on weekdays, you could use this and simply not check Saturday and Sunday.",-1,7,7,234,37
+    GROUPBOX        "Choose which days to allow triggering on",IDC_GROUPBOX,7,46,234,46
+    CONTROL         "Monday",IDC_DAY1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,67,61,41,10
+    CONTROL         "Tuesday",IDC_DAY2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,117,61,43,10
+    CONTROL         "Sunday",IDC_DAY0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,61,39,10
+    CONTROL         "Wednesday",IDC_DAY3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,171,61,54,10
+    CONTROL         "Thursday",IDC_DAY4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,74,45,10
+    CONTROL         "Friday",IDC_DAY5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,67,74,45,10
+    CONTROL         "Saturday",IDC_DAY6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,117,75,45,10
+END
+
+IDD_WIZARD_ATOMIC DIALOG 0, 0, 228, 185
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Atomic Clock Time Adjust Wizard"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,164,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,171,164,50,14
+    LTEXT           "This wizard sets up an event that keeps your computer clock accurate (within about a second) from anywhere in the world by contacting the worlds most accurate time pieces, the atomic clock.",IDC_STATIC,7,7,214,31
+    LTEXT           "Timezone/region information is correctly processed.   Advanced error checking is done to avoid ever setting with bad values.",IDC_STATIC,7,46,214,22
+    GROUPBOX        "Choose (or enter) the NIST time server to communicate with:",IDC_GROUPBOX,7,76,214,33
+    COMBOBOX        IDC_COMBO,15,90,198,64,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "How often would you like to check and synchronize your time?",IDC_GROUPBOX1,7,118,214,37
+    LTEXT           "Check",IDC_STATIC,19,134,27,10
+    COMBOBOX        IDC_COMBO_TIME,47,132,87,52,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ALERT DIALOG 0, 0, 383, 146
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Toolfish Notification"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,166,125,50,14
+    CONTROL         "",IDC_RICHEDIT,"RichEdit20W",WS_BORDER | WS_VSCROLL | WS_TABSTOP | 0x804,7,7,369,109
+END
+
+IDD_MAIL_VIEW DIALOG 0, 0, 507, 265
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION 
+"Show Emails  - A list of emails still sitting on the server(s) as of the most recent server checks."
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,233,247,50,14
+    CONTROL         "",IDC_RICHEDIT,"RichEdit20W",WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP | 0x804,7,7,493,234
+END
+
+IDD_ACTION_TTS DIALOG 0, 0, 278, 81
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Enable/Disable Toolfish's Text To Speech"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,60,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,221,60,50,14
+    LTEXT           "This option is here so you can automatically have Toolfish stop talking and schedule it to activate speech again at 8 am or whenever is convient.",IDC_STATIC,7,7,264,19
+    LTEXT           "When this action is run do the following:",IDC_STATIC,7,34,129,10
+    COMBOBOX        IDC_COMBO,137,31,134,46,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ACTION_SMARTMUTE DIALOG 0, 0, 278, 79
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Enable/Disable Toolfish's Smart Mute"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,58,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,221,58,50,14
+    LTEXT           "This option let's you turn on and off the muting on inactivity feature of Toolfish in an automated  fashion.",IDC_STATIC,7,7,264,19
+    LTEXT           "When this action is run do the following:",IDC_STATIC,7,34,128,10
+    COMBOBOX        IDC_COMBO,137,32,134,46,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ACTION_VOLUME DIALOGEX 0, 0, 241, 206
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Set System Volume"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Slider1",IDC_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,87,70,141,11
+    LTEXT           "Set System Volume to:",IDC_STATIC,7,72,72,8
+    LTEXT           "0",IDC_STATIC,93,61,12,8
+    LTEXT           "100",IDC_STATIC,212,62,20,8
+    DEFPUSHBUTTON   "Ok",IDOK,7,184,57,14
+    CONTROL         "Reset the Smart Mute inactivity timer if applicable",IDC_UNMUTE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,163,170,10
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,177,184,57,14
+    LTEXT           "This is a neat way to have your main system volume change at certain times of the day.",IDC_STATIC,7,7,227,20
+    LTEXT           "For instance, you could set the volume to max here and also add a ""run file"" action and play an .mp3 to wake you up each morning.",IDC_STATIC,7,32,227,26
+    LTEXT           "If the computer is ""Smart Muted"" when this event is run, the volume change will be remembered and used the next time the computer is touched. ",IDC_STATIC,7,108,227,26
+    LTEXT           "If you want to be sure the computer is not muted and the volume change happens right away, check the option below.",IDC_STATIC,7,138,205,17
+    CONTROL         "Smoothly fade to the new volume level",IDC_FADE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,89,137,10
+END
+
+IDD_WIZARD_EMAIL DIALOG 0, 0, 290, 261
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Check Email Wizard"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,240,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,233,240,50,14
+    LTEXT           "The Check Email action let's you get notified when a POP3 email box has received new messages.   It only checks, it doesn't delete any email from the server.",IDC_STATIC,7,7,276,20
+    LTEXT           "This is good for people who don't want to run memory hogs like Outlook all the time but still want to know when they got new email.",IDC_STATIC,7,30,276,21
+    LTEXT           "Incoming mail server (POP3) :",IDC_STATIC,20,67,95,9
+    EDITTEXT        IDC_SERVER,119,65,153,12,ES_AUTOHSCROLL
+    LTEXT           "Logon:",IDC_STATIC,20,83,27,11
+    EDITTEXT        IDC_NAME,59,82,89,12,ES_AUTOHSCROLL
+    GROUPBOX        "Email Server Setup",IDC_GROUPBOX,7,52,276,67
+    LTEXT           "Password:",IDC_STATIC,20,100,36,11
+    EDITTEXT        IDC_PASSWORD,59,99,89,12,ES_PASSWORD | ES_AUTOHSCROLL
+    GROUPBOX        "How often should we check?",IDC_GROUPBOX2,7,127,276,36
+    LTEXT           "Check the server",IDC_STATIC,19,142,55,8
+    COMBOBOX        IDC_COMBO,81,141,97,65,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Text to Speech Options: If new email is detected...",IDC_GROUPBOX1,7,169,276,62
+    CONTROL         "Say how many new emails were detected",IDC_SAY_COUNT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,181,156,14
+    CONTROL         "Say who each new email is from",IDC_SAY_FROM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,195,156,14
+    CONTROL         "Say the subject of each email",IDC_SAY_SUBJECT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,209,156,14
+END
+
+IDD_ACTION_MONITOR DIALOG 0, 0, 287, 354
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Site Monitor"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,333,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,230,333,50,14
+    LTEXT           "This action is good if you want alarms to go off or emails sent if a certain webpage or port becomes inaccessible, or you simply want to keep track of its uptime and ping statistics.",IDC_STATIC,7,7,273,25
+    LTEXT           "If a site cannot be reached the remaining actions of this event are run, this gives you the flexibility to perform any action(s) in the case of failure.",IDC_STATIC,7,40,273,19
+    CONTROL         "The server/port cannot be reached",IDC_TIMEOUT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,179,189,13
+    GROUPBOX        "Trigger a fail condition and run remaining actions in this event IF...",IDC_GROUPBOX1,7,168,273,86
+    GROUPBOX        "Site/Port to monitor",IDC_GROUPBOX,7,71,273,92
+    GROUPBOX        "Stastistical data",IDC_GROUPBOX2,7,261,273,64
+    PUSHBUTTON      "Reset",IDC_RESET,119,306,44,13
+    EDITTEXT        IDC_FILENAME,39,113,172,13,ES_AUTOHSCROLL
+    CONTROL         "The file is not found (404) or other serious errors are detected",IDC_ERROR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,35,225,210,13
+    LTEXT           "Out of 0 checks the site failed 0 times.  (100 percent uptime)",IDC_TEXT1,15,276,193,9
+    LTEXT           "Lowest ping was 0, highest ping was 0.  Average was 0.",IDC_TEXT2,15,289,191,14
+    LTEXT           "URL:",IDC_STATIC,13,115,21,11
+    LTEXT           "Port:",IDC_STATIC,217,115,16,11
+    EDITTEXT        IDC_PORT,238,113,32,13,ES_AUTOHSCROLL
+    LTEXT           "You can monitor more than websites, for instance, you can put your mail server and choose the standard POP3 mail port of 110 if you wish.  Leave it at 80 for most websites.",IDC_STATIC,13,81,256,26
+    CONTROL         "The size of webpage is less than",IDC_SIZE_CONTENT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,35,209,119,10
+    EDITTEXT        IDC_SIZE_BYTES,159,208,31,13,ES_AUTOHSCROLL
+    LTEXT           "bytes in size",IDC_STATIC,197,210,45,11
+    CONTROL         "Actually load the webpage (only click this if you're monitoring a web server)",IDC_WEBPAGE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,129,257,15
+    GROUPBOX        "Additional fail conditions for after loading the webpage",IDC_GROUPBOX3,22,195,237,48
+    CONTROL         "Reverse behavior - run remaining operations only if the site is reachable",IDC_REVERSE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,145,257,15
+END
+
+IDD_WIZARD_MONITOR DIALOG 0, 0, 287, 338
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Site Monitor Wizard"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Create Event",IDOK,7,317,52,14
+    PUSHBUTTON      "Cancel",IDCANCEL,230,317,50,14
+    LTEXT           "This wizard let's you setup an event that will notify you when a site or port is not reachable.  You can be alerted by audio, popup window or emailed.\r\n\r\nWhile monitoring, uptime and ping statistics are collected.",IDC_STATIC,7,7,273,38
+    GROUPBOX        "Site/Port to monitor",IDC_GROUPBOX,7,51,273,77
+    EDITTEXT        IDC_FILENAME,39,94,172,13,ES_AUTOHSCROLL
+    LTEXT           "URL:",IDC_STATIC,13,95,21,11
+    LTEXT           "Port:",IDC_STATIC,217,95,18,11
+    EDITTEXT        IDC_PORT,238,94,32,13,ES_AUTOHSCROLL
+    LTEXT           "You can monitor more than websites, for instance, you can put your mail server and choose the standard POP3 mail port of 110 if you wish.  Leave it at 80 for most websites.",IDC_STATIC,13,62,256,26
+    CONTROL         "This is a webpage, load it and check for 404 and other errors too",IDC_WEBPAGE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,110,257,15
+    GROUPBOX        "If a problem with the site is detected, do this...",IDC_GROUPBOX2,7,136,273,117
+    CONTROL         "Tell me about it using Text To Speech",IDC_SAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,149,138,12
+    CONTROL         "Pop up a window about it",IDC_POPUP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,164,188,12
+    CONTROL         "Email about it",IDC_EMAIL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,180,77,10
+    EDITTEXT        IDC_EMAIL_TO,68,209,102,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Global SMTP settings",IDC_SMTP,183,216,74,16
+    GROUPBOX        "Additional Settings",IDC_GROUPBOX3,7,260,273,49
+    CONTROL         "Quiet mode (Don't show anything to the log unless a problem is detected)",IDC_QUIET,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,292,260,11
+    GROUPBOX        "Email Options (use a valid from address to insure it won't get spam filtered)",IDC_GROUPBOX1,16,197,255,48
+    LTEXT           "Email to:",IDC_STATIC,28,211,28,8
+    EDITTEXT        IDC_EMAIL_FROM,68,226,102,13,ES_AUTOHSCROLL
+    LTEXT           "Email from:",IDC_STATIC,21,228,35,8
+    LTEXT           "Monitor frequency:",IDC_STATIC,14,274,60,8
+    COMBOBOX        IDC_COMBO,81,272,97,65,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_FUN DIALOG 0, 0, 252, 174
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Fun Stuff"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,153,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,195,153,50,14
+    PUSHBUTTON      "See keyboard and mouse statistics",IDC_STATISTICS,63,116,125,15
+    CONTROL         "Leet-Type enabled",IDC_OVERLAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,48,100,14
+    LTEXT           "Leet-Type automatically converts anything you type into 'hacker-speak', it's a fun way to annoy people you're chatting with.  Use sparingly!",IDC_STATIC,14,18,225,25
+    GROUPBOX        "Leet-Type",IDC_GROUPBOX,7,7,238,62
+    LTEXT           "Ever wondered how many miles you've moved your mouse?  How many keys you've hit today?  Well click and find out!",IDC_STATIC,13,87,226,17
+    GROUPBOX        "Fun Statistics",IDC_GROUPBOX1,7,75,238,67
+END
+
+IDD_STATISTICS DIALOG 0, 0, 217, 202
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Keyboard & Mouse Statistics"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,83,182,50,14
+    GROUPBOX        "Today",IDC_GROUPBOX,7,7,203,70
+    GROUPBOX        "Total",IDC_GROUPBOX1,7,87,203,83
+    PUSHBUTTON      "Reset",IDC_RESET,92,153,32,11
+    EDITTEXT        IDC_TODAY_BUTTONS,13,18,191,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY
+    EDITTEXT        IDC_TOTAL_BUTTONS,13,97,191,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY
+END
+
+IDD_TRIGGER_PROCESS DIALOG 0, 0, 361, 156
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "If a certain process is running..."
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,135,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,304,135,50,14
+    LTEXT           "A process trigger allows you to run an event only if a certain application is (or isn't) running.",IDC_STATIC,7,7,347,19
+    LTEXT           "This make things such as restarting a crashed application or killing applications that shouldn't be running possible.  (Not case sensitive)",IDC_STATIC,7,27,347,22
+    GROUPBOX        "Trigger only if...",IDC_GROUPBOX,7,72,347,34
+    LTEXT           "If the word",IDC_STATIC,13,86,39,11
+    EDITTEXT        IDC_SEARCH,58,83,64,13,ES_AUTOHSCROLL
+    LTEXT           "is",IDC_STATIC,125,86,9,11
+    COMBOBOX        IDC_FOUND,136,84,52,43,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_FILENAME,192,84,156,43,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Only check the window that currently has the focus (usually you don't want this)",IDC_FOCUS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,112,280,15
+    PUSHBUTTON      "(click here to view list of active processes)",IDC_VIEW,2,50,142,14,BS_LEFT
+END
+
+IDD_ACTION_SEND DIALOGEX 0, 0, 345, 186
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Send Command To Application"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_SEARCH,28,61,64,13,ES_AUTOHSCROLL
+    COMBOBOX        IDC_FILENAME,127,61,156,43,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Perform standard windows task",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,13,103,114,10
+    CONTROL         "Fake a keystroke",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,13,121,71,10
+    CONTROL         "Custom message (experts only!)  Msg:",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,13,137,134,10
+    COMBOBOX        IDC_COMBO_MESSAGE,168,103,159,92,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,7,165,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,288,165,50,14
+    LTEXT           "This action let's you control other applications.  For instance, you could close, minimize or bring an application into focus.",IDC_STATIC,7,7,331,17
+    GROUPBOX        "First enter information that helps locate the target window we're going to send to",IDC_GROUPBOX,7,48,331,33
+    LTEXT           "If",IDC_STATIC,17,63,8,8
+    LTEXT           "is found",IDC_STATIC,95,63,26,8
+    GROUPBOX        "What message should we send to the window?",IDC_GROUPBOX1,7,89,331,67
+    LTEXT           "then...",IDC_STATIC,290,63,24,10
+    COMBOBOX        IDC_COMBO_KEY,102,119,107,123,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Alt",IDC_B_ALT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,219,121,24,10
+    CONTROL         "Ctrl",IDC_B_CTRL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,257,121,26,10
+    CONTROL         "Shift",IDC_B_SHIFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,301,121,31,10
+    EDITTEXT        IDC_MSG,148,137,36,13,ES_AUTOHSCROLL
+    LTEXT           "LParam:",IDC_STATIC,189,139,27,8
+    EDITTEXT        IDC_LPARAM,222,137,36,13,ES_AUTOHSCROLL
+    LTEXT           "WParam:",IDC_STATIC,261,139,27,8
+    EDITTEXT        IDC_WPARAM,293,137,36,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "(click here to view list of active processes)",IDC_VIEW,165,27,142,14,BS_LEFT
+    LTEXT           "You can also fake keystrokes to automate tasks.",IDC_STATIC,7,30,155,10
+END
+
+IDD_ACTION_DELAY DIALOG 0, 0, 209, 105
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Delay"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,84,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,152,84,50,14
+    LTEXT           "Wait",IDC_STATIC,7,66,16,8
+    LTEXT           "Sometimes, when doing multiple things in one event you need a delay between actions.\r\n\r\nFor example, if you wanted to start a program, wait for it to load, then send some keystrokes to it.",IDC_STATIC,7,7,195,43
+    EDITTEXT        IDC_MS,27,64,61,12,ES_AUTOHSCROLL
+    LTEXT           "milliseconds.  (1000 = 1 second)",IDC_STATIC,92,66,110,8
+END
+
+IDD_ACTION_REBOOT DIALOG 0, 0, 238, 178
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Logoff/Reboot/Shutdown"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,157,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,181,157,50,14
+    LTEXT           "This action will automatically logoff the current user, shutdown or reboot your computer.",IDC_STATIC,7,7,230,17
+    LTEXT           "One example this would be useful for is for a server that has a problem - for instance, you could set up a trigger that if a server monitor fails and the computer has not been touched in 30 minutes, it will reboot.",IDC_STATIC,7,28,230,29
+    COMBOBOX        IDC_COMBO,7,138,158,57,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Warning: there is no countdown or visual indication of the shutdown/reboot.  Do not use this feature unless you're really sure you know what you're doing!  It's a good idea to setup and test the trigger first.",IDC_STATIC,7,62,224,32
+    LTEXT           "Some documents and data may be lost using these commands, as you will not get a chance to save them.",IDC_STATIC,7,104,224,24
+END
+
+IDD_ACTION_LEET DIALOG 0, 0, 186, 85
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Leet-Type Toggle"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,70,64,50,14
+    LTEXT           "This has no settings, it will simply toggle Leet-Type on or off.",-1,7,36,172,20
+    LTEXT           "If you need to quicly switch between normal and Leet-Type mode by hotkey, this action let's you do that.",-1,7,7,179,23
+END
+
+IDD_WIZARD_ONE_TIME_REMINDER_X DIALOG 0, 0, 284, 111
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Quick Reminder Wizard"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_TEXT,16,37,247,15,ES_AUTOHSCROLL
+    CONTROL         "Pop up a message box",IDC_B_POPUP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,58,92,15
+    CONTROL         "Say it",IDC_B_SAY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,116,61,33,10
+    PUSHBUTTON      "Hear it now",IDC_HEAR,153,58,43,15
+    DEFPUSHBUTTON   "Add this event!",IDOK,7,90,69,14
+    PUSHBUTTON      "Cancel",IDCANCEL,221,90,50,14
+    LTEXT           "Get reminded in a specifed amount of time from now.",IDC_DESCRIPTION,7,7,264,16
+    GROUPBOX        "Enter reminder text:",IDC_GROUPBOX1,7,24,264,56
+END
+
+IDD_DIALOG1 DIALOGEX 0, 0, 187, 94
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,130,24,50,14
+END
+
+IDD_ACTION_MIC_VOLUME DIALOGEX 0, 0, 241, 150
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Set Microphone Volume"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Slider1",IDC_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,87,70,141,11
+    LTEXT           "Set Mic Input Level %",-1,7,72,72,8
+    LTEXT           "0",-1,93,61,12,8
+    LTEXT           "100",-1,212,62,20,8
+    DEFPUSHBUTTON   "Ok",IDOK,7,128,57,14
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,177,128,57,14
+    LTEXT           "Does a game or app keep changing your mic levels?  By setting this to run every few seconds, you can force the levels you want!",-1,7,7,227,20
+    LTEXT           "Optionally, if you have a lot of mics/inputs, you can specify part of the name to only affect matching devices. (case sensitive!  If no match is found when it runs, it will show a list of device names)",-1,7,32,227,26
+    EDITTEXT        IDC_PARTIAL_NAME,106,93,121,13,ES_AUTOHSCROLL
+    LTEXT           "Partial Device Name (or leave blank for all mic/inputs) Example: Pro 9000",-1,7,93,89,33
+END
+
+IDD_ACTION_REZ DIALOGEX 0, 0, 321, 190
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Action Reset Video"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,198,155,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,252,155,50,14
+    LTEXT           "This control has no settings.  It forces the video card to reset the primary graphics adapter.\n\nSeems weird, but by assigning it to a hotkey, you can recover from the ""blank screen"" NVidia card issue.",IDC_STATIC,68,41,177,65
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "Toolfish Utility Suite"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "Toolfish"
+            VALUE "LegalCopyright", "Copyright (C) 2007"
+            VALUE "OriginalFilename", "toolfish.exe"
+            VALUE "ProductName", "Toolfish"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_SOURCE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 517
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 334
+    END
+
+    IDD_EVENTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 487
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 275
+    END
+
+    IDD_EVENT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 366
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 355
+    END
+
+    IDD_MUTE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 239
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 114
+    END
+
+    IDD_TRIGGER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 107
+    END
+
+    IDD_TRIGGER_TIME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 293
+    END
+
+    IDD_ACTION_MESSAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 507
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 307
+    END
+
+    IDD_ACTION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 179
+    END
+
+    IDD_ACTION_SOUND, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 66
+    END
+
+    IDD_KEY_LOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 237
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 115
+    END
+
+    IDD_TRIGGER_HOTKEY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 284
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 157
+    END
+
+    IDD_ACTION_WEBSITE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 288
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 75
+    END
+
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 185
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 253
+    END
+
+    IDD_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 225
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 157
+    END
+
+    IDD_ACTION_COMPARE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 352
+        BOTTOMMARGIN, 290
+    END
+
+    IDD_WIZARD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 402
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 271
+    END
+
+    IDD_OKCANCEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 282
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 75
+    END
+
+    IDD_THREADS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+
+    IDD_NAG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 226
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 157
+    END
+
+    IDD_UNLOCK, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 211
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 109
+    END
+
+    IDD_RENAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 251
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 86
+    END
+
+    IDD_WELCOME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 376
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 229
+    END
+
+    IDD_VOICE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 265
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_TEST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 486
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 301
+    END
+
+    IDD_TIME_RANGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 188
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 106
+    END
+
+    IDD_TRIGGER_INACTIVITY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 331
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 122
+    END
+
+    IDD_ACTION_RUN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 266
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 184
+    END
+
+    IDD_QUIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 257
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 72
+    END
+
+    IDD_ACTION_STEALTH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 107
+    END
+
+    IDD_ACTION_EMAIL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 283
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 331
+    END
+
+    IDD_EMAIL_SETTINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 239
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 258
+    END
+
+    IDD_SMTP_SETUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 266
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 290
+    END
+
+    IDD_ACTION_TOGGLE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 130
+    END
+
+    IDD_INTRO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 328
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 200
+    END
+
+    IDD_WIZARD_ONE_TIME_REMINDER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 271
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 243
+    END
+
+    IDD_ACTION_ATOMIC, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 221
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+
+    IDD_WIZARD_RECURRENT_REMINDER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 271
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 323
+    END
+
+    IDD_TRIGGER_DAY_FILTER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 241
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 114
+    END
+
+    IDD_WIZARD_ATOMIC, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 221
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 178
+    END
+
+    IDD_ALERT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 376
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_MAIL_VIEW, DIALOG
+    BEGIN
+        RIGHTMARGIN, 421
+        VERTGUIDE, 418
+        BOTTOMMARGIN, 220
+    END
+
+    IDD_ACTION_TTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 271
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 74
+    END
+
+    IDD_ACTION_SMARTMUTE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 271
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 72
+    END
+
+    IDD_ACTION_VOLUME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 234
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 198
+    END
+
+    IDD_WIZARD_EMAIL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 283
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 254
+    END
+
+    IDD_ACTION_MONITOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 280
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 347
+    END
+
+    IDD_WIZARD_MONITOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 280
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 331
+    END
+
+    IDD_FUN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 245
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 167
+    END
+
+    IDD_STATISTICS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 196
+    END
+
+    IDD_TRIGGER_PROCESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 354
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_ACTION_SEND, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 338
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 179
+    END
+
+    IDD_ACTION_DELAY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 202
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 98
+    END
+
+    IDD_ACTION_REBOOT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 231
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 171
+    END
+
+    IDD_ACTION_LEET, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 78
+    END
+
+    IDD_WIZARD_ONE_TIME_REMINDER_X, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 271
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 104
+    END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+
+    IDD_ACTION_MIC_VOLUME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 234
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 142
+    END
+
+    IDD_ACTION_REZ, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 314
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 183
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_TRAY_MENU MENU
+BEGIN
+    POPUP "Toolfish"
+    BEGIN
+        MENUITEM "About Toolfish...",           ID_ABOUT_TOOLFISH
+        MENUITEM "Options...",                  ID_MENU_OPTIONS
+        MENUITEM "Disable Smart Muting",        ID_DISABLE_SMARTMUTE
+        MENUITEM "Disable Text To Speech",      ID_MENU_VOICE_MUTE
+        MENUITEM "Read clipboard text out loud ", ID_MENU_READ_CLIPBOARD
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        ID_MENU_EXIT
+    END
+END
+
+IDR_COPY_MENU MENU
+BEGIN
+    POPUP "Activity Window"
+    BEGIN
+        MENUITEM "Copy (Ctrl-C)",               ID_MENU_COPY
+    END
+END
+
+IDR_MENU_WIZARD MENU
+BEGIN
+    POPUP "Toolfish"
+    BEGIN
+        MENUITEM "Web Compare Wizard",          ID_MENU_WIZARD_WEB
+        MENUITEM "Site Monitor Wizard",         ID_MENU_WIZARD_MONITOR
+        MENUITEM "Talking Email Check Wizard",  ID_MENU_WIZARD_EMAIL
+        MENUITEM "One Time Reminder Wizard",    ID_MENU_WIZARD_ONE_TIME_REMINDER
+        MENUITEM "Recurrent Reminder Wizard",   ID_MENU_WIZARD_REMINDER
+        MENUITEM "Atomic Clock Time Adjust Wizard", ID_MENU_WIZARD_ATOMIC
+        POPUP "Remind me in..."
+        BEGIN
+            MENUITEM "5 minutes",                   ID_MENU_WIZARD_REMINDER_5
+            MENUITEM "10 minutes",                  ID_MENU_WIZARD_REMINDER_10
+            MENUITEM "15 minutes",                  ID_MENU_WIZARD_REMINDER_15
+            MENUITEM "20 minutes",                  ID_MENU_WIZARD_REMINDER_20
+            MENUITEM "30 minutes",                  ID_MENU_WIZARD_REMINDER_30
+            MENUITEM "45 minutes",                  ID_MENU_WIZARD_REMINDER_45
+            MENUITEM "1 hour",                      ID_MENU_WIZARD_REMINDER_1_HOUR
+            MENUITEM "2 hours",                     ID_MENU_WIZARD_REMINDER_2_HOUR
+            MENUITEM "4 hours",                     ID_MENU_WIZARD_REMINDER_4_HOURS
+            MENUITEM "8 hours",                     ID_MENU_WIZARD_REMINDER_8_HOURS
+            MENUITEM "1 day",                       ID_MENU_WIZARD_REMINDER_1_DAY
+            MENUITEM "1 week",                      ID_MENU_WIZARD_REMINDER_1_WEEK
+            MENUITEM "1 month",                     ID_MENU_WIZARD_REMINDER_1_MONTH
+        END
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "fish.ico"
+
+IDR_FOLDER              ICON                    "idr_fold.ico"
+
+IDR_FOLDER_OPEN         ICON                    "ico00001.ico"
+
+IDR_FISH_DISABLED       ICON                    "fish_dis.ico"
+
+IDR_FISH_ALARM          ICON                    "idr_main.ico"
+
+IDR_FISH_ONETIME        ICON                    "idr_fish.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_ACTION_EMAIL DLGINIT
+BEGIN
+    IDC_FILTER_HAVE, 0x403, 24, 0
+0x6749, 0x6f6e, 0x6572, 0x6520, 0x616d, 0x6c69, 0x2073, 0x6874, 0x7461, 
+0x6820, 0x7661, 0x0065, 
+    IDC_FILTER_HAVE, 0x403, 30, 0
+0x6749, 0x6f6e, 0x6572, 0x6520, 0x616d, 0x6c69, 0x2073, 0x6874, 0x7461, 
+0x4420, 0x4e4f, 0x5427, 0x6820, 0x7661, 0x0065, 
+    IDC_FILTER_FIELD, 0x403, 8, 0
+0x7553, 0x6a62, 0x6365, 0x0074, 
+    IDC_FILTER_FIELD, 0x403, 7, 0
+0x6553, 0x646e, 0x7265, "\000" 
+    IDC_FILTER_FIELD, 0x403, 10, 0
+0x6552, 0x6963, 0x6970, 0x6e65, 0x0074, 
+    IDC_FILTER_FIELD, 0x403, 5, 0
+0x6f42, 0x7964, "\000" 
+    0
+END
+
+IDD_WIZARD_RECURRENT_REMINDER DLGINIT
+BEGIN
+    IDC_COMBO, 0x403, 6, 0
+0x6144, 0x6c69, 0x0079, 
+    IDC_COMBO, 0x403, 7, 0
+0x6559, 0x7261, 0x796c, "\000" 
+    0
+END
+
+IDD_ACTION_TTS DLGINIT
+BEGIN
+    IDC_COMBO, 0x403, 34, 0
+0x6944, 0x6173, 0x6c62, 0x2065, 0x6f54, 0x6c6f, 0x6966, 0x6873, 0x7327, 
+0x5420, 0x7865, 0x2074, 0x6f54, 0x5320, 0x6570, 0x6365, 0x0068, 
+    IDC_COMBO, 0x403, 33, 0
+0x6e45, 0x6261, 0x656c, 0x5420, 0x6f6f, 0x666c, 0x7369, 0x2768, 0x2073, 
+0x6554, 0x7478, 0x5420, 0x206f, 0x7053, 0x6565, 0x6863, "\000" 
+    0
+END
+
+IDD_ACTION_SMARTMUTE DLGINIT
+BEGIN
+    IDC_COMBO, 0x403, 19, 0
+0x6944, 0x6173, 0x6c62, 0x2065, 0x6d53, 0x7261, 0x2074, 0x754d, 0x6574, 
+"\000" 
+    IDC_COMBO, 0x403, 18, 0
+0x6e45, 0x6261, 0x656c, 0x5320, 0x616d, 0x7472, 0x4d20, 0x7475, 0x0065, 
+
+    0
+END
+
+IDD_WIZARD_EMAIL DLGINIT
+BEGIN
+    IDC_COMBO, 0x403, 14, 0
+0x6e6f, 0x6563, 0x6120, 0x6d20, 0x6e69, 0x7475, 0x0065, 
+    IDC_COMBO, 0x403, 20, 0
+0x7665, 0x7265, 0x2079, 0x6874, 0x6572, 0x2065, 0x696d, 0x756e, 0x6574, 
+0x0073, 
+    IDC_COMBO, 0x403, 19, 0
+0x7665, 0x7265, 0x2079, 0x6966, 0x6576, 0x6d20, 0x6e69, 0x7475, 0x7365, 
+"\000" 
+    IDC_COMBO, 0x403, 13, 0
+0x6e6f, 0x6563, 0x6120, 0x206e, 0x6f68, 0x7275, "\000" 
+    0
+END
+
+IDD_WIZARD_MONITOR DLGINIT
+BEGIN
+    IDC_COMBO, 0x403, 14, 0
+0x6e6f, 0x6563, 0x6120, 0x6d20, 0x6e69, 0x7475, 0x0065, 
+    IDC_COMBO, 0x403, 19, 0
+0x7665, 0x7265, 0x2079, 0x6966, 0x6576, 0x6d20, 0x6e69, 0x7475, 0x7365, 
+"\000" 
+    IDC_COMBO, 0x403, 21, 0
+0x7665, 0x7265, 0x2079, 0x6874, 0x7269, 0x7974, 0x6d20, 0x6e69, 0x7475, 
+0x7365, "\000" 
+    IDC_COMBO, 0x403, 13, 0
+0x6e6f, 0x6563, 0x6120, 0x206e, 0x6f68, 0x7275, "\000" 
+    IDC_COMBO, 0x403, 11, 0
+0x6e6f, 0x6563, 0x6120, 0x6420, 0x7961, "\000" 
+    0
+END
+
+IDD_SMTP_SETUP DLGINIT
+BEGIN
+    IDC_COMBO, 0x403, 11, 0
+0x5541, 0x4854, 0x4c20, 0x474f, 0x4e49, "\000" 
+    IDC_COMBO, 0x403, 12, 0
+0x4f4c, 0x4947, 0x204e, 0x4c50, 0x4941, 0x004e, 
+    IDC_COMBO, 0x403, 9, 0
+0x5243, 0x4d41, 0x4d20, 0x3544, "\000" 
+    0
+END
+
+IDD_TRIGGER_PROCESS DLGINIT
+BEGIN
+    IDC_FOUND, 0x403, 6, 0
+0x6f46, 0x6e75, 0x0064, 
+    IDC_FOUND, 0x403, 10, 0
+0x6f4e, 0x2074, 0x6f66, 0x6e75, 0x0064, 
+    IDC_FILENAME, 0x403, 25, 0
+0x6e61, 0x2079, 0x7270, 0x636f, 0x7365, 0x6620, 0x6c69, 0x6e65, 0x6d61, 
+0x2065, 0x616e, 0x656d, "\000" 
+    IDC_FILENAME, 0x403, 25, 0
+0x6e61, 0x2079, 0x7270, 0x636f, 0x7365, 0x2073, 0x6977, 0x646e, 0x776f, 
+0x7420, 0x7469, 0x656c, "\000" 
+    0
+END
+
+IDD_ACTION_SEND DLGINIT
+BEGIN
+    IDC_FILENAME, 0x403, 25, 0
+0x6e61, 0x2079, 0x7270, 0x636f, 0x7365, 0x6620, 0x6c69, 0x6e65, 0x6d61, 
+0x2065, 0x616e, 0x656d, "\000" 
+    IDC_FILENAME, 0x403, 25, 0
+0x6e61, 0x2079, 0x7270, 0x636f, 0x7365, 0x2073, 0x6977, 0x646e, 0x776f, 
+0x7420, 0x7469, 0x656c, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ACTION_REZ AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ABOUT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    ID_MENU_EXIT            "Unload Toolfish"
+    ID_MENU_OPTIONS         "Open Toolfish"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\Source.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

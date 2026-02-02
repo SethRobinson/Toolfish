@@ -1,0 +1,113 @@
+
+
+V2.1 Features?
+
+* Text to speech now works better on Vista
+* Pop-up notifications now come to the foreground in Vista
+
+
+* Keyboard cleaner mode
+
+* %1 change should be trigger on a 1 byte change, yo!
+
+* Add whole site wizard
+* Cookie support
+* Proxy support?
+* Smart delay of web related triggers if not online
+* maybe $HIGHLIGHTED$ token
+* If already running, bring the current one to the top
+* Add password option
+* Add support for announcing WHICH account an email came from?
+* Add popup box that accepts a word and loads dictionary.com for example (PoVRAZOR)
+
+
+** BEFORE RELEASE CHECKLIST
+** Compile RELEASE build of EXE ** AND ** .DLL
+** Are the proper EVENTS included?
+
+-- Get notified when your friends who update their webpages twice a year finally do
+   it, without checking all the time!
+-- Get notifed when your favorite web comic has updated
+-- Get notified when your favorite game's website news is updated
+-- Get notified when your name or product is talked about by checking search engine results
+-- Get notified when someone adds an entry to your guestbook
+-- Monitor your friend's web journal, get notified when he/she updates!
+-- Use phrase checking to detect when somebody swears in your guestbook!
+-- Monitor a web forum for general activity or when a certain person posts.
+-- Have your computer "tell" you to take a break every hour if computer
+   activity has been detected
+-- Secretly log all passwords/emails entered on your computer
+-- Mute your computer based on inactivity
+-- Run batchfiles or programs at scheduled times
+-- Attach hotkeys to any website, document or program
+-- Attach macros to hotkeys so you can paste info quickly anywhere, quickly (great for tech support people)
+-- Perform scheduled backups by passing the current date or time as a parameter to a batch file
+
+-- Monitor your favorite web-comics, journals, forums, game news and more using advanced fuzzy logic
+
+** FRAME 1
+
+Want to know when this page is updated?	(big font)
+
+** FRAME 2
+
+Toolfish                  Let Toolfish tell you when your favorite sites have been updated. (the word "tell" is italics, bold and a different color?)
+Web Compare (logo)
+
+
+** FRAME 3
+
+Toolfish                  Monitor your favorite web-comics, journals, forums, game news and more using advanced fuzzy logic
+Web Compare (logo)
+
+
+** FRAME 4
+
+Toolfish           
+Web Compare (logo)             Work smarter.  Trust the fish.	  (fish graphic)
+
+
+
+
+
+
+* Warn if moving web compare event?
+
+-- ideas for features
+
+Toolfish Web Compare
+Tool Fish Web Check	Monitor
+
+Tiny description:
+
+Get notified when web pages are updated using fuzzy logic.
+
+Very small description:
+
+Toolfish is a powerful talking tray application that notifies you when your
+favorite websites are updated based on 'percent changed' fuzzy logic.
+
+Small Description:
+
+Very small description: Toolfish is a powerful talking tray application that notifies you when your
+favorite websites are updated based on 'percent changed' fuzzy logic. Also handles hotkeys, macros, stealth keyboard logging and more.
+
+
+Long description:
+
+Wasting time checking your favorite websites only to find nothing new?
+
+Not anymore!  Let Toolfish check your sites at specified intervals for you using easy simple criteria like 'percent changed', date, or keywords found or missing and 'tell' you they've been updated.
+
+Toolfish also supports easy to use hotkeys, macros (including paste IP address), scheduling reminders or programs to be run, keyboard logging (with stealth mode) and muting on inactivity.
+
+Use the Add URL Wizard to add sites quick and easy or get down and dirty with the event builder and create custom events with unlimited triggers and actions.
+
+Professional multithreaded version.  Windows 2000/XP optimized.
+
+Don't work harder, work smarter.
+
+
+
+
+

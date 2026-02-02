@@ -1,0 +1,18 @@
+# -FrontPage-
+
+IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
+
+<Limit GET POST>
+order deny,allow
+deny from all
+allow from all
+</Limit>
+<Limit PUT DELETE>
+order deny,allow
+deny from all
+</Limit>
+AuthName www.codedojo.com
+AuthUserFile /home/rtsoft/public_html/_vti_pvt/service.pwd
+AuthGroupFile /home/rtsoft/public_html/_vti_pvt/service.grp
+
+Redirect temp /ToolfishInstaller.exe http://www.rtsoft.com/ToolfishInstaller.exe

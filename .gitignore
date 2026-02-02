@@ -1,0 +1,107 @@
+# Toolfish .gitignore
+
+# =============================================================================
+# Build outputs
+# =============================================================================
+build/
+*.obj
+*.pch
+*.iobj
+*.ipdb
+*.ilk
+*.exp
+*.bsc
+
+# =============================================================================
+# Visual Studio
+# =============================================================================
+.vs/
+*.user
+*.suo
+*.ncb
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+*.vcxproj.filters
+
+# =============================================================================
+# App directory - executables and runtime files
+# =============================================================================
+app/toolfish.exe
+app/toolfish_debug.exe
+app/sm.dll
+app/sm.lib
+app/sm.exp
+app/sm.pdb
+app/toolfish.lib
+app/toolfish.pdb
+app/toolfish_debug.pdb
+app/toolfish_debug.bsc
+app/toolfish_debug.suo
+app/toolfish_debug.SUP
+app/toolfish.suo
+app/toolfish.SUP
+app/config.dat
+app/toolfish_log.txt
+
+# App cache directory - all cached content
+app/cache/
+
+# App events directory - ignore all except installer defaults
+app/events/*
+!app/events/check rtsoft.dat
+!app/events/check toolfish website.dat
+!app/events/hotkey - dictionary.com.dat
+!app/events/hotkey - google.dat
+!app/events/hotkey_stealth.dat
+!app/events/hotkey_toggle.dat
+!app/events/macro - ip address.dat
+!app/events/open notes.dat
+
+# =============================================================================
+# Source directory - build artifacts
+# =============================================================================
+Source/Debug/
+Source/Release/
+Source/.vs/
+Source/Source___Win32_Debug/
+Source/Source___Win32_Debug_ANSI/
+Source/Source___Win32_Release_ANSI/
+Source/*.aps
+Source/unlock_util/*.obj
+Source/unlock_util/*.pdb
+Source/unlock_util/*.sbr
+Source/unlock_util/*.bsc
+Source/unlock_util/*.pch
+Source/unlock_util/*.idb
+Source/unlock_util/Debug/
+Source/unlock_util/Release/
+
+# =============================================================================
+# Distribution - built installers (keep toolfish.wse and .htaccess)
+# =============================================================================
+dist/*.exe
+dist/toolfish_*.exe
+
+# =============================================================================
+# Misc
+# =============================================================================
+*.log
+*.tmp
+*.temp
+Thumbs.db
+.DS_Store
+Local/CRACJ___.TTF
+Local/fish_icon_32.jpg
+Local/fish.ico
+Local/frame_just1.psd
+Local/GOYAH___.TTF
+Local/icon_16.ico
+Local/icon_32.ico
+Local/screenshot.psd
+Local/screenshot2.psd
+Local/toolfish_banner1.gif
+Local/toolfish_sa.gif
+Local/Untitled-1.psd
+.vscode/settings.json
