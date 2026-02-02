@@ -1,0 +1,138 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Toolfish (Debug)",
+            "type": "shell",
+            "command": "${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe",
+            "args": [
+                "-latest",
+                "-requires",
+                "Microsoft.Component.MSBuild",
+                "-find",
+                "MSBuild\\**\\Bin\\MSBuild.exe",
+                "-format",
+                "value"
+            ],
+            "options": {
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoProfile", "-Command"]
+                }
+            },
+            "problemMatcher": [],
+            "hide": true
+        },
+        {
+            "label": "Build Debug",
+            "type": "shell",
+            "command": "& \"$(& '${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe' -latest -requires Microsoft.Component.MSBuild -find 'MSBuild\\**\\Bin\\MSBuild.exe')\" Toolfish.sln /p:Configuration=Debug /p:Platform=Win32 /m",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoProfile", "-Command"]
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "Build Release",
+            "type": "shell",
+            "command": "& \"$(& '${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe' -latest -requires Microsoft.Component.MSBuild -find 'MSBuild\\**\\Bin\\MSBuild.exe')\" Toolfish.sln /p:Configuration=Release /p:Platform=Win32 /m",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoProfile", "-Command"]
+                }
+            },
+            "group": "build",
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "& \"$(& '${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe' -latest -requires Microsoft.Component.MSBuild -find 'MSBuild\\**\\Bin\\MSBuild.exe')\" Toolfish.sln /t:Clean /p:Configuration=Debug /p:Platform=Win32",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoProfile", "-Command"]
+                }
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Rebuild Debug",
+            "type": "shell",
+            "command": "& \"$(& '${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe' -latest -requires Microsoft.Component.MSBuild -find 'MSBuild\\**\\Bin\\MSBuild.exe')\" Toolfish.sln /t:Rebuild /p:Configuration=Debug /p:Platform=Win32 /m",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoProfile", "-Command"]
+                }
+            },
+            "group": "build",
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "Run Toolfish",
+            "type": "shell",
+            "command": "Start-Process -FilePath '${workspaceFolder}/app/toolfish_debug.exe' -WorkingDirectory '${workspaceFolder}/app'",
+            "options": {
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoProfile", "-Command"]
+                }
+            },
+            "dependsOn": "Build Debug",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Run Toolfish (Release)",
+            "type": "shell",
+            "command": "Start-Process -FilePath '${workspaceFolder}/app/toolfish.exe' -WorkingDirectory '${workspaceFolder}/app'",
+            "options": {
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoProfile", "-Command"]
+                }
+            },
+            "dependsOn": "Build Release",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
+        }
+    ]
+}

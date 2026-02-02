@@ -1,0 +1,9 @@
+// Place this in your user keybindings (Ctrl+K Ctrl+S → Open Keyboard Shortcuts JSON)
+// Or just use: Ctrl+Shift+P → "Run Task" → "Run Toolfish"
+[
+    {
+        "key": "ctrl+f5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Run Toolfish"
+    }
+]

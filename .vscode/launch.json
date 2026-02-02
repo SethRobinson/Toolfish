@@ -1,0 +1,7 @@
+{
+    "version": "0.2.0",
+    // Native Windows debugging requires Visual Studio (cppvsdbg is blocked in Cursor)
+    // Use Ctrl+F5 to build and run without debugging
+    // Use Visual Studio (double-click Toolfish.sln) for actual debugging with breakpoints
+    "configurations": []
+}

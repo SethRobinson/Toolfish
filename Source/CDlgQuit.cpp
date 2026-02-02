@@ -107,5 +107,5 @@ void CDlgQuit::OnHide()
 
 void CDlgQuit::OnBnClickedCancel()
 {
-    // TODO: Add your control notification handler code here
+    OnCancel();
 }
