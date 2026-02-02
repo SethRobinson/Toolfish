@@ -17,6 +17,7 @@
 #include "CDlgAbout.h"
 #include "CDlgMute.h"
 #include "mute_util.h"
+#include "gamepad_util.h"
 #include "spy_util.h"        
 #include "..\Shared\winsock\winsock_util.h"
 #include "CDlgWizard.h"
@@ -48,6 +49,8 @@ const int C_TRAY_MODE_NORMAL = 0;
 const int C_TRAY_MODE_BLINK = 1;
 
 const int C_MAIN_TIMER_MSECS = 400;
+const int C_GAMEPAD_TIMER_MSECS = 50;  // Fast polling for responsive gamepad detection
+const int C_GAMEPAD_TIMER_ID = 2;
 
 const int C_MAIN_TIMER_MAINT = 1000*59; //almost one minute
 const int C_MAIN_TIMER_AUTO_SAVE = 1000*60*30; //save our globals every 30 minutes, so we don't lose mouse clicks
@@ -219,6 +222,12 @@ BOOL CDlgMain::OnInitDialog()
     if (!app_glo.m_timer_ident)
     {
         log_error("Unable to initalize a system timer.  Nothing is going to work right.");
+    }
+
+    // Fast timer for gamepad polling (50ms for responsive button detection)
+    if (!SetTimer(C_GAMEPAD_TIMER_ID, C_GAMEPAD_TIMER_MSECS, NULL))
+    {
+        log_error("Unable to initialize gamepad timer.");
     }
  
   
@@ -710,6 +719,8 @@ void CDlgMain::ShutDownStuff()
         app_glo.m_timer_ident = 0;                     
     }
 
+    // Kill gamepad polling timer
+    KillTimer(C_GAMEPAD_TIMER_ID);
 }
 void CDlgMain::KillBitmaps()
 {
@@ -779,6 +790,15 @@ LRESULT CDlgMain::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 #endif
   
 		 //AdjustMic("2- H4", 0.08f);
+        }
+
+        // Fast gamepad polling timer (50ms)
+        if (wParam == C_GAMEPAD_TIMER_ID)
+        {
+            if (CheckGamepadActivity())
+            {
+                ProcessMuteGamepad();
+            }
         }
     }
 

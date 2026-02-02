@@ -309,7 +309,7 @@ UINT GetIPAddressFromServer(LPVOID pVoid)
     else
     {
 #ifdef _DEBUG
-        LogMsg("Found IP of %s",app_glo.GetIP());
+        LogMsg("Detected IP address.");
 #endif
     }
 

@@ -64,6 +64,16 @@ void ProcessMuteMouse()
 
 }
 
+void ProcessMuteGamepad()
+{
+    if (app_glo.GetMuted())
+    {
+        // Unmute when gamepad activity detected
+        DeactivateMute();
+    }
+    app_glo.ResetMuteTimer();
+}
+
 // Volume knob sensitivity - adds extra volume change when volume keys are detected
 bool ProcessVolumeKnobKey(WPARAM wParam)
 {

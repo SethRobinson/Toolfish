@@ -545,12 +545,12 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,281,108,50,14
     LTEXT           "Using an inactivity trigger you can make sure nobody is using the computer while doing an event, or make sure someone is using it at the time.  (for instance, to not give ""take a break messages"" if nobody is at the computer)",IDC_STATIC,7,7,324,24
     GROUPBOX        "Activate the trigger if...",IDC_STATIC,7,69,324,33
-    LTEXT           "If the mouse or keyboard",IDC_STATIC,15,82,79,8
+    LTEXT           "If the mouse, keyboard, or gamepad",IDC_STATIC,15,82,115,8
     CONTROL         "have",IDC_RADIO_HAS,"Button",BS_AUTORADIOBUTTON,103,77,32,10
     CONTROL         "have not",IDC_RADIO_HAS_NOT,"Button",BS_AUTORADIOBUTTON,102,88,44,10
     LTEXT           "been touched in the last",IDC_STATIC,150,82,77,8
     EDITTEXT        IDC_EDIT,232,80,40,14,ES_AUTOHSCROLL
-    LTEXT           "Note:  Only keyboard and mouse are monitored.  The mouse monitor features Anti-Bump technology; this means jittery mouse readings/very slight movements will not incorrectly trigger activity.",IDC_STATIC,7,44,324,19
+    LTEXT           "Note:  Keyboard, mouse, and gamepads are monitored.  The mouse monitor features Anti-Bump technology; this means jittery mouse readings/very slight movements will not incorrectly trigger activity.",IDC_STATIC,7,44,324,19
     CONTROL         "seconds",IDC_RADIO_SECONDS,"Button",BS_AUTORADIOBUTTON,280,77,41,9
     CONTROL         "minutes",IDC_RADIO_MINUTES,"Button",BS_AUTORADIOBUTTON,280,88,41,9
 END
