@@ -141,9 +141,38 @@ void CDlgOptions::OnOK()
        }
        else
        {
-           MessageBox(_T("You need to run Toolfish as administrator to enable admin startup.\n\nPlease restart Toolfish as administrator and try again."),
-               _T("Toolfish"), MB_OK | MB_ICONWARNING);
-           glo.m_b_boot_admin = false;  // Reset since we couldn't enable it
+           // Not running as admin - offer to restart elevated
+           if (MessageBox(
+               _T("Creating an admin startup task requires administrator privileges.\n\n")
+               _T("Would you like to restart Toolfish as administrator now?"),
+               _T("Elevation Required"),
+               MB_YESNO | MB_ICONQUESTION) == IDYES)
+           {
+               // Save settings and restart elevated
+               FileConfigSave(&glo);
+               
+               TCHAR exePath[MAX_PATH];
+               GetModuleFileName(NULL, exePath, MAX_PATH);
+               
+               CString params;
+               params.Format(_T("-show -waitpid:%d"), GetCurrentProcessId());
+               
+               AllowSetForegroundWindow(ASFW_ANY);
+               
+               SHELLEXECUTEINFO sei = { sizeof(sei) };
+               sei.fMask = SEE_MASK_NOCLOSEPROCESS;
+               sei.lpVerb = _T("runas");
+               sei.lpFile = exePath;
+               sei.lpParameters = params;
+               sei.nShow = SW_SHOWNORMAL;
+               
+               if (ShellExecuteEx(&sei))
+               {
+                   ExitProcess(0);
+               }
+           }
+           // If user declined or restart failed, continue without admin startup
+           glo.m_b_boot_admin = false;
        }
    }
    else

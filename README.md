@@ -88,11 +88,13 @@ Toolfish uses a powerful event system where **Triggers** determine *when* someth
 ## History
 
 
-**V2.31 Feb 2nd, 2026** 
+**V2.32 Feb 2nd, 2026** 
 * Added "Set audio output device" action.
 * Added "modify volume knob sensitivity" option to the Smart Mute menu.
 * Added "Duplicate" to Event Manager dialog.
 * "Inactivity" detection improved, now monitors gamepads and detects Windows' "display required' state (watching movies, etc)
+* Added boot in admin mode option, otherwise hotkeys and inactivity detection won't work with other apps that ARE running in admin mode, like Genshin Impact (I mute it when my kid is AFK using Toolfish)
+* Using low level hook instead of DLL injection now, should work a bit better I guess
 * Source code released.
 
 ## Building from Source
