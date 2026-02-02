@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Dialogs">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Dialogs\Actions">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Dialogs\Triggers">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Dialogs\Wizards">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Dialogs\Misc">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Data">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Util">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2EE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\Email">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2EF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\Util">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\Winsock">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2F1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD99}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Shared -->
+    <ClCompile Include="Shared\All.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\BkDialogST.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\BtnST.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\CEncrypt.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\CProtection.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\CRandom.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\CSpeech.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\CTextParse.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\CTimer.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\HyperLink.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\MailMessage.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\mfc_all.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\POP3.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\registry.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\richeditctrlex.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\std_all.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\uni.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <!-- Shared\Email -->
+    <ClCompile Include="Shared\Email\Base64Coder.cpp">
+      <Filter>Shared\Email</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\Email\md5.cpp">
+      <Filter>Shared\Email</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\Email\Smtp.cpp">
+      <Filter>Shared\Email</Filter>
+    </ClCompile>
+    <!-- Shared\Util -->
+    <ClCompile Include="Shared\Util\TreeCtrlEx.cpp">
+      <Filter>Shared\Util</Filter>
+    </ClCompile>
+    <!-- Shared\Winsock -->
+    <ClCompile Include="Shared\Winsock\RawSocket.cpp">
+      <Filter>Shared\Winsock</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\Winsock\winsock_util.cpp">
+      <Filter>Shared\Winsock</Filter>
+    </ClCompile>
+    <!-- Source - Main -->
+    <ClCompile Include="Source\CGlobals.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Source.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StdAfx.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\reboot_util.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <!-- Source\Data -->
+    <ClCompile Include="Source\CAction.cpp">
+      <Filter>Source\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEvent.cpp">
+      <Filter>Source\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEventList.cpp">
+      <Filter>Source\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CInputStats.cpp">
+      <Filter>Source\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CTrigger.cpp">
+      <Filter>Source\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CVoice.cpp">
+      <Filter>Source\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\file_config.cpp">
+      <Filter>Source\Data</Filter>
+    </ClCompile>
+    <!-- Source\Util -->
+    <ClCompile Include="Source\AtomicClock.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CKeyLog.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\demo_util.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\internet_util.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mail_util.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Maint.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MicAdjust.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mute_util.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProcessEvents.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProcessFindUtils.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\registry_util.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\security_online.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ServerMonitor.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\spy_util.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <!-- Source\Dialogs -->
+    <ClCompile Include="Source\CDlgAction.cpp">
+      <Filter>Source\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgAlert.cpp">
+      <Filter>Source\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgEvent.cpp">
+      <Filter>Source\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgMailView.cpp">
+      <Filter>Source\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgMain.cpp">
+      <Filter>Source\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DlgEvents.cpp">
+      <Filter>Source\Dialogs</Filter>
+    </ClCompile>
+    <!-- Source\Dialogs\Actions -->
+    <ClCompile Include="Source\CDlgActionAtomic.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionCompare.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionDelay.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionEmail.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionLeet.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionMessage.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionMonitor.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionReboot.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionRez.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionRun.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionSend.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionSmartMute.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionSound.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionToggle.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionTTS.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionVolume.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionWebsite.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgEmailSettings.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DlgActionStealth.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DlgMicVolume.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <!-- Source\Dialogs\Triggers -->
+    <ClCompile Include="Source\CDlgTimeRange.cpp">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgTrigger.cpp">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgTriggerDayFilter.cpp">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgTriggerHotkey.cpp">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgTriggerInactivity.cpp">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgTriggerProcess.cpp">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgTriggerTime.cpp">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClCompile>
+    <!-- Source\Dialogs\Wizards -->
+    <ClCompile Include="Source\CDlgWizard.cpp">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgWizardAtomic.cpp">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgWizardEmail.cpp">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgWizardMonitor.cpp">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgWizardRecurrentReminder.cpp">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DlgWizardOTReminder.cpp">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DlgWizardReminderX.cpp">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClCompile>
+    <!-- Source\Dialogs\Misc -->
+    <ClCompile Include="Source\CDlgAbout.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgFun.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgIntro.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgKeyLog.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgMute.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgNag.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgOkCancel.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgOptions.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgQuit.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgRename.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgStatistics.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgTest.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgThread.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgUnlock.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgVoice.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CSMPTSetup.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DlgWelcome.cpp">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Shared Headers -->
+    <ClInclude Include="Shared\BkDialogST.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\BtnST.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\CEncrypt.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\CProtection.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\CSpeech.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\HyperLink.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\MailMessage.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\mfc_all_u.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\richeditctrlex.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\std_all.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <!-- Shared\Util Headers -->
+    <ClInclude Include="Shared\Util\TreeCtrlEx.h">
+      <Filter>Shared\Util</Filter>
+    </ClInclude>
+    <!-- Shared\Winsock Headers -->
+    <ClInclude Include="Shared\Winsock\winsock_util.h">
+      <Filter>Shared\Winsock</Filter>
+    </ClInclude>
+    <!-- Source Headers -->
+    <ClInclude Include="Source\SMDLL\lib1.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AtomicClock.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CGlobals.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Source.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StdAfx.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\reboot_util.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <!-- Source\Data Headers -->
+    <ClInclude Include="Source\CAction.h">
+      <Filter>Source\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEvent.h">
+      <Filter>Source\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEventList.h">
+      <Filter>Source\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CTrigger.h">
+      <Filter>Source\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CVoice.h">
+      <Filter>Source\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\file_config.h">
+      <Filter>Source\Data</Filter>
+    </ClInclude>
+    <!-- Source\Util Headers -->
+    <ClInclude Include="Source\CKeyLog.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\demo_util.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\internet_util.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mail_util.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mfc_all_u.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MicAdjust.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mute_util.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ProcessEvents.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ProcessFindUtils.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\registry_util.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\security_online.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ServerMonitor.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\spy_util.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="CSMPTSetup.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <!-- Source\Dialogs Headers -->
+    <ClInclude Include="Source\CDlgAction.h">
+      <Filter>Source\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgAlert.h">
+      <Filter>Source\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgEvent.h">
+      <Filter>Source\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgMain.h">
+      <Filter>Source\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DlgEvents.h">
+      <Filter>Source\Dialogs</Filter>
+    </ClInclude>
+    <!-- Source\Dialogs\Actions Headers -->
+    <ClInclude Include="Source\CDlgActionAtomic.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionCompare.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionDelay.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionEmail.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionMessage.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionMonitor.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionReboot.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionRez.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionRun.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionSend.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionSound.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionToggle.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionTTS.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionWebsite.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgEmailSettings.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DlgActionStealth.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DlgMicVolume.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <!-- Source\Dialogs\Triggers Headers -->
+    <ClInclude Include="Source\CDlgTimeRange.h">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgTrigger.h">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgTriggerDayFilter.h">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgTriggerHotkey.h">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgTriggerInactivity.h">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgTriggerProcess.h">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgTriggerTime.h">
+      <Filter>Source\Dialogs\Triggers</Filter>
+    </ClInclude>
+    <!-- Source\Dialogs\Wizards Headers -->
+    <ClInclude Include="Source\CDlgWizard.h">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgWizardAtomic.h">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgWizardMonitor.h">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgWizardRecurrentReminder.h">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DlgWizardOTReminder.h">
+      <Filter>Source\Dialogs\Wizards</Filter>
+    </ClInclude>
+    <!-- Source\Dialogs\Misc Headers -->
+    <ClInclude Include="Source\CDlgAbout.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgIntro.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgKeyLog.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgMute.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgNag.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgOkCancel.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgOptions.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgQuit.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgRename.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgTest.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgThread.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgUnlock.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgVoice.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DlgWelcome.h">
+      <Filter>Source\Dialogs\Misc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="fish.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="fish_dis.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ico00001.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="idr_fish.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="idr_fold.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="idr_main.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Source\Source.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\res\Source.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\app\whatsnew.txt" />
+    <Text Include="worklog.txt" />
+  </ItemGroup>
+</Project>

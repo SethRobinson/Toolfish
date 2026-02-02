@@ -23,7 +23,6 @@ build/
 *.opensdf
 *.VC.db
 *.VC.opendb
-*.vcxproj.filters
 
 # =============================================================================
 # App directory - executables and runtime files
@@ -50,8 +49,6 @@ app/cache/
 
 # App events directory - ignore all except installer defaults
 app/events/*
-!app/events/check rtsoft.dat
-!app/events/check toolfish website.dat
 !app/events/hotkey - dictionary.com.dat
 !app/events/hotkey - google.dat
 !app/events/hotkey_stealth.dat

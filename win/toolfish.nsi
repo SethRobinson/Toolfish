@@ -111,8 +111,6 @@ CreateDirectory "$INSTDIR\events"
 
 SetOutPath "$INSTDIR\events"
 
-  File "..\app\events\check rtsoft.dat"
-  File "..\app\events\check toolfish website.dat"
   File "..\app\events\hotkey - dictionary.com.dat"
   File "..\app\events\hotkey - google.dat"
   File "..\app\events\hotkey_stealth.dat"
