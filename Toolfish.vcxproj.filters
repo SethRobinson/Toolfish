@@ -376,6 +376,7 @@
     <ClCompile Include="Source\DlgWelcome.cpp">
       <Filter>Source\Dialogs\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="Source\gamepad_util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <!-- Shared Headers -->
@@ -659,6 +660,7 @@
     <ClInclude Include="Source\DlgWelcome.h">
       <Filter>Source\Dialogs\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="Source\gamepad_util.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="fish.ico">
@@ -689,9 +691,5 @@
     <None Include="Source\res\Source.rc2">
       <Filter>Resource Files</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\app\whatsnew.txt" />
-    <Text Include="worklog.txt" />
   </ItemGroup>
 </Project>

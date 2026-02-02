@@ -303,11 +303,8 @@ CHAR * st_version = "(98/ME Non-Unicode Build)";
      
     app_glo.RetrieveIPAddress(); //fill it with a valid value
 
-     if (app_glo.GetTrialDaysLeft() < 0) 
-       {
-         //let's log on to rtsoft's server and check the registration code if possible
-           AfxBeginThread(CheckForUpdate, 0);
-       }
+     //check for updates on startup
+     AfxBeginThread(CheckForUpdate, 0);
    
         BuildHotKeyInfo();
         SetupKeyboardOverlay();

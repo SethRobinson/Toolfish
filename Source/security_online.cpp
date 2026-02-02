@@ -132,111 +132,80 @@ bool CServerInfo::GetServerInfo(char p_st_server[], char p_st_file[])
         log_error("Unable to init winsock.");
         return false;
     }
-    char st_server[256]; //temp work buffer
-    sprintf(st_server, p_st_server);
 
-	DWORD dwConnectionTypes = INTERNET_CONNECTION_LAN |
-                           INTERNET_CONNECTION_MODEM |
-                           INTERNET_CONNECTION_PROXY;
- if (!InternetGetConnectedState(&dwConnectionTypes, 0))
- {
-     InternetAutodial(INTERNET_AUTODIAL_FORCE_UNATTENDED,
-                    0);
- } 
-//   log_msg("Connecting to %s.", st_server);		
-	struct sockaddr_in blah;
-	struct hostent *he;
-	memset ((char *) &blah,'0', sizeof(blah));
+    // Build the full URL
+    char st_url[512];
+    sprintf(st_url, "https://%s/%s", p_st_server, p_st_file);
 
-    if ((he = gethostbyname(st_server)) != NULL)
-	{
-	    //change it to numbers
-       
-        memcpy((char *) &blah.sin_addr, he->h_addr, he->h_length );
-        sprintf(st_server, "%s", inet_ntoa(blah.sin_addr));
-
-//	log_msg("Converted to %s.", st_server);		
+    // Use WinINet which handles HTTPS automatically
+    HINTERNET hInternet = InternetOpenA("Toolfish", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
+    if (!hInternet)
+    {
+        return false;
     }
 
-	CWizReadWriteSocket socket;
-
-    if(!socket.Connect(uni(st_server).GetAuto(), 80))
+    HINTERNET hUrl = InternetOpenUrlA(hInternet, st_url, NULL, 0, INTERNET_FLAG_RELOAD | INTERNET_FLAG_NO_CACHE_WRITE, 0);
+    if (!hUrl)
     {
-//            log_msg("Cannot connect to server");
-            return false;
-        }
+        InternetCloseHandle(hInternet);
+        return false;
+    }
 
-        char st_temp[255];
-   sprintf(st_temp, "GET /%s HTTP/0.9\nAccept: */*\r\nHost: %s\r\n\r\n", p_st_file, p_st_server);
+    // Read the response
+    CTextParse parse;
+    char st_buff[513];
+    DWORD dwBytesRead = 0;
 
- //      sprintf(st_temp, "GET /%s HTTP/0.9\nAccept: */*\nHost: tlm\n\n", p_st_file, p_st_server);
+    while (InternetReadFile(hUrl, st_buff, 512, &dwBytesRead) && dwBytesRead > 0)
+    {
+        parse.AddText(st_buff, dwBytesRead);
+    }
+    parse.AddText("\0", 1);
 
-        socket.Write(st_temp, strlen(st_temp));
+    InternetCloseHandle(hUrl);
+    InternetCloseHandle(hInternet);
 
-        //read what we get
-        char st_buff[513];
-        memset(st_buff, 0, 513);
-    
-        CTextParse parse;
-        int i_read = 0;    
-        
-        while ( (i_read = socket.Read((char*)&st_buff, 512)) > 0)
+    // Parse the response
+    char *p_line;
+    char st_key[2000];
+
+    while (parse.get_next_line(&p_line))
+    {
+        strcpy(st_key, parse.get_word(1, '|'));
+
+        if (stricmp(st_key, "server_name") == 0)
         {
-           // log_msg(st_buff);
-            parse.AddText(st_buff, i_read);
+            strcpy(m_st_url, parse.get_word(2, '|'));
         }
-        //add ending NULL
-        parse.AddText("\0", 1);
-  
-  char *p_line;
-  char st_key[2000];
+        if (stricmp(st_key, "upgrade_message") == 0)
+        {
+            strcpy(m_st_upgrade_text, parse.get_word(2, '|'));
+        }
+        if (stricmp(st_key, "upgrade_link") == 0)
+        {
+            strcpy(m_st_upgrade_url, parse.get_word(2, '|'));
+        }
+        if (stricmp(st_key, "version_latest") == 0)
+        {
+            m_f_version_latest = float(atof(parse.get_word(2, '|')));
+        }
+        if (stricmp(st_key, "version_required") == 0)
+        {
+            m_f_version_required = float(atof(parse.get_word(2, '|')));
+        }
+        if (stricmp(st_key, "server_port") == 0)
+        {
+            m_i_port = atoi(parse.get_word(2, '|'));
+        }
+    }
 
-  while (parse.get_next_line(&p_line))
-  {
-     //log_msg("Line: %s", p_line);
+    if (m_i_port == 0)
+    {
+        return false;
+    }
 
-    strcpy(st_key,parse.get_word(1, '|'));
-  
-      if (stricmp(st_key, "server_name") == 0)
-      {
-         strcpy(m_st_url, parse.get_word(2, '|'));
-      }
-      if (stricmp(st_key, "upgrade_message") == 0)
-      {
-         strcpy(m_st_upgrade_text, parse.get_word(2, '|'));
-      }
-      if (stricmp(st_key, "upgrade_link") == 0)
-      {
-         strcpy(m_st_upgrade_url, parse.get_word(2, '|'));
-      }
-
-            if (stricmp(st_key, "version_latest") == 0)
-      {
-         m_f_version_latest =  float(atof(parse.get_word(2, '|')));
-      }
-            if (stricmp(st_key, "version_required") == 0)
-      {
-         m_f_version_required =  float(atof(parse.get_word(2, '|')));
-      }
-       
-            if (stricmp(st_key, "server_port") == 0)
-      {
-         m_i_port =  atoi(parse.get_word(2, '|'));
-      }
-
-
-  }
-  
-  
-   if (m_i_port == 0)
-   {
-       //something went wrong, couldn't get valid info.
-       log_error("Unable to read from RTsoft.");
-       return false;
-   }
-
-return true;
- }
+    return true;
+}
 
 
 
@@ -252,7 +221,6 @@ return true;
                 {
                     //unable to connect, let them play anyway.
                     goto done;
-
                 }
            //     SetDlgItemText(hWnd, IDC_STATUS, "Found server.  Checking for updates...");
                 if (server_info.m_f_version_required > app_glo.GetVersion())
@@ -276,40 +244,15 @@ return true;
                 
                 if (server_info.m_f_version_latest > app_glo.GetVersion())
                 {
-                    
-                    char st_temp[256];
-                    sprintf(st_temp, "Hey, version v%.2f of Toolfish has been released.  Hit http://www.rtsoft.com/toolfish to grab it.", server_info.m_f_version_latest);
-                    log_msg(st_temp);
+                    // Convert ^ to newlines in the message (same convention as GetAuthorization)
+                    replace("^", "\n", server_info.m_st_upgrade_text);
+                    LogMsg("Update available: %s", server_info.m_st_upgrade_text);
+                    LogMsg("Download: %s", server_info.m_st_upgrade_url);
                 }
-  
-                  
-                //go ahead and communicate with the main server
-                char st_message[256];
-                char st_key[100];
-                char st_name[80];
-                strcpy(st_name, glo.m_st_unlock_key);
-
-                if (!server_info.GetAuthorization(st_name, st_key, st_message, true))
+                else
                 {
-                   LogMsg("Failed connecting to update server");
-                    //error connecting, did not get the code checked.
-                
-                    /*
-                    //write new settings
-                    g_settings.ResetKey();
-                    g_settings.Save("defaults.dat");
-                    MessageBox(hWnd,"An error has occured.  Please restart TLM!", "Error", NULL);
-                    EndDialog (hWnd, FALSE); //temop to test it
-                    return false;
-                    */
-                    //good or bad it doesn't matter - it will get caught right before the game starts.
-                } else
-                {
-                    //let's copy whatever it is into our global area
-					LogMsg("Checked for new version.");
-					
-					strcpy(glo.m_st_code, st_key);
-                 }
+                    LogMsg("Checked for updates: V%.2f is the latest version.", server_info.m_f_version_latest);
+                }
                 
 done:
     app_glo.DecActiveThreadCount();

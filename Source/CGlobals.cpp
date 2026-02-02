@@ -329,9 +329,9 @@ UINT GetIPAddressFromServer(LPVOID pVoid)
     }
     else
     {
-#ifdef _DEBUG
-        LogMsg("Detected IP address.");
-#endif
+//#ifdef _DEBUG
+        LogMsg("Detected your public IP address (as seen by external servers), use Ctrl+Shift+Alt+I to paste it to the active window.");
+//#endif
     }
 
 
