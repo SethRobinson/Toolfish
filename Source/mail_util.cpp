@@ -1,8 +1,7 @@
+#include "stdafx.h"
 #include "mail_util.h"
-
 #include "..\Shared\CTextParse.h"
 #include "ProcessEvents.h"
-//#include "..\Shared\smtp.h"
 #include "..\Shared\email\smtp.h"
 
 #include "CGLobals.h"

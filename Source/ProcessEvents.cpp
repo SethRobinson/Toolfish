@@ -1,13 +1,12 @@
+#include "stdafx.h"
 #include "ProcessEvents.h"
 #include "CEvent.h"
 #include "CEventList.h"          
-#include "..\Shared\uni.h"
 #include "Mmsystem.h."
 #include "mute_util.h"
 #include "CDlgMute.h"
 #include <winuser.h>      
 #include "..\Shared\CTextParse.h"
-#include "..\Shared\std_all.h"
 #include "internet_util.h"
 #include "spy_util.h"
 #include <errno.h>

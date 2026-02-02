@@ -32,6 +32,12 @@
 #include <afxsock.h>		// MFC socket extensions
 //#include <winsock.h>
 
+// Commonly used project headers (for PCH optimization)
+#include "..\Shared\all.h"
+#include "..\Shared\uni.h"
+#include "..\Shared\mfc_all.h"
+#include "..\Shared\std_all.h"
+
 #include "resource.h"
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

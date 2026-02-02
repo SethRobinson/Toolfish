@@ -855,7 +855,7 @@ BOOL CSMTPBodyPart::GetBody(LPSTR& pszBody, int& nBodySize)
       BOOL bGotLength = FALSE;
       try
       {
-        dwSize = infile.GetLength();
+        dwSize = static_cast<DWORD>(infile.GetLength());
         bGotLength = TRUE;
       }
       catch (CFileException* pEx)
@@ -2371,7 +2371,7 @@ BOOL CSMTPConnection::SendMessage(const CString& sMessageOnFile, CSMTPAddressArr
     DWORD dwTotalBytes = 0;
     try
     {
-      dwTotalBytes = mailFile.GetLength();
+      dwTotalBytes = static_cast<DWORD>(mailFile.GetLength());
     }
     catch (CFileException* pEx)
     {

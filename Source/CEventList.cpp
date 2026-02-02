@@ -1,8 +1,6 @@
+#include "stdafx.h"
 #include "CEventList.h"
 #include "CEvent.h"
-
-#include "..\Shared\all.h"
-#include "..\Shared\uni.h"
 
 
 

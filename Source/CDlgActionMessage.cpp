@@ -1,10 +1,10 @@
 // CDlgActionMessage.cpp : implementation file
 //
 
+#include "stdafx.h"
 #include "cglobals.h"
 #include "Source.h"
 #include "CDlgActionMessage.h"
-#include "..\Shared\uni.h"
 #include "CDlgEmailSettings.h"
 #include "CAction.h"        
 #include "spy_util.h"

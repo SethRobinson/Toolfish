@@ -1,8 +1,7 @@
+#include "stdafx.h"
 #include "demo_util.h"
 #include "..\Shared\CProtection.h"
-#include "..\Shared\registry.h"
-#include "..\Shared\uni.h"  
-#include "..\Shared\std_all.h"   
+#include "..\Shared\registry.h"   
 
 
 int InitTrialStuff()
@@ -56,7 +55,7 @@ int InitTrialStuff()
         //figure out how many days should be left
         int i_temp = C_DEMO_DAYS;
         
-        i_temp -= GetDaysSinceDate(*(__time64_t*)&time_loaded);
+        i_temp -= GetDaysSinceDate(static_cast<time_t>(time_loaded.GetTime()));
         int i_total = C_DEMO_DAYS;
         
         if (i_temp > i_total) i_temp = 0; //they cheated somehow

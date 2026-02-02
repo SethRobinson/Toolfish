@@ -1,11 +1,8 @@
+#include "stdafx.h"
 #include "internet_util.h"
- 
-#include "..\Shared\all.h"
 #include "..\Shared\CTextParse.h"
 #include "..\Shared\winsock\winsock_util.h"
 #include "..\Shared\winsock\RawSocket.h"
-#include "..\Shared\uni.h"
-#include "..\Shared\mfc_all.h"
 #include "spy_util.h"
                          
 #include <wininet.h>
@@ -390,7 +387,7 @@ bool ProcessCompare( CEvent *p_event, int i_index)
         st_reason[0] = 0;
         if (b_first_time_to_cache)
         {
-            _stprintf(st_reason, _T("First time run.  Caching page for future comparisons."), wst_had_word);
+            _stprintf(st_reason, _T("First time run.  Caching page for future comparisons."));
         }   else
             
             if (b_percent_trigger)

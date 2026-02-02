@@ -1,11 +1,8 @@
+#include "stdafx.h"
 #include "AtomicClock.h"
- 
-#include "..\Shared\all.h"
 #include "..\Shared\CTextParse.h"
 #include "..\Shared\winsock\winsock_util.h"
 #include "..\Shared\winsock\RawSocket.h"
-#include "..\Shared\uni.h"
-#include "..\Shared\mfc_all.h"
 
 
 bool ProcessAtomicClock(CEvent *p_event, int i_index)
@@ -64,7 +61,7 @@ bool ProcessAtomicClock(CEvent *p_event, int i_index)
             strcpy(st_temp, parse.get_word(2, ' '));
             //YEAR            
             seperate_string(st_temp, 1, '-', (char*)&st_num);
-            time_system.wYear = atol(st_num)+2000;
+            time_system.wYear = static_cast<WORD>(atol(st_num)+2000);
             //MONTH            
             seperate_string(st_temp, 2, '-', (char*)&st_num);
             time_system.wMonth = WORD(atol(st_num));

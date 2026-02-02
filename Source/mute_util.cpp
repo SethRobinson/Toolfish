@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "mute_util.h"
 #include "mmsystem.h"
 #include "CDlgMute.h"

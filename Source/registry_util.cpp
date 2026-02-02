@@ -1,6 +1,6 @@
+#include "stdafx.h"
 #include "registry_util.h"
 #include "CGlobals.h"
-#include "..\Shared\all.h"
 #include "..\Shared\registry.h"
 
 bool global_registry( bool return_only, bool add )

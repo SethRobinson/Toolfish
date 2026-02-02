@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CAction.h"
 
 CActionInfo g_actions; //general action information

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "ProcessFindUtils.h"
 #include "CEvent.h"
 #include "CTrigger.h"

@@ -1,8 +1,7 @@
+#include "stdafx.h"
 #include "security_online.h"
-#include "..\\..\\shared\\CTextParse.h"
-#include "..\\..\\shared\\CProtection.h"
-#include "..\Shared\uni.h"
-#include "..\\..\\shared\\std_all.h"
+#include "..\Shared\CTextParse.h"
+#include "..\Shared\CProtection.h"
 
 
 CServerInfo::CServerInfo()

@@ -152,7 +152,7 @@ BOOL CDlgEvent::OnInitDialog()
 
         int i_minutes = timeLastRun.GetMinute();
         
-		get_time_difference_in_text_long(&st_since, *(__time64_t*)m_p_event->GetTimeLastRun());
+		get_time_difference_in_text_long(&st_since, static_cast<time_t>(m_p_event->GetTimeLastRunAsCTime().GetTime()));
         
         
         st_temp.Format(_T("%s at %2.d:%2.d %s (%s ago)"), 
@@ -189,7 +189,7 @@ BOOL CDlgEvent::OnInitDialog()
           
             time_t t_now;
             time(&t_now);
-            long i_seconds = difftime(*(__time64_t*)&m_p_event->GetTrigger(0)->GetTime(), t_now);
+            long i_seconds = static_cast<long>(difftime(static_cast<time_t>(m_p_event->GetTrigger(0)->GetTime().GetTime()), t_now));
  
             if (i_seconds > 0)
             {

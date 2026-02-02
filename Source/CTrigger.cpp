@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CTrigger.h"
 #include "..\Shared\CProtection.h"
 #include "CEvent.h"
@@ -69,7 +70,7 @@ CTrigger::CTrigger()
     {
         memset(this, 0, sizeof(CTrigger));
         m_i_trigger_type = -1;
-        m_time = *(__time64_t*)&CTime::GetCurrentTime(); 
+        m_time = static_cast<time_t>(CTime::GetCurrentTime().GetTime()); 
         SetRescheduleActive(true);
         SetRescheduleRaw(1);
         SetRescheduleType(C_TRIGGER_TIME_DAYS);
@@ -248,7 +249,7 @@ TCHAR * CTrigger::GetName()
 
 void CTrigger::SetTime(CTime *p_time)
 {
-	m_time = *(__time64_t*)p_time;
+	m_time = static_cast<time_t>(p_time->GetTime());
 }
 long CTrigger::GetRescheduleTimeInSeconds()
 {

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CVoice.h"
 #include "ProcessEvents.h"
 #include "..\Shared\CSpeech.h"

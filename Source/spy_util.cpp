@@ -1,6 +1,5 @@
+#include "stdafx.h"
 #include "spy_util.h"
-#include "spy_util.h"
-#include "..\Shared\uni.h"
 
 #include "ProcessEvents.h"
 #include "CKeyLog.h"

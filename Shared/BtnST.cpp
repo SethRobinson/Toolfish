@@ -32,9 +32,14 @@ static char THIS_FILE[] = __FILE__;
 //#define BS_TYPEMASK SS_TYPEMASK
 
 
-#ifndef	TTM_SETTITLE
+// TTM_SETTITLE definitions - use system headers if available
+#ifndef	TTM_SETTITLEA
 #define TTM_SETTITLEA           (WM_USER + 32)  // wParam = TTI_*, lParam = char* szTitle
+#endif
+#ifndef	TTM_SETTITLEW
 #define TTM_SETTITLEW           (WM_USER + 33)  // wParam = TTI_*, lParam = wchar* szTitle
+#endif
+#ifndef	TTM_SETTITLE
 #ifdef	UNICODE
 #define TTM_SETTITLE            TTM_SETTITLEW
 #else

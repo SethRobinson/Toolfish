@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "reboot_util.h"
 #include "CEvent.h"
 

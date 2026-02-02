@@ -1,11 +1,8 @@
+#include "stdafx.h"
 #include "ServerMonitor.h"
- 
-#include "..\Shared\all.h"
 #include "..\Shared\CTextParse.h"
 #include "..\Shared\winsock\winsock_util.h"
 #include "..\Shared\winsock\RawSocket.h"
-#include "..\Shared\uni.h"
-#include "..\Shared\mfc_all.h"
 #include "internet_util.h"
 #include "spy_util.h"
                          

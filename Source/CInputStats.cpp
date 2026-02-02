@@ -1,6 +1,5 @@
+#include "stdafx.h"
 #include "CInputStats.h"
-#include "..\Shared\all.h"
-#include "..\Shared\mfc_all.h"
 
 const int C_MOUSEPAD_BASE = 1000; //higher number means less distance from mouse movement
 

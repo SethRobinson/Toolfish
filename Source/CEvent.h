@@ -94,7 +94,7 @@ public:
 	CTime GetTimeLastRunAsCTime(){return CTime (m_time_last_run);}
     void SetLastRunTimeToNow()
     {
-        m_time_last_run = *(__time64_t*)&CTime::GetCurrentTime();
+        m_time_last_run = static_cast<time_t>(CTime::GetCurrentTime().GetTime());
     }
 
     void DeleteEventFile();

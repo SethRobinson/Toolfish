@@ -1,7 +1,6 @@
+#include "stdafx.h"
 #include "CGlobals.h"
 #include "CEventList.h"
-#include "..\Shared\uni.h"        
-       
 #include "..\Shared\CSpeech.h"  
 #include "CDlgMute.h"      
 #include "..\Shared\winsock\winsock_util.h"                             

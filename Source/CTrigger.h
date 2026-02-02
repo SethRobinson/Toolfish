@@ -107,7 +107,7 @@ public:
 	 void SetTime(CTime *p_time);
 	 
      CTime GetTimeEnd(){return CTime(m_time_end);};
-     void SetTimeEnd(CTime *p_time){m_time_end = *(__time64_t*) &p_time;}
+     void SetTimeEnd(CTime *p_time){m_time_end = static_cast<time_t>(p_time->GetTime());}
 
      void SetRescheduleRaw(long i_new){m_l_reschedule_raw = i_new;}
      bool GetRescheduleActive(){return m_b_reschedule_active;}

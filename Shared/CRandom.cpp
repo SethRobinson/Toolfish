@@ -67,5 +67,5 @@ unsigned int CRandom::GetRandomSeed(void)
 
 void CRandom::Randomize(void)
 {
-    SetRandomSeed(time(NULL));
+    SetRandomSeed(static_cast<unsigned int>(time(NULL)));
 }

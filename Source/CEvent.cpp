@@ -1,5 +1,5 @@
+#include "stdafx.h"
 #include "CEvent.h"
-#include "..\Shared\uni.h"
 
 TCHAR g_buffer[512];
  

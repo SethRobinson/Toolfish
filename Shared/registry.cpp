@@ -253,7 +253,7 @@ BOOL CRegistry::Write(LPCTSTR lpszKey, CWnd *pWnd)
 		 << wp.rcNormalPosition;
 	ar.Close();
 
-	DWORD dwSize = file.GetLength();
+	DWORD dwSize = static_cast<DWORD>(file.GetLength());
 	BYTE* pByte = file.Detach();
 
 	LONG lResult = RegSetValueEx(m_hKey, lpszKey, NULL, REG_BINARY, pByte, dwSize);
@@ -315,7 +315,7 @@ BOOL CRegistry::Write(LPCTSTR lpszKey, CObject& object)
 	object.Serialize(ar);
 	ar.Close();
 	
-	DWORD dwSize = file.GetLength();
+	DWORD dwSize = static_cast<DWORD>(file.GetLength());
 	#ifdef _DEBUG
 		if (dwSize > 2048)
 			TRACE1("CRegistry::Write - Object size = %d (> 2048) better use a file !\n", dwSize);

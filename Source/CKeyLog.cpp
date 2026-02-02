@@ -1,6 +1,5 @@
+#include "stdafx.h"
 #include "CKeyLog.h"
-#include "..\Shared\uni.h"
-#include "..\\..\\shared\\std_all.h"
 CKeyLog g_key_log;
 
 

@@ -1,5 +1,5 @@
+#include "stdafx.h"
 #include "file_config.h"
-#include "..\Shared\all.h"
 #ifndef _UNLOCK_UTILITY_
 #include "CGlobals.h"
 #endif
