@@ -800,6 +800,7 @@ LRESULT CDlgMain::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
        glo.m_stats_total.AddKey();
 
        ProcessMuteKey();
+       ProcessVolumeKnobKey(wParam);
        ProcessGotKey(wParam, lParam);
    }                 
     if (message == WM_GOTMOUSE)        

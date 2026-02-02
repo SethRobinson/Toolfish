@@ -1,14 +1,39 @@
 #include "mute_util.h"
 #include "mmsystem.h"
 #include "CDlgMute.h"
-/*
-	Msg("Aux devices is %d.",(int)auxGetNumDevs());
-	
-  	ULONG mmin,mmax;
-		Msg("Volume is %d.\n", (int)GetMasterVolume(mmin,mmax));
-	  Msg("Min is %d, max is %d.", (int)mmin, (int)mmax);
-      */
+#include <mmdeviceapi.h>
+#include <endpointvolume.h>
 
+// GUIDs for Core Audio API
+static const GUID CLSID_MMDeviceEnumerator_local = { 0xBCDE0395, 0xE52F, 0x467C, {0x8E, 0x3D, 0xC4, 0x57, 0x92, 0x91, 0x69, 0x2E} };
+static const GUID IID_IMMDeviceEnumerator_local = { 0xA95664D2, 0x9614, 0x4F35, {0xA7, 0x46, 0xDE, 0x8D, 0xB6, 0x36, 0x17, 0xE6} };
+static const GUID IID_IAudioEndpointVolume_local = { 0x5CDF2C82, 0x841E, 0x4546, {0x97, 0x22, 0x0C, 0xF7, 0x40, 0x78, 0x22, 0x9A} };
+
+// Helper function to get the audio endpoint volume interface
+static IAudioEndpointVolume* GetAudioEndpointVolume()
+{
+    HRESULT hr;
+    IMMDeviceEnumerator* pEnumerator = NULL;
+    IMMDevice* pDevice = NULL;
+    IAudioEndpointVolume* pVolume = NULL;
+
+    hr = CoCreateInstance(CLSID_MMDeviceEnumerator_local, NULL, CLSCTX_ALL,
+                          IID_IMMDeviceEnumerator_local, (void**)&pEnumerator);
+    if (FAILED(hr) || !pEnumerator)
+        return NULL;
+
+    hr = pEnumerator->GetDefaultAudioEndpoint(eRender, eConsole, &pDevice);
+    pEnumerator->Release();
+    if (FAILED(hr) || !pDevice)
+        return NULL;
+
+    hr = pDevice->Activate(IID_IAudioEndpointVolume_local, CLSCTX_ALL, NULL, (void**)&pVolume);
+    pDevice->Release();
+    if (FAILED(hr))
+        return NULL;
+
+    return pVolume;
+}
 
 void ProcessMuteKey()
 {
@@ -38,127 +63,90 @@ void ProcessMuteMouse()
 
 }
 
+// Volume knob sensitivity - adds extra volume change when volume keys are detected
+bool ProcessVolumeKnobKey(WPARAM wParam)
+{
+    // Only handle volume up/down keys
+    if (wParam != VK_VOLUME_UP && wParam != VK_VOLUME_DOWN)
+        return false;
+
+    // Check if feature is enabled
+    if (!glo.m_b_volume_knob_sensitivity)
+        return false;
+
+    // Check if shift-only mode is enabled and shift is not pressed
+    if (glo.m_b_volume_knob_shift_only)
+    {
+        if (!(GetAsyncKeyState(VK_SHIFT) & 0x8000))
+            return false;
+    }
+
+    // Calculate extra volume change
+    // Each step adds ~2% volume on top of the normal keypress
+    int extra_steps = glo.m_i_volume_knob_multiplier;
+    if (extra_steps <= 0)
+        return false;
+
+    float extra_change = (float)extra_steps * 0.02f;  // 2% per step
+
+    IAudioEndpointVolume* pVolume = GetAudioEndpointVolume();
+    if (!pVolume)
+        return false;
+
+    float current_vol = 0.0f;
+    pVolume->GetMasterVolumeLevelScalar(&current_vol);
+
+    float new_vol;
+    if (wParam == VK_VOLUME_UP)
+    {
+        new_vol = current_vol + extra_change;
+        if (new_vol > 1.0f) new_vol = 1.0f;
+    }
+    else // VK_VOLUME_DOWN
+    {
+        new_vol = current_vol - extra_change;
+        if (new_vol < 0.0f) new_vol = 0.0f;
+    }
+
+    pVolume->SetMasterVolumeLevelScalar(new_vol, NULL);
+    pVolume->Release();
+
+    return true;
+}
+
+// Get master volume using Windows Core Audio API
+// Returns volume as 0-65535 for backwards compatibility
+// min is always 0, max is always 65535
 unsigned long GetMasterVolume(unsigned long &min, unsigned long &max)
 {
-    unsigned long result = 0;
- 
-    // open the mixer device and grab its handle
-    HMIXER HMixer2;
-    if (mixerOpen(&HMixer2, 0, 0, 0, 0) == MMSYSERR_NOERROR)     {
-        // initialize the MIXERCOTNROL structure
-        MIXERCONTROL mc2;
-        ZeroMemory(&mc2, sizeof(MIXERCONTROL));
-        mc2.cbStruct = sizeof(MIXERCONTROL);
- 
-        // initialize the MIXERLINE structure
-        MIXERLINE ml2;
-        ZeroMemory(&ml2, sizeof(MIXERLINE));
-        ml2.cbStruct = sizeof(MIXERLINE);
-ml2.dwComponentType = MIXERLINE_COMPONENTTYPE_DST_SPEAKERS;
- 
-        // fill the mixerline info
-if (mixerGetLineInfo((HMIXEROBJ) HMixer2, &ml2, 
-                            MIXER_GETLINEINFOF_COMPONENTTYPE)
-            == MMSYSERR_NOERROR)
-        {
-            // initialize the MIXERLINECONTROL structure
-            MIXERLINECONTROLS mlc2;
-            ZeroMemory(&mlc2, sizeof(MIXERLINECONTROLS));
-    mlc2.cbStruct = sizeof(MIXERLINECONTROLS);
-    mlc2.dwLineID = ml2.dwLineID;
-        mlc2.dwControlType = MIXERCONTROL_CONTROLTYPE_VOLUME;
-        mlc2.cControls = 1;
-    mlc2.cbmxctrl = sizeof(MIXERCONTROL);
-    mlc2.pamxctrl = (LPMIXERCONTROL)&mc2;
- 
-            // find the level display associated with this source      
-	if (mixerGetLineControls((HMIXEROBJ)HMixer2, &mlc2,
-        MIXER_GETLINECONTROLSF_ONEBYTYPE)   == MMSYSERR_NOERROR)
-            {
-                // fill in the volume range values
-                min = mc2.Bounds.lMinimum;
-                max = mc2.Bounds.lMaximum;
- 
-                // initialize the MIXERCONTROLDETAILS structure
-                
-				MIXERCONTROLDETAILS mcd2;
-                
-				ZeroMemory(&mcd2, sizeof(mcd2));
-        mcd2.cbStruct = sizeof(MIXERCONTROLDETAILS);
-  mcd2.dwControlID = mc2.dwControlID;
-  mcd2.cChannels = 1;
-      mcd2.cbDetails = sizeof(MIXERCONTROLDETAILS_UNSIGNED);
- 
-              MIXERCONTROLDETAILS_UNSIGNED mcdMeter2;
-      mcd2.paDetails = &mcdMeter2;
- 
-                // get the peak level of the volume meter
-                mixerGetControlDetails((HMIXEROBJ)HMixer2, &mcd2,
-                                      MIXER_GETCONTROLDETAILSF_VALUE); 
- 
-                result = mcdMeter2.dwValue;
-            }
-    }
-    }
-    mixerClose(HMixer2);
-    return result;
+    min = 0;
+    max = 65535;
+
+    IAudioEndpointVolume* pVolume = GetAudioEndpointVolume();
+    if (!pVolume)
+        return 0;
+
+    float level = 0.0f;
+    pVolume->GetMasterVolumeLevelScalar(&level);
+    pVolume->Release();
+
+    // Convert 0.0-1.0 to 0-65535
+    return (unsigned long)(level * 65535.0f);
 }
  
+// Set master volume using Windows Core Audio API
+// Takes value as 0-65535 for backwards compatibility
 void SetMasterVolume(unsigned long value)
 {
-    // open the mixer device and grab its handle
-    HMIXER HMixer2;
-    if (mixerOpen(&HMixer2, 0, 0, 0, 0) == MMSYSERR_NOERROR)     {
-        // initialize the MIXERCOTNROL structure
-        MIXERCONTROL mc2;
-        ZeroMemory(&mc2, sizeof(MIXERCONTROL));
-        mc2.cbStruct = sizeof(MIXERCONTROL);
- 
-        // initialize the MIXERLINE structure
-        MIXERLINE ml2;
-        ZeroMemory(&ml2, sizeof(MIXERLINE));
-        ml2.cbStruct = sizeof(MIXERLINE);
-ml2.dwComponentType = MIXERLINE_COMPONENTTYPE_DST_SPEAKERS;
- 
-        // fill the mixerline info
-if (mixerGetLineInfo((HMIXEROBJ)HMixer2, &ml2, 
-                            MIXER_GETLINEINFOF_COMPONENTTYPE)
-        == MMSYSERR_NOERROR)
-        {
-            // initialize the MIXERLINECONTROL structure
-            MIXERLINECONTROLS mlc2;
-            ZeroMemory(&mlc2, sizeof(MIXERLINECONTROLS));
-    mlc2.cbStruct = sizeof(MIXERLINECONTROLS);
-    mlc2.dwLineID = ml2.dwLineID;
-        mlc2.dwControlType = MIXERCONTROL_CONTROLTYPE_VOLUME;
-        mlc2.cControls = 1;
-    mlc2.cbmxctrl = sizeof(MIXERCONTROL);
-    mlc2.pamxctrl = (LPMIXERCONTROL)&mc2;
- 
-            // find the level display associated with this source         
-    if (mixerGetLineControls((HMIXEROBJ)HMixer2, &mlc2,
-          MIXER_GETLINECONTROLSF_ONEBYTYPE)
-            == MMSYSERR_NOERROR)
-            {
-                // initialize the MIXERCONTROLDETAILS structure
-            MIXERCONTROLDETAILS mcd2;
-                ZeroMemory(&mcd2, sizeof(mcd2));
-  mcd2.cbStruct = sizeof(MIXERCONTROLDETAILS);
-        mcd2.dwControlID = mc2.dwControlID;
-  mcd2.cChannels = 1;
-      mcd2.cbDetails = sizeof(MIXERCONTROLDETAILS_UNSIGNED);
- 
-            MIXERCONTROLDETAILS_UNSIGNED mcdMeter2;
-      mcd2.paDetails = &mcdMeter2;
- 
-                // set the new volume value
-                mcdMeter2.dwValue = value;
-                mixerSetControlDetails((HMIXEROBJ)HMixer2, &mcd2,
-                                      MIXER_GETCONTROLDETAILSF_VALUE);     
-	}
-    }
-    }
-    mixerClose(HMixer2);
-}
- 
+    IAudioEndpointVolume* pVolume = GetAudioEndpointVolume();
+    if (!pVolume)
+        return;
 
+    // Convert 0-65535 to 0.0-1.0
+    float level = (float)value / 65535.0f;
+    if (level > 1.0f) level = 1.0f;
+    if (level < 0.0f) level = 0.0f;
+
+    pVolume->SetMasterVolumeLevelScalar(level, NULL);
+    pVolume->Release();
+}

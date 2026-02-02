@@ -98,6 +98,11 @@ public:
     bool m_b_server_ip_disabled;
     bool m_b_minimize_on_close; //if true, clicking the close button will minimize
 
+    // Volume knob sensitivity settings
+    bool m_b_volume_knob_sensitivity;  // enable sensitivity adjustment for volume knobs
+    int m_i_volume_knob_multiplier;    // extra steps to add (each step ~2% volume)
+    bool m_b_volume_knob_shift_only;   // only apply when Shift key is held
+
     CConfig()
     {
         //set defaults

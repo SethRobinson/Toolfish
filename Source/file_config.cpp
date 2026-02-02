@@ -33,6 +33,11 @@ bool D_LOAD_FUNCTION_NAME (CConfig *sys)
         sys->m_i_mute_time = 15;
         sys->m_i_mute_time_type = C_TIMER_TYPE_MINUTES;
         sys->m_b_log_programs_run = 0;
+        
+        // Volume knob sensitivity defaults
+        sys->m_b_volume_knob_sensitivity = false;
+        sys->m_i_volume_knob_multiplier = 2;  // 2 extra steps = 4% extra per press
+        sys->m_b_volume_knob_shift_only = false;
         sys->m_i_trim_lines = 200;
         sys->m_voice.SetDefaults();
         wcscpy(sys->m_st_smtp_server, L"mail");

@@ -24,6 +24,9 @@ CDlgMute::CDlgMute(CWnd* pParent /*=NULL*/)
 	//{{AFX_DATA_INIT(CDlgMute)
 	m_b_smart_mute = FALSE;
 	m_cst_time = _T("");
+	m_b_volume_knob_enabled = FALSE;
+	m_cst_volume_knob_multiplier = _T("");
+	m_b_volume_knob_shift_only = FALSE;
 	//}}AFX_DATA_INIT
 }
 
@@ -35,6 +38,9 @@ void CDlgMute::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SLIDER, m_slider);
 	DDX_Check(pDX, IDC_MUTE_ENABLED, m_b_smart_mute);
 	DDX_Text(pDX, IDC_TIME, m_cst_time);
+	DDX_Check(pDX, IDC_VOLUME_KNOB_ENABLED, m_b_volume_knob_enabled);
+	DDX_Text(pDX, IDC_VOLUME_KNOB_MULTIPLIER, m_cst_volume_knob_multiplier);
+	DDX_Check(pDX, IDC_VOLUME_KNOB_SHIFT_ONLY, m_b_volume_knob_shift_only);
 	//}}AFX_DATA_MAP
 }
 
@@ -44,6 +50,7 @@ BEGIN_MESSAGE_MAP(CDlgMute, CBkDialogST)
 	ON_BN_CLICKED(IDC_OK, OnOk)
 	ON_BN_CLICKED(IDC_MUTE_ENABLED, OnMuteEnabled)
 	ON_BN_CLICKED(IDC_CANCEL, OnCancel)
+	ON_BN_CLICKED(IDC_VOLUME_KNOB_ENABLED, OnVolumeKnobEnabled)
 	ON_WM_CTLCOLOR()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -63,6 +70,11 @@ BOOL CDlgMute::OnInitDialog()
     
     m_b_smart_mute = glo.m_b_smart_mute;
     m_cst_time.Format(_T("%d"), glo.m_i_mute_time);
+
+    // Load volume knob settings
+    m_b_volume_knob_enabled = glo.m_b_volume_knob_sensitivity;
+    m_cst_volume_knob_multiplier.Format(_T("%d"), glo.m_i_volume_knob_multiplier);
+    m_b_volume_knob_shift_only = glo.m_b_volume_knob_shift_only;
 
     //set radio buttons
     CButton* p_button;
@@ -111,6 +123,14 @@ void CDlgMute::OnOk()
     glo.m_i_mute_time = _tcstol(m_cst_time, NULL, 10);
 
     glo.m_b_smart_mute = m_b_smart_mute != 0;
+
+    // Save volume knob settings
+    glo.m_b_volume_knob_sensitivity = m_b_volume_knob_enabled != 0;
+    int multiplier = _tcstol(m_cst_volume_knob_multiplier, NULL, 10);
+    if (multiplier < 1) multiplier = 1;
+    if (multiplier > 10) multiplier = 10;
+    glo.m_i_volume_knob_multiplier = multiplier;
+    glo.m_b_volume_knob_shift_only = m_b_volume_knob_shift_only != 0;
 
     FileConfigSave(&glo);
   
@@ -165,10 +185,21 @@ void CDlgMute::SetGreyOut()
  ((CButton*)GetDlgItem(IDC_SLIDER))->EnableWindow(m_b_smart_mute);
  ((CEdit*)GetDlgItem(IDC_TIME))->EnableWindow(m_b_smart_mute);
 
+ // Volume knob controls - enable sub-options only when main checkbox is checked
+ ((CEdit*)GetDlgItem(IDC_VOLUME_KNOB_MULTIPLIER))->EnableWindow(m_b_volume_knob_enabled);
+ ((CButton*)GetDlgItem(IDC_VOLUME_KNOB_SHIFT_ONLY))->EnableWindow(m_b_volume_knob_enabled);
+
 }
 
 
 void CDlgMute::OnMuteEnabled() 
+{
+	UpdateData(D_TO_VAR);
+    SetGreyOut();
+	
+}
+
+void CDlgMute::OnVolumeKnobEnabled() 
 {
 	UpdateData(D_TO_VAR);
     SetGreyOut();
@@ -194,7 +225,8 @@ switch (nCtlColor)
 
         if (
             (pWnd->GetDlgCtrlID() == IDC_GROUPBOX)
-            ||            (pWnd->GetDlgCtrlID() == IDC_SLIDER)
+            || (pWnd->GetDlgCtrlID() == IDC_VOLUME_KNOB_GROUP)
+            || (pWnd->GetDlgCtrlID() == IDC_SLIDER)
  
             )
         {

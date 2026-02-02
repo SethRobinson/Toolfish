@@ -27,6 +27,9 @@ public:
 	CSliderCtrl	m_slider;
 	BOOL	m_b_smart_mute;
 	CString	m_cst_time;
+	BOOL	m_b_volume_knob_enabled;
+	CString	m_cst_volume_knob_multiplier;
+	BOOL	m_b_volume_knob_shift_only;
 	//}}AFX_DATA
 
 
@@ -47,6 +50,7 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnCancel();
 	afx_msg void OnMuteEnabled();
+	afx_msg void OnVolumeKnobEnabled();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()

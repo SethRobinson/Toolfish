@@ -287,6 +287,10 @@
 #define IDC_AUTHENTICATION              1199
 #define IDC_DESCRIPTION                 1201
 #define IDC_PARTIAL_NAME                1202
+#define IDC_VOLUME_KNOB_ENABLED         1203
+#define IDC_VOLUME_KNOB_MULTIPLIER      1204
+#define IDC_VOLUME_KNOB_SHIFT_ONLY      1205
+#define IDC_VOLUME_KNOB_GROUP           1206
 #define ID_MENU_EXIT                    32772
 #define ID_MENU_OPTIONS                 32773
 #define ID_MENU_COPY                    32774
@@ -320,7 +324,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        204
 #define _APS_NEXT_COMMAND_VALUE         32800
-#define _APS_NEXT_CONTROL_VALUE         1203
+#define _APS_NEXT_CONTROL_VALUE         1207
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
