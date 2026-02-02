@@ -33,7 +33,7 @@ Toolfish uses a powerful event system where **Triggers** determine *when* someth
 | **Time** | Run at a specific time with auto-rescheduling options |
 | **Time Range** | Only activate within a specified time window |
 | **Hotkey** | Trigger on any key combination (global hotkeys) |
-| **Inactivity** | Trigger based on keyboard/mouse idle time |
+| **Inactivity** | Trigger based on keyboard/mouse/gamepad idle time |
 | **Day Filter** | Limit events to specific days of the week |
 | **Process** | Trigger when a process starts, stops, or has focus |
 
