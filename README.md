@@ -51,13 +51,6 @@ It can be moved to a new computer very easily simply by copying its folder.
 
 ## Old Original documentation is [here](https://rtsoft.com/toolfish/index.php) and [here](https://rtsoft.com/toolfish/help.htm)
 
-
-## Building from Source
-
-1. Open `Toolfish.sln` in Visual Studio 2026
-2. Build the solution (both Release and Debug configurations available)
-3. The keyboard hook DLL (`SMDLL`) will be built automatically as part of the solution
-
 ## Usage
 
 1. Run `Toolfish.exe`
@@ -76,6 +69,14 @@ It can be moved to a new computer very easily simply by copying its folder.
 
 **V2.10 Feb 2nd, 2026** - Source code release
 
+## Building from Source
+
+1. Open `Toolfish.sln` in Visual Studio 2026
+2. Build the solution (both Release and Debug configurations available)
+3. The keyboard hook DLL (`SMDLL`) will be built automatically as part of the solution
+
+## License: BSD-style attribution, see [LICENSE.md](LICENSE.md)
+
 ## Credits
 
 * Written by Seth A. Robinson ([seth@rtsoft.com](mailto:seth@rtsoft.com))
@@ -84,6 +85,3 @@ It can be moved to a new computer very easily simply by copying its folder.
 * Website: [rtsoft.com](https://www.rtsoft.com)
 * Blog: [Codedojo](https://www.codedojo.com)
 
-## License
-
-See license agreement in application.
