@@ -78,7 +78,8 @@ BOOL CDlgTriggerHotkey::OnInitDialog()
     m_b_ctrl = m_p_action->m_b_ctrl;
     m_b_pass_through = m_p_action->m_b_pass_through;
    
-    set_selection_by_data(&m_combo, m_p_action->m_vk_key);
+    // Cast to unsigned char to avoid sign extension issues with VK codes > 127
+    set_selection_by_data(&m_combo, (unsigned char)m_p_action->m_vk_key);
 
     if (m_p_action->m_vk_key == 0)
     {
@@ -103,7 +104,7 @@ void CDlgTriggerHotkey::AddComboItem(TCHAR *p_name, int data)
 
 void CDlgTriggerHotkey::PopulateCombo()
 {
-  
+    // Function keys F1-F24
     AddComboItem(_T("F1"), VK_F1);
     AddComboItem(_T("F2"), VK_F2);
     AddComboItem(_T("F3"), VK_F3);
@@ -126,7 +127,10 @@ void CDlgTriggerHotkey::PopulateCombo()
     AddComboItem(_T("F20"), VK_F20);
     AddComboItem(_T("F21"), VK_F21);
     AddComboItem(_T("F22"), VK_F22);
+    AddComboItem(_T("F23"), VK_F23);
+    AddComboItem(_T("F24"), VK_F24);
     
+    // Numbers
     AddComboItem(_T("1"), '1');
     AddComboItem(_T("2"), '2');
     AddComboItem(_T("3"), '3');
@@ -138,6 +142,7 @@ void CDlgTriggerHotkey::PopulateCombo()
     AddComboItem(_T("9"), '9');
     AddComboItem(_T("0"), '0');
 
+    // Letters
     AddComboItem(_T("A"), 'A');
     AddComboItem(_T("B"), 'B');
     AddComboItem(_T("C"), 'C');
@@ -165,9 +170,8 @@ void CDlgTriggerHotkey::PopulateCombo()
     AddComboItem(_T("Y"), 'Y');
     AddComboItem(_T("Z"), 'Z');
 
-    
-    
-    AddComboItem(_T("),"), ',');
+    // Punctuation
+    AddComboItem(_T(","), ',');
     AddComboItem(_T("."), '.');
     AddComboItem(_T(";"), ';');
     AddComboItem(_T("'"), '\'');
@@ -177,7 +181,36 @@ void CDlgTriggerHotkey::PopulateCombo()
     AddComboItem(_T("="), '=');
     AddComboItem(_T("\\"), '\\');
     AddComboItem(_T("`"), '`');
-    
+
+    // Navigation keys
+    AddComboItem(_T("Tab"), VK_TAB);
+    AddComboItem(_T("Backspace"), VK_BACK);
+    AddComboItem(_T("Delete"), VK_DELETE);
+    AddComboItem(_T("Insert"), VK_INSERT);
+    AddComboItem(_T("Home"), VK_HOME);
+    AddComboItem(_T("End"), VK_END);
+    AddComboItem(_T("Page Up"), VK_PRIOR);
+    AddComboItem(_T("Page Down"), VK_NEXT);
+    AddComboItem(_T("Arrow Left"), VK_LEFT);
+    AddComboItem(_T("Arrow Up"), VK_UP);
+    AddComboItem(_T("Arrow Right"), VK_RIGHT);
+    AddComboItem(_T("Arrow Down"), VK_DOWN);
+
+    // Media keys
+    AddComboItem(_T("Volume Mute"), VK_VOLUME_MUTE);
+    AddComboItem(_T("Volume Down"), VK_VOLUME_DOWN);
+    AddComboItem(_T("Volume Up"), VK_VOLUME_UP);
+    AddComboItem(_T("Media Next"), VK_MEDIA_NEXT_TRACK);
+    AddComboItem(_T("Media Prev"), VK_MEDIA_PREV_TRACK);
+    AddComboItem(_T("Media Stop"), VK_MEDIA_STOP);
+    AddComboItem(_T("Media Play/Pause"), VK_MEDIA_PLAY_PAUSE);
+
+    // System keys
+    AddComboItem(_T("Print Screen"), VK_SNAPSHOT);
+    AddComboItem(_T("Scroll Lock"), VK_SCROLL);
+    AddComboItem(_T("Pause"), VK_PAUSE);
+    AddComboItem(_T("Caps Lock"), VK_CAPITAL);
+    AddComboItem(_T("Num Lock"), VK_NUMLOCK);
 
 }
 

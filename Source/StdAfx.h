@@ -31,6 +31,9 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 #include <afxsock.h>		// MFC socket extensions
 //#include <winsock.h>
+#include <afxtempl.h>		
+#include <afxpriv.h>		
+
 
 // Commonly used project headers (for PCH optimization)
 #include "..\Shared\all.h"

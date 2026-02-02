@@ -718,6 +718,88 @@ if (b_orig_ctrl)
 }
 
 
+// InjectVK - Sends a virtual key code directly (for function keys, special keys, etc.)
+// Unlike InjectChar, this does NOT use VkKeyScan, so it works correctly for non-character keys
+void InjectVK(char vk, bool b_shift, bool b_ctrl, bool b_alt)
+{
+  //save original states of special keys
+  bool b_orig_shift = false;
+  bool b_orig_ctrl = false;
+  bool b_orig_alt = false;
+  
+ if (GetAsyncKeyState(VK_SHIFT))
+ {
+     InjectCharRelease(VK_SHIFT, MapVirtualKey(VK_SHIFT, 0));
+     b_orig_shift = true;
+ }
+ if (GetAsyncKeyState(VK_MENU))
+ {
+     InjectCharRelease(VK_MENU, MapVirtualKey(VK_MENU, 0));
+      b_orig_alt = true;
+ }
+ if (GetAsyncKeyState(VK_CONTROL))
+ {
+     InjectCharRelease(VK_CONTROL, MapVirtualKey(VK_CONTROL, 0));
+      b_orig_ctrl = true;
+ }
+ 
+
+ //now turn on the ones we're supposed to
+ if (b_shift)
+ {
+     InjectCharPress(VK_SHIFT, MapVirtualKey(VK_SHIFT, 0));
+ }
+
+if (b_alt)
+ {
+     InjectCharPress(VK_MENU, MapVirtualKey(VK_MENU, 0));
+ }
+if (b_ctrl)
+ {
+     InjectCharPress(VK_CONTROL, MapVirtualKey(VK_CONTROL, 0));
+ }
+ 
+ //now send the real keystroke - use the VK code directly, not VkKeyScan
+  InjectCharPress(vk, 0);
+  InjectCharRelease(vk, 0);
+
+  //now release any special keys we had down
+
+if (b_shift)
+ {
+     InjectCharRelease(VK_SHIFT, MapVirtualKey(VK_SHIFT, 0));
+ }
+
+if (b_alt)
+ {
+     InjectCharRelease(VK_MENU, MapVirtualKey(VK_MENU, 0));
+ }
+if (b_ctrl)
+ {
+     InjectCharRelease(VK_CONTROL, MapVirtualKey(VK_CONTROL, 0));
+ }
+
+
+//now put back the defaults if required
+
+ if (b_orig_shift)
+ {
+     InjectCharPress(VK_SHIFT, MapVirtualKey(VK_SHIFT, 0));
+ }
+
+if (b_orig_alt)
+ {
+     InjectCharPress(VK_MENU, MapVirtualKey(VK_MENU, 0));
+ }
+if (b_orig_ctrl)
+ {
+     InjectCharPress(VK_CONTROL, MapVirtualKey(VK_CONTROL, 0));
+ }
+
+
+}
+
+
 void FakeKeystroke( HWND hwnd, CEvent *p_event, int i_index, DWORD pid)
 {
     //save current focus info
@@ -727,7 +809,8 @@ void FakeKeystroke( HWND hwnd, CEvent *p_event, int i_index, DWORD pid)
     SetForegroundWindow(hwnd);
     
     //send the keystroke with a low level keyboard hit event
-    InjectChar(p_event->GetAction(i_index)->GetVK(),p_event->GetAction(i_index)->GetShift(),
+    //Use InjectVK instead of InjectChar - it sends VK codes directly without VkKeyScan
+    InjectVK(p_event->GetAction(i_index)->GetVK(),p_event->GetAction(i_index)->GetShift(),
         p_event->GetAction(i_index)->GetCtrl(),p_event->GetAction(i_index)->GetAlt());
     
     //make sure the keys have time to send

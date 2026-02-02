@@ -129,6 +129,7 @@ TCHAR * CTrigger::GetName()
         TCHAR st_key[32];
         _stprintf(st_key, _T("%c"), TCHAR(m_vk_key));
 
+        // Function keys F1-F24
         if (m_vk_key == VK_F1)    _stprintf(st_key, _T("F1"));
         if (m_vk_key == VK_F2)    _stprintf(st_key, _T("F2"));
         if (m_vk_key == VK_F3)    _stprintf(st_key, _T("F3"));
@@ -151,10 +152,39 @@ TCHAR * CTrigger::GetName()
         if (m_vk_key == VK_F20)    _stprintf(st_key, _T("F20"));
         if (m_vk_key == VK_F21)    _stprintf(st_key, _T("F21"));
         if (m_vk_key == VK_F22)    _stprintf(st_key, _T("F22"));
+        if (m_vk_key == VK_F23)    _stprintf(st_key, _T("F23"));
+        if (m_vk_key == VK_F24)    _stprintf(st_key, _T("F24"));
 
+        // Navigation keys
+        if (m_vk_key == VK_TAB)      _stprintf(st_key, _T("Tab"));
+        if (m_vk_key == VK_BACK)     _stprintf(st_key, _T("Backspace"));
+        if (m_vk_key == VK_DELETE)   _stprintf(st_key, _T("Delete"));
+        if (m_vk_key == VK_INSERT)   _stprintf(st_key, _T("Insert"));
+        if (m_vk_key == VK_HOME)     _stprintf(st_key, _T("Home"));
+        if (m_vk_key == VK_END)      _stprintf(st_key, _T("End"));
+        if (m_vk_key == VK_PRIOR)    _stprintf(st_key, _T("Page Up"));
+        if (m_vk_key == VK_NEXT)     _stprintf(st_key, _T("Page Down"));
+        if (m_vk_key == VK_LEFT)     _stprintf(st_key, _T("Arrow Left"));
+        if (m_vk_key == VK_UP)       _stprintf(st_key, _T("Arrow Up"));
+        if (m_vk_key == VK_RIGHT)    _stprintf(st_key, _T("Arrow Right"));
+        if (m_vk_key == VK_DOWN)     _stprintf(st_key, _T("Arrow Down"));
 
-        
-        
+        // Media keys
+        if (m_vk_key == char(VK_VOLUME_MUTE))       _stprintf(st_key, _T("Volume Mute"));
+        if (m_vk_key == char(VK_VOLUME_DOWN))      _stprintf(st_key, _T("Volume Down"));
+        if (m_vk_key == char(VK_VOLUME_UP))        _stprintf(st_key, _T("Volume Up"));
+        if (m_vk_key == char(VK_MEDIA_NEXT_TRACK)) _stprintf(st_key, _T("Media Next"));
+        if (m_vk_key == char(VK_MEDIA_PREV_TRACK)) _stprintf(st_key, _T("Media Prev"));
+        if (m_vk_key == char(VK_MEDIA_STOP))       _stprintf(st_key, _T("Media Stop"));
+        if (m_vk_key == char(VK_MEDIA_PLAY_PAUSE)) _stprintf(st_key, _T("Media Play/Pause"));
+
+        // System keys
+        if (m_vk_key == VK_SNAPSHOT) _stprintf(st_key, _T("Print Screen"));
+        if (m_vk_key == char(VK_SCROLL))   _stprintf(st_key, _T("Scroll Lock"));
+        if (m_vk_key == VK_PAUSE)    _stprintf(st_key, _T("Pause"));
+        if (m_vk_key == VK_CAPITAL)  _stprintf(st_key, _T("Caps Lock"));
+        if (m_vk_key == char(VK_NUMLOCK))  _stprintf(st_key, _T("Num Lock"));
+
         _stprintf(g_trigger_buf, _T("Hotkey: %s%s%s%s"), ws_control, ws_alt, ws_shift, st_key);
         return ((TCHAR*)&g_trigger_buf);
     }
