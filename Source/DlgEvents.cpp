@@ -67,6 +67,7 @@ BEGIN_MESSAGE_MAP(CDlgEvents, CBkDialogST)
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(ID_RUN_NOW, OnRunNow)
 	ON_BN_CLICKED(ID_ENABLE, OnEnable)
+	ON_BN_CLICKED(ID_DUPLICATE, OnDuplicate)
 	ON_NOTIFY(NM_DBLCLK, IDC_TREE, OnDblclkTree)
 	ON_BN_CLICKED(ID_ADD_FOLDER, OnAddFolder)
 	ON_NOTIFY(TVN_ENDLABELEDIT, IDC_TREE, OnEndlabeleditTree)
@@ -500,7 +501,119 @@ void CDlgEvents::OnEnable()
 
 }
 
+void CDlgEvents::OnDuplicate()
+{
+	HTREEITEM h_item = this->GetTreeCtrl().GetFirstSelectedItem();
+	if (!h_item) return;
 
+	//something is selected
+	int i_index = this->GetTreeCtrl().GetItemData(h_item);
+
+	if (i_index == C_TREE_DIRECTORY)
+	{
+		//can't duplicate a directory
+		return;
+	}
+
+	CEvent *p_source_event = app_glo.GetEventList()->GetEvent(i_index);
+	if (!p_source_event) return;
+
+	//Save the source event's original filename
+	WCHAR wst_original_filename[MAX_PATH];
+	wcscpy(wst_original_filename, p_source_event->GetFileName());
+
+	//Create a temp filename for the duplication
+	WCHAR wst_temp_filename[MAX_PATH];
+	wcscpy(wst_temp_filename, L"events\\temp_duplicate.dat");
+
+	//Temporarily set the source event's filename to the temp file
+	p_source_event->SetFileName(wst_temp_filename);
+
+	//Save the source event to the temp file
+	if (!p_source_event->Save())
+	{
+		//Restore original filename and abort
+		p_source_event->SetFileName(wst_original_filename);
+		LogError(_T("Failed to save event for duplication."));
+		return;
+	}
+
+	//Restore the source event's original filename
+	p_source_event->SetFileName(wst_original_filename);
+
+	//Create a new event (this assigns a unique filename automatically)
+	int i_new_event_id = app_glo.GetEventList()->AddEvent();
+	if (i_new_event_id == -1)
+	{
+		//Failed to create new event, clean up temp file
+		_tremove(_T("events\\temp_duplicate.dat"));
+		return;
+	}
+
+	CEvent *p_new_event = app_glo.GetEventList()->GetEvent(i_new_event_id);
+	if (!p_new_event)
+	{
+		_tremove(_T("events\\temp_duplicate.dat"));
+		return;
+	}
+
+	//Save the new event's assigned filename before loading
+	WCHAR wst_new_filename[MAX_PATH];
+	wcscpy(wst_new_filename, p_new_event->GetFileName());
+
+	//Load the temp file into the new event
+	if (!p_new_event->Load(_T("events\\temp_duplicate.dat")))
+	{
+		//Load failed, delete the new event and temp file
+		app_glo.GetEventList()->DeleteEvent(i_new_event_id);
+		_tremove(_T("events\\temp_duplicate.dat"));
+		LogError(_T("Failed to load duplicated event."));
+		return;
+	}
+
+	//Restore the new event's unique filename (Load overwrites it)
+	p_new_event->SetFileName(wst_new_filename);
+	p_new_event->SetIndex(i_new_event_id);
+
+	//Modify the name to append " Copy"
+	WCHAR wst_new_name[C_EVENT_MAX_NAME_SIZE];
+	const WCHAR *p_old_name = p_new_event->GetName();
+	int i_old_len = (int)wcslen(p_old_name);
+	const WCHAR wst_copy_suffix[] = L" Copy";
+	int i_suffix_len = (int)wcslen(wst_copy_suffix);
+
+	if (i_old_len + i_suffix_len < C_EVENT_MAX_NAME_SIZE)
+	{
+		//Name fits, just append
+		wcscpy(wst_new_name, p_old_name);
+		wcscat(wst_new_name, wst_copy_suffix);
+	}
+	else
+	{
+		//Truncate the original name to make room for suffix
+		int i_max_base_len = C_EVENT_MAX_NAME_SIZE - i_suffix_len - 1;
+		wcsncpy(wst_new_name, p_old_name, i_max_base_len);
+		wst_new_name[i_max_base_len] = 0;
+		wcscat(wst_new_name, wst_copy_suffix);
+	}
+	p_new_event->SetName(wst_new_name);
+
+	//Save the new event to its assigned filename
+	p_new_event->Save();
+
+	//Delete the temp file
+	_tremove(_T("events\\temp_duplicate.dat"));
+
+	//Add the new event to the tree
+	AddTreeEvent(i_new_event_id);
+
+	//Select the new item in the tree
+	HTREEITEM h_new_item = GetTreeItemFromData(GetTreeCtrl(), i_new_event_id);
+	if (h_new_item)
+	{
+		GetTreeCtrl().SelectItem(h_new_item);
+	}
+}
 
 void CDlgEvents::OnOK() 
 {

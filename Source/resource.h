@@ -13,6 +13,7 @@
 #define ID_RUN_NOW                      6
 #define ID_ENABLE                       7
 #define ID_ADD_FOLDER                   8
+#define ID_DUPLICATE                    9
 #define IDD_ABOUT                       100
 #define IDD_SOURCE_DIALOG               102
 #define IDR_MAINFRAME                   128
