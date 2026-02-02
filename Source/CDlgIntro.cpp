@@ -85,6 +85,12 @@ switch (nCtlColor)
 BOOL CDlgIntro::OnInitDialog() 
 {
 	CBkDialogST::OnInitDialog();
+	
+	// Ensure dialog is shown in foreground and not minimized on first launch
+	ShowWindow(SW_RESTORE);
+	SetForegroundWindow();
+	BringWindowToTop();
+
     SetBitmap(_T("gui\\background.bmp"));
 	
 	

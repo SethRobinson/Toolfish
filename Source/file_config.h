@@ -108,7 +108,7 @@ public:
         //set defaults
         memset(this, 0, sizeof(CConfig));
 
-
+        m_b_disable_tts = true;  // disable text to speech by default
     }
 };
 

@@ -19,7 +19,7 @@
   Name "${_TITLE_}"
  ; Icon
 !define MUI_ICON "toolfish.ico" 
-!define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\classic-uninstall.ico"
+!define MUI_UNICON "toolfish.ico"
 
 RequestExecutionLevel user
 
@@ -133,6 +133,7 @@ CreateDirectory "$SMPROGRAMS\${_TITLE_}"
   ;write uninstall strings
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${_TITLE_}" "DisplayName" "${_TITLE_} (remove only)"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${_TITLE_}" "UninstallString" '"$INSTDIR\Uninstall.exe"'
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${_TITLE_}" "DisplayIcon" "$INSTDIR\toolfish.exe,0"
   
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
