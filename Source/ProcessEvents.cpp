@@ -318,26 +318,14 @@ void ProcessMessage(CEvent *p_event, int i_index)
     
       ReplaceStrings(p_temp_parms, uni(p_event->GetAction(i_index)->GetFilename()).GetAuto(), i_buff_size, i_orig_buff_size, p_event);
   
-      if (p_event->GetAction(i_index)->GetOpenInSameWindow())
-      {
-          
-          winall_create_url_file_full(uni(p_temp_parms).to_st());
-          int result = (int)ShellExecute(NULL,_T("open"),_T("temp.url"), NULL,NULL, SW_MAXIMIZE);
+      // Use ShellExecute directly on the URL - Windows will route to the default browser
+      // (The "open in same window" vs "new window" distinction is now browser-dependent)
+      int result = (int)ShellExecute(NULL, _T("open"), p_temp_parms, NULL, NULL, SW_SHOWNORMAL);
 #ifdef _UNICODE
-          ProcessError(app_glo.GetHWND(), result, _T("temp.url"),p_event->GetAction(i_index)->GetFilename()); //show an error message if we couldn't open this
+      ProcessError(app_glo.GetHWND(), result, p_temp_parms, p_event->GetAction(i_index)->GetFilename()); //show an error message if we couldn't open this
 #else
-          ProcessError(app_glo.GetHWND(), result, _T("temp.url"),uni(p_event->GetAction(i_index)->GetFilename()).to_st()); //show an error message if we couldn't open this
-          
+      ProcessError(app_glo.GetHWND(), result, p_temp_parms, uni(p_event->GetAction(i_index)->GetFilename()).to_st()); //show an error message if we couldn't open this
 #endif
-       
-          
-
-
-      } else
-      {
-          
-         LaunchURL(p_temp_parms);
-      }
  
       
       SAFE_DELETE_ARRAY(p_temp_parms);

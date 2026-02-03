@@ -9,6 +9,8 @@
 #include "CTextParse.h"
 #include <powrprof.h>
 #pragma comment(lib, "PowrProf.lib")
+#include <wininet.h>
+#pragma comment(lib, "wininet.lib")
 
 CApplicationGlobals app_glo;
 
@@ -263,66 +265,54 @@ UINT GetIPAddressFromServer(LPVOID pVoid)
 {
     app_glo.IncActiveThreadCount();
 
-    CTextParse parse;
-    struct sockaddr_in blah;
-    struct hostent *he;
-    memset ((char *) &blah,'0', sizeof(blah));
-    char st_server[MAX_PATH];
-    strcpy(st_server, "rtsoft.com");
-
-    if ((he = gethostbyname(st_server)) != NULL)
+    // Use WinINet which handles HTTPS automatically
+    HINTERNET hInternet = InternetOpenA("Toolfish", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
+    if (!hInternet)
     {
-        //change it to numbers
-        memcpy((char *) &blah.sin_addr, he->h_addr, he->h_length );
-        sprintf(st_server, "%s", inet_ntoa(blah.sin_addr));
-        
-     //   	LogMsg(_T("Converted to %s."), uni(st_server).GetAuto());		
+        LogMsg(_T("Failed to get IP address, could not initialize WinINet."));
+        app_glo.DecActiveThreadCount();
+        return 0;
     }
-    
-    
-    CWizReadWriteSocket socket;
- 
-    if(!socket.Connect(uni(st_server).GetAuto(), 80))
-       {
-            LogMsg(_T("Failed to get IP address, rtsoft.com might be down."));
-            goto done;
-       }
-    char st_temp[255];
 
-      sprintf(st_temp, "GET /htbin/ip.php HTTP/1.1\r\nAccept: */*\r\nHost: %s\r\nUser-Agent: Toolfish\r\n\r\n", "rtsoft.com");
-      socket.Write(st_temp, strlen(st_temp));
-        //read what we get
-        char st_buff[MAX_PATH];
-        memset(st_buff, 0, MAX_PATH);
-        int i_read;
-        i_read = 0;    
-        
-        while ( (i_read = socket.Read((char*)&st_buff, MAX_PATH-1)) > 0)
+    HINTERNET hUrl = InternetOpenUrlA(hInternet, "https://rtsoft.com/htbin/ip.php", NULL, 0, 
+        INTERNET_FLAG_RELOAD | INTERNET_FLAG_NO_CACHE_WRITE, 0);
+    if (!hUrl)
+    {
+        LogMsg(_T("Failed to get IP address, rtsoft.com might be down."));
+        InternetCloseHandle(hInternet);
+        app_glo.DecActiveThreadCount();
+        return 0;
+    }
+
+    // Read the response
+    CTextParse parse;
+    char st_buff[MAX_PATH];
+    DWORD dwBytesRead = 0;
+
+    while (InternetReadFile(hUrl, st_buff, MAX_PATH - 1, &dwBytesRead) && dwBytesRead > 0)
+    {
+        parse.AddText(st_buff, dwBytesRead);
+    }
+    parse.AddText("\0", 1);
+
+    InternetCloseHandle(hUrl);
+    InternetCloseHandle(hInternet);
+
+    // Parse the response
+    char *p_line;
+    bool bIPWasFound = false;
+    char st_key[6000];  //why so big?  to not crash if our website got screwed and gave huge not found messages
+
+    while (parse.get_next_line(&p_line))
+    {
+        strcpy(st_key, parse.get_word(1, '|'));
+        if (stricmp(st_key, "IPADDRESS") == 0)
         {
-             parse.AddText(st_buff, i_read);
+            app_glo.SetIP(parse.get_word(2, '|'));
+            bIPWasFound = true;
         }
-  
-        //add ending NULL
-        parse.AddText("\0", 1);
-  
-  char *p_line;
-  bool bIPWasFound = false;
+    }
 
-  char st_key[6000];  //why so big?  to not crash if our website got screwed and gave huge not found messages
-  while (parse.get_next_line(&p_line))
-  {
-    
-      strcpy(st_key,parse.get_word(1, '|'));
-      if (stricmp(st_key, "IPADDRESS") == 0)
-      {
-          app_glo.SetIP(parse.get_word(2, '|'));
-          bIPWasFound = true;
-      }
-      
-  }
-
-    socket.Close();
-  
     if (!bIPWasFound)
     {
         LogMsg("Unable to find latest version from server");
@@ -334,11 +324,8 @@ UINT GetIPAddressFromServer(LPVOID pVoid)
 #endif
     }
 
-
-done:
-
-        app_glo.DecActiveThreadCount();
-        return 0;
+    app_glo.DecActiveThreadCount();
+    return 0;
 }
 
 void CApplicationGlobals::RetrieveIPAddress()

@@ -104,6 +104,9 @@ public:
     int m_i_volume_knob_multiplier;    // extra steps to add (each step ~2% volume)
     bool m_b_volume_knob_shift_only;   // only apply when Shift key is held
 
+    // New fields must be added at the end for backwards compatibility with old config files
+    bool m_b_check_version_disabled; //if true, don't check for new versions on startup
+
     CConfig()
     {
         //set defaults

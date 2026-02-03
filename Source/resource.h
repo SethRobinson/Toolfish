@@ -298,6 +298,7 @@
 #define IDC_BOOT_ADMIN                  1209
 #define IDC_ADMIN_EXPLANATION           1210
 #define IDC_ADMIN_STATUS                1211
+#define IDC_B_CHECK_NEW_VERSIONS        1212
 #define ID_MENU_EXIT                    32772
 #define ID_MENU_OPTIONS                 32773
 #define ID_MENU_COPY                    32774
@@ -331,7 +332,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        208
 #define _APS_NEXT_COMMAND_VALUE         32800
-#define _APS_NEXT_CONTROL_VALUE         1212
+#define _APS_NEXT_CONTROL_VALUE         1213
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

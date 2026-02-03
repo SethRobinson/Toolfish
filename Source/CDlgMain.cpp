@@ -304,7 +304,10 @@ CHAR * st_version = "(98/ME Non-Unicode Build)";
     app_glo.RetrieveIPAddress(); //fill it with a valid value
 
      //check for updates on startup
-     AfxBeginThread(CheckForUpdate, 0);
+     if (!glo.m_b_check_version_disabled)
+     {
+         AfxBeginThread(CheckForUpdate, 0);
+     }
    
         BuildHotKeyInfo();
         SetupKeyboardOverlay();

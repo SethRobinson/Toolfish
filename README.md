@@ -85,16 +85,35 @@ Toolfish uses a powerful event system where **Triggers** determine *when* someth
 * **Create a hotkey** - Add a Hotkey trigger with a Run action to launch programs
 * **Auto-mute** - Enable Smart Mute to silence your PC after inactivity
 
+## Safety
+
+It's a bit scary to run an a system trap app that can see everything you do (especially if you enable elevated access) so a bit about me:
+
+* I am Seth A. Robinson ([Wikipedia](https://en.wikipedia.org/wiki/Robinson_Technologies)), having written over 50+ games and utilities over the last 35 years
+
+* This app doesn't share your personal data at all.  It does hit RTsoft for two functions though:
+
+  * Getting your true IP address - It hits [rtsoft.com/htbin/ip.php](rtsoft.com/htbin/ip.php) to get your 'outside' IP address, for use with the default IP address hotkey macro
+
+  * Checking for updates - It hits [rtsoft.com/toolfish/server.txt](https://rtsoft.com/htbin/ip.php) to see what the latest version is.  Also also sends the current version of toolfish as a parm.
+
+Both of these functions can be disabled in Options menu.
+
+* The version I have here for download has been signed by Robinson Technologies Corporation, my company.  The first time you run it, Windows will popup telling you this - if it doesn't (the file isn't signed) than DON'T run it, it didn't come for me. 
+
+* You can also compile it yourself using Visual Studio 2026 and run that version
+
 ## History
 
-
-**V2.32 Feb 2nd, 2026** 
+**V2.33 Feb 3nd, 2026**
 * Added "Set audio output device" action.
 * Added "modify volume knob sensitivity" option to the Smart Mute menu.
 * Added "Duplicate" to Event Manager dialog.
 * "Inactivity" detection improved, now monitors gamepads and detects Windows' "display required' state (watching movies, etc)
-* Added boot in admin mode option, otherwise hotkeys and inactivity detection won't work with other apps that ARE running in admin mode, like Genshin Impact (I mute it when my kid is AFK using Toolfish)
+* Added option to autostart in admin mode, otherwise hotkeys and inactivity detection won't work with other apps that ARE running in admin mode, like Genshin Impact (I use this to auto mute it when my kid is AFK)
 * Using low level hook instead of DLL injection now, should work a bit better I guess
+* HTTPS support added for web compares/etc
+* Fixed issue with not respecting the system's default browser setting
 * Source code released.
 
 ## Building from Source

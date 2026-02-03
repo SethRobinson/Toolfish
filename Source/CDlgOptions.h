@@ -34,6 +34,7 @@ public:
 	BOOL	m_b_enable_blink_webpage;
 	BOOL	m_b_detect_IP_address_server_side;
 	BOOL	m_b_minimize_on_close;
+	BOOL	m_b_check_new_versions;
 	//}}AFX_DATA
 
 

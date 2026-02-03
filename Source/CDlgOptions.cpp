@@ -36,6 +36,7 @@ CDlgOptions::CDlgOptions(CWnd* pParent /*=NULL*/)
 	m_b_enable_blink_webpage = FALSE;
 	m_b_detect_IP_address_server_side = FALSE;
 	m_b_minimize_on_close = FALSE;
+	m_b_check_new_versions = TRUE;
 	//}}AFX_DATA_INIT
 }
 
@@ -55,6 +56,7 @@ void CDlgOptions::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_BLINK_WEBPAGE, m_b_enable_blink_webpage);
 	DDX_Check(pDX, IDC_B_DETECT_IP_SERVER_SIDE, m_b_detect_IP_address_server_side);
 	DDX_Check(pDX, IDC_B_MINIMIZE_ON_CLOSE, m_b_minimize_on_close);
+	DDX_Check(pDX, IDC_B_CHECK_NEW_VERSIONS, m_b_check_new_versions);
 	//}}AFX_DATA_MAP
 }
 
@@ -92,6 +94,7 @@ BOOL CDlgOptions::OnInitDialog()
     m_b_enable_blink_email = !glo.m_b_tray_no_trigger_on_email;
     m_b_detect_IP_address_server_side = !glo.m_b_server_ip_disabled;
     m_b_minimize_on_close = glo.m_b_minimize_on_close;
+    m_b_check_new_versions = !glo.m_b_check_version_disabled;
 
     // Show current elevation status
     if (IsUserAnAdmin())
@@ -127,6 +130,7 @@ void CDlgOptions::OnOK()
    glo.m_b_tray_no_trigger_on_email =  m_b_enable_blink_email != 1; //reversed
    glo.m_b_server_ip_disabled =  m_b_detect_IP_address_server_side != 1; //reversed
    glo.m_b_minimize_on_close = m_b_minimize_on_close != 0;
+   glo.m_b_check_version_disabled = m_b_check_new_versions != 1; //reversed
    
    ProcessGray();
 

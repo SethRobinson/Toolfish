@@ -133,12 +133,10 @@ BOOL CDlgNag::OnInitDialog()
 
 void CDlgNag::OnPurchase() 
 {
-    TCHAR * p_wst_filename = _T("www.rtsoft.com/toolfish/purchase.shtml");
-    winall_create_url_file_full(uni(p_wst_filename).to_st());
-  int result = (int)ShellExecute(NULL,_T("open"),_T("temp.url"), NULL,NULL, SW_MAXIMIZE);
-  ProcessError(this->m_hWnd, result, _T("temp.url"),p_wst_filename); //show an error message if we couldn't open this
-
-	
+    TCHAR * p_wst_filename = _T("http://www.rtsoft.com/toolfish/purchase.shtml");
+    // Use ShellExecute directly on the URL - Windows will route to the default browser
+    int result = (int)ShellExecute(NULL, _T("open"), p_wst_filename, NULL, NULL, SW_SHOWNORMAL);
+    ProcessError(this->m_hWnd, result, p_wst_filename, p_wst_filename); //show an error message if we couldn't open this
 }
 
 void CDlgNag::OnEnterCode() 

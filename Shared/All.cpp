@@ -180,82 +180,22 @@ void getdir(TCHAR t_final_out[])
 
 #ifndef _USRDLL   //.dll's don't seem to like this, well, at least smartmute's doesn't
 
-//launch a URL in the default web browser IN A NEW WINDOW
+//launch a URL in the default web browser
+// Uses ShellExecute directly on the URL to let Windows route to the user's default browser
+// (The old registry-based detection no longer works reliably on Windows 10/11)
 DWORD LaunchURL(LPTSTR addy){
-/* while testing leave in all the ZeroMemory lines even though
- * they probably aren't all necessary. oh well
- */
-	TCHAR lpBrowser[512];
-	TCHAR holder[512];
-	TCHAR addytype[512];
-	DWORD dwLen = 500;
-	DWORD dwType;
-	DWORD urltype=0;
-	HKEY hKey;
-	LPTSTR lpPathValue;
-	ZeroMemory(lpBrowser, 512 * sizeof(TCHAR));
-	
-	ZeroMemory(addytype, 512 * sizeof(TCHAR));
-	ZeroMemory(holder, 512 * sizeof(TCHAR));	_tcsncpy(holder, addy, 4);
-	if(_tcsicmp(holder, _T("ftp:")) == 0)
-	{
-		_tcscpy(addytype, _T("ftp\\shell\\open\\command"));
-		urltype = 2;
-	}
-	else
-	{
-		ZeroMemory(holder, 512 * sizeof(TCHAR));	_tcsncpy(holder, addy, 7);
-		if(_tcsicmp(holder, _T("mailto:")) == 0)
-		{
-			return (DWORD) ShellExecute(NULL, NULL, addy, NULL, NULL, SW_SHOWNORMAL);
-		}
-		else
-		{
-			_tcscpy(addytype, _T("http\\shell\\open\\command")); // default browser, this will run most often
-		}
-	}
-
-	lpPathValue = (LPTSTR)GlobalAlloc(GMEM_FIXED, 500);
-	
-	if(RegOpenKeyEx(HKEY_CLASSES_ROOT,addytype, 0,KEY_QUERY_VALUE, &hKey ) == ERROR_SUCCESS)
-	{
-		if(RegQueryValueEx(hKey,_T(""),0,&dwType,(BYTE *)lpPathValue, &dwLen) ==  ERROR_SUCCESS)
-		{
-			ZeroMemory(holder, 512 * sizeof(TCHAR));
-		
-            if (lpPathValue[0] == '\"')
-            {
-            //let's get rid of the quote
-            _tcscpy(holder, lpPathValue+1);
-           _tcsncpy(lpBrowser, holder, _tcsrchr(holder, '\"') - holder);
-          
-            } else
-            {
-                //just copy the damn thing over
-                _tcscpy(lpBrowser, lpPathValue);
-            }
-           //let's remove anything after the .exe part
-           
-           TCHAR *p_pos = _tcsrchr(lpBrowser, '.');
-           if (p_pos)
-           {
-              p_pos[4] = 0; //add null to truncate it
-
-           }   else
-           {
-#ifndef _NOLOGMSG
-               LogMsg(_T("Don't understand format of your default browser.  Let Seth know.  Disable Open in new window for now."));
-#endif
-           }
-
-		}
-		else _tcscpy(lpBrowser, _T("iexplore"));
-	}
-	else _tcscpy(lpBrowser, _T("iexplore"));
-	RegCloseKey(hKey);
-	GlobalFree(lpPathValue);
-   
-    return (DWORD)ShellExecute(NULL, _T("open"), lpBrowser, addy, NULL, SW_SHOWDEFAULT);
+    // For mailto: links, use ShellExecute with NULL verb for default mail handler
+    TCHAR holder[8];
+    ZeroMemory(holder, 8 * sizeof(TCHAR));
+    _tcsncpy(holder, addy, 7);
+    if (_tcsicmp(holder, _T("mailto:")) == 0)
+    {
+        return (DWORD)ShellExecute(NULL, NULL, addy, NULL, NULL, SW_SHOWNORMAL);
+    }
+    
+    // For http, https, ftp, and other URLs, use ShellExecute directly
+    // Windows will route to the user's default browser
+    return (DWORD)ShellExecute(NULL, _T("open"), addy, NULL, NULL, SW_SHOWNORMAL);
 }
 
 #endif
@@ -432,7 +372,7 @@ return(count);
         }
         
         //write the unicode marker
-        CHAR *p_st_unicode = "ÿþ";
+        CHAR *p_st_unicode = "ï¿½ï¿½";
         fwrite(p_st_unicode, 2, 1, fp_dest);
         FILE *fp;  
         int i_line_counter = 0;

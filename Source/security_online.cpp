@@ -228,9 +228,12 @@ bool CServerInfo::GetServerInfo(char p_st_server[], char p_st_file[])
                     int i_ret = MessageBox(app_glo.GetDialogHWND(),uni(server_info.m_st_upgrade_text).GetAuto(), _T("New version released!"), MB_OKCANCEL);
                     if (i_ret == IDOK)
                     {
-                        winall_create_url_file(server_info.m_st_upgrade_url);
-                        int result = (int)ShellExecute(NULL,_T("open"),_T("temp.url"), NULL,NULL, SW_MAXIMIZE);
-                        ProcessError(app_glo.GetDialogHWND(), result, _T("temp.url"),uni(server_info.m_st_upgrade_url).GetAuto()); 
+                        // Use ShellExecute directly on the URL - Windows will route to the default browser
+                        // Prepend http:// since the URL may not include the protocol
+                        char st_full_url[512];
+                        sprintf(st_full_url, "http://%s", server_info.m_st_upgrade_url);
+                        int result = (int)ShellExecute(NULL, _T("open"), uni(st_full_url).GetAuto(), NULL, NULL, SW_SHOWNORMAL);
+                        ProcessError(app_glo.GetDialogHWND(), result, uni(st_full_url).GetAuto(), uni(server_info.m_st_upgrade_url).GetAuto()); 
                     }
                     
                     

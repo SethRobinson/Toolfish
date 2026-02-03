@@ -83,19 +83,16 @@ void CDlgActionWebsite::OnOK()
 void CDlgActionWebsite::OnTest() 
 {
   UpdateData(D_TO_VAR);
-    winall_create_url_file_full(uni(m_filename).to_st());
-  int result = (int)ShellExecute(NULL,_T("open"),_T("temp.url"), NULL,NULL, SW_MAXIMIZE);
+  // Use ShellExecute directly on the URL - Windows will route to the default browser
+  int result = (int)ShellExecute(NULL, _T("open"), m_filename, NULL, NULL, SW_SHOWNORMAL);
 
 #ifdef _UNICODE
-  ProcessError(this->m_hWnd, result, _T("temp.url"), m_filename); //show an error message if we couldn't open this
+  ProcessError(this->m_hWnd, result, m_filename, m_filename); //show an error message if we couldn't open this
 #else
-
   char st_file[MAX_PATH];
   strcpy(st_file, m_filename);
-  ProcessError(this->m_hWnd, result, _T("temp.url"), st_file); //show an error message if we couldn't open this
-  
+  ProcessError(this->m_hWnd, result, st_file, st_file); //show an error message if we couldn't open this
 #endif
-	
 }
 
 HBRUSH CDlgActionWebsite::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
