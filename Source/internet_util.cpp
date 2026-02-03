@@ -34,10 +34,18 @@ void RefreshCache(CTextParse *p_parse, TCHAR * p_ws_domain, TCHAR *p_ws_filename
 
 //p_original_url and p_full should both be the same when sending them in?
 bool BreakURLDown(const TCHAR *p_original_url, TCHAR *p_full, TCHAR * p_ws_domain, TCHAR * p_ws_path,
-                  TCHAR * p_ws_filename)
+                  TCHAR * p_ws_filename, bool *p_b_https)
 {
+    // Default to HTTP if caller wants to know
+    if (p_b_https) *p_b_https = false;
 
-    if (_tcsncicmp(p_full, _T("http://"),_tcslen(_T("http://"))) == 0)
+    if (_tcsncicmp(p_full, _T("https://"),_tcslen(_T("https://"))) == 0)
+    {
+        //get rid of it and flag as HTTPS
+        p_full = (TCHAR*)&p_original_url[_tcslen(_T("https://"))];
+        if (p_b_https) *p_b_https = true;
+    }
+    else if (_tcsncicmp(p_full, _T("http://"),_tcslen(_T("http://"))) == 0)
     {
         //get rid of it!
         p_full = (TCHAR*)&p_original_url[_tcslen(_T("http://"))];
@@ -155,6 +163,7 @@ bool ProcessCompare( CEvent *p_event, int i_index)
 
     TCHAR ws_date_updated[256];
     bool b_date_triggered = false;
+    bool b_https = false; // Will be set by BreakURLDown()
 
     char * p_new_date = "Unknown";
     char * p_old_date = "Unknown";
@@ -171,7 +180,7 @@ bool ProcessCompare( CEvent *p_event, int i_index)
 
     _tcscpy(p_full, ws_full_url);
 
-    if (!BreakURLDown(ws_full_url, p_full, ws_domain, ws_path, ws_filename))
+    if (!BreakURLDown(ws_full_url, p_full, ws_domain, ws_path, ws_filename, &b_https))
    {
        LogError(_T("Error understaing URL, maybe you typed it wrong? (%s), "), uni_filename.GetAuto());
        return true;
@@ -187,7 +196,7 @@ bool ProcessCompare( CEvent *p_event, int i_index)
         CTextParse new_content;
         CWebHeader new_header;
         if (GetWebFile(uni(ws_domain).to_st(), uni(ws_path).to_st(), &new_content, &new_header, p_action->GetWebCompareAuthenticate(),
-            p_action->GetLogon(), p_action->GetPassword()))
+            p_action->GetLogon(), p_action->GetPassword(), b_https))
         {
             //got it!
             //now we need to know if it is chanegd enough to trigger future actions
@@ -487,102 +496,92 @@ bool ProcessCompare( CEvent *p_event, int i_index)
 
 
 
-bool GetWebFile(const char * p_st_server, const char *p_st_file, CTextParse *p_parse, CWebHeader *p_header, const bool b_authenticate, const WCHAR *p_wst_logon, const WCHAR *p_wst_pass)
+bool GetWebFile(const char * p_st_server, const char *p_st_file, CTextParse *p_parse, CWebHeader *p_header, const bool b_authenticate, const WCHAR *p_wst_logon, const WCHAR *p_wst_pass, bool b_https)
 {
-    //get rid of the starting http if we have it..
+    // Build the full URL
+    char st_url[C_MAX_URL_SIZE];
+    sprintf(st_url, "%s://%s/%s", b_https ? "https" : "http", p_st_server, p_st_file);
 
-    char st_server[C_MAX_URL_SIZE]; //temp work buffer
-    sprintf(st_server, p_st_server);
-    
+    // Check for internet connection and auto-dial if needed
     DWORD dwConnectionTypes = INTERNET_CONNECTION_LAN |
         INTERNET_CONNECTION_MODEM |
         INTERNET_CONNECTION_PROXY;
     if (!InternetGetConnectedState(&dwConnectionTypes, 0))
     {
-        InternetAutodial(INTERNET_AUTODIAL_FORCE_UNATTENDED,
-            0);
-    } 
-   //  log_msg("Connecting to %s.", st_server);		
-    struct sockaddr_in blah;
-    struct hostent *he;
-    memset ((char *) &blah,'0', sizeof(blah));
-    
-    if ((he = gethostbyname(st_server)) != NULL)
-    {
-        //change it to numbers
-        
-        memcpy((char *) &blah.sin_addr, he->h_addr, he->h_length );
-        sprintf(st_server, "%s", inet_ntoa(blah.sin_addr));
-        
-   // log_msg("Converted to %s.", st_server);		
+        InternetAutodial(INTERNET_AUTODIAL_FORCE_UNATTENDED, 0);
     }
-    
-    
-    CWizReadWriteSocket socket;
-    
-    if(!socket.Connect(uni(st_server).GetAuto(), 80))
+
+    // Open internet session
+    HINTERNET hInternet = InternetOpenA("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;)", 
+        INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
+    if (!hInternet)
     {
-        log_msg("Cannot connect to server");
+        log_msg("Cannot open internet session");
         return false;
     }
-    
-    char st_temp[C_MAX_URL_SIZE];
-    char st_buffer[C_MAX_URL_SIZE];
-    st_buffer[0] = 0;
 
-    sprintf(st_temp, "GET /%s HTTP/1.0\r\nAccept: */*\r\n",  p_st_file);
-    strcat(st_buffer, st_temp);
-    
- //  strcat(st_buffer, "Accept-Language: en-us\r\n");
- // strcat(st_buffer, "Accept-Encoding: gzip, deflate\r\n");
- // strcat(st_buffer, "Connection: Keep-Alive\r\n");
-    sprintf(st_temp, "Host: %s\r\n",p_st_server);
-    strcat(st_buffer, st_temp);
-  //  strcat(st_buffer, "Connection: Close\n");
-    strcat(st_buffer, "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;)\r\n");
-   if (b_authenticate) 
-   {
-    
-    CString cst_format;
-    cst_format.Format(_T("%s:%s"), uni(p_wst_logon).GetAuto(),uni(p_wst_pass).GetAuto());
-       //For basic authentication
-    CString cst_encoded = EncodeTextBase64(cst_format);
-    uni u(cst_encoded);
+    // Build authentication header if needed
+    char st_headers[C_MAX_URL_SIZE];
+    st_headers[0] = 0;
+    DWORD dwHeaderLen = 0;
 
-    sprintf(st_temp, "Authorization: Basic %s\r\n", u.st_data);
-    strcat(st_buffer, st_temp);
-   }
-
-
-  //  strcat(st_buffer, "Cookie: PREF=ID=62bf3e453cd19d16:FF=4:LD=en:NR=10:TM=1032994623:LM=1033024920:S=PbEXZv1loxItUXf6; CP=null*");
-
-    //sprintf(st_temp, "Content-Length: %d\r\n", strlen(st_temp)+strlen("Content-Length:"));
-  //  strcat(st_buffer, st_temp);
-
-
-    strcat(st_buffer, "\r\n"); //blank line indicating the content is going to start
-
-
-    //)
-  // log_msg("Grabbing %s.", st_buffer);
-  
-   
-    socket.Write(st_buffer, strlen(st_buffer));
-    
-
-    //read what we get
-    char st_buff[513];
-    memset(st_buff, 0, 513);
-    
-    int i_read = 0;    
-    
-    while ( (i_read = socket.Read((char*)&st_buff, 512)) > 0)
+    if (b_authenticate)
     {
-        // log_msg(st_buff);
-        p_parse->AddText(st_buff, i_read);
+        CString cst_format;
+        cst_format.Format(_T("%s:%s"), uni(p_wst_logon).GetAuto(), uni(p_wst_pass).GetAuto());
+        // For basic authentication
+        CString cst_encoded = EncodeTextBase64(cst_format);
+        uni u(cst_encoded);
+
+        sprintf(st_headers, "Authorization: Basic %s\r\n", u.st_data);
+        dwHeaderLen = (DWORD)strlen(st_headers);
     }
-    //add ending NULL
+
+    // Open URL - handles HTTPS, redirects, etc. automatically
+    DWORD dwFlags = INTERNET_FLAG_RELOAD | INTERNET_FLAG_NO_CACHE_WRITE;
+    if (b_https)
+    {
+        // For HTTPS: ignore certificate errors for compatibility with self-signed certs
+        dwFlags |= INTERNET_FLAG_SECURE | INTERNET_FLAG_IGNORE_CERT_CN_INVALID | INTERNET_FLAG_IGNORE_CERT_DATE_INVALID;
+    }
+
+    HINTERNET hUrl = InternetOpenUrlA(hInternet, st_url, 
+        dwHeaderLen > 0 ? st_headers : NULL,
+        dwHeaderLen,
+        dwFlags, 0);
+
+    if (!hUrl)
+    {
+        DWORD dwError = GetLastError();
+        log_msg("Cannot connect to server (error %d)", dwError);
+        InternetCloseHandle(hInternet);
+        return false;
+    }
+
+    // Get HTTP headers and prepend them to the response (for compatibility with existing code)
+    // The existing code parses "Last-Modified:" etc. from the raw response
+    char st_response_headers[4096];
+    DWORD dwHeaderSize = sizeof(st_response_headers);
+    if (HttpQueryInfoA(hUrl, HTTP_QUERY_RAW_HEADERS_CRLF, st_response_headers, &dwHeaderSize, NULL))
+    {
+        p_parse->AddText(st_response_headers, dwHeaderSize);
+    }
+
+    // Read response body
+    char st_buff[513];
+    DWORD dwBytesRead = 0;
+
+    while (InternetReadFile(hUrl, st_buff, 512, &dwBytesRead) && dwBytesRead > 0)
+    {
+        p_parse->AddText(st_buff, dwBytesRead);
+        dwBytesRead = 0; // Reset for next iteration
+    }
+
+    // Add ending NULL
     p_parse->AddText("\0", 1);
+
+    InternetCloseHandle(hUrl);
+    InternetCloseHandle(hInternet);
     return true;
 }
 

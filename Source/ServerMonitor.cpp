@@ -19,6 +19,7 @@ bool ProcessMonitor( CEvent *p_event, int i_index)
     TCHAR p_full[C_MAX_URL_SIZE];
 
     bool b_error = false;
+    bool b_https = false; // Will be set by BreakURLDown()
  
     uni uni_filename(p_action->GetFilename());
   
@@ -28,7 +29,7 @@ bool ProcessMonitor( CEvent *p_event, int i_index)
 
     _tcscpy(p_full, ws_full_url);
 
-    if (!BreakURLDown(ws_full_url, p_full, ws_domain, ws_path, ws_filename))
+    if (!BreakURLDown(ws_full_url, p_full, ws_domain, ws_path, ws_filename, &b_https))
    {
        LogError(_T("Error understaing URL, maybe you typed it wrong? (%s), "), uni_filename.GetAuto());
        return true;
@@ -97,91 +98,122 @@ bool ProcessMonitor( CEvent *p_event, int i_index)
         
         if (p_action->GetWebPage())
         {
-            //let's send a command to actually get the webpage too
+            // Use WinINet to fetch the webpage - supports both HTTP and HTTPS
             
-            char st_temp[C_MAX_URL_SIZE];
-            char st_buffer[C_MAX_URL_SIZE];
-            st_buffer[0] = 0;
+            // Build the full URL
+            char st_url[C_MAX_URL_SIZE];
+            int i_port = p_action->GetPort();
             
-            sprintf(st_temp, "GET /%s HTTP/1.0\r\nAccept: */*\r\n",  uni(ws_filename).to_st());
-            strcat(st_buffer, st_temp);
-            strcat(st_buffer, "Accept-Language: en-us\r\n");
-            strcat(st_buffer, "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0;)\r\n");
-            sprintf(st_temp, "Host: %s\r\n",st_server);
-            strcat(st_buffer, st_temp);
-            strcat(st_buffer, "\r\n"); //blank line indicating the content is going to start
-            socket.Write(st_buffer, strlen(st_buffer));
+            // Determine if we need to specify a non-default port in the URL
+            bool b_default_port = (b_https && i_port == 443) || (!b_https && i_port == 80);
             
-            CTextParse parse;
-            //read what we get
-            char st_buff[513];
-            memset(st_buff, 0, 513);
-            
-            int i_read = 0;    
-            
-            while ( (i_read = socket.Read((char*)&st_buff, 512)) > 0)
+            if (b_default_port)
             {
-                //log_msg(st_buff);
-                parse.AddText(st_buff, i_read);
+                sprintf(st_url, "%s://%s/%s", b_https ? "https" : "http", st_server, uni(ws_path).to_st());
             }
-            //add ending NULL
-            parse.AddText("\0", 1);
-        
-            //let's examine what we got and see what teh response code was.
-            
-            CHAR *p_line;
-
-            parse.get_next_line(&p_line);
-            
-            int i_result_code = atoi(parse.get_word(2, ' '));
-            sprintf(st_result, " (%s)",p_line); //save the header for later
-            
-            bool b_ignore_404 = false;
-
-            if (_tcsstr(ws_path, _T(".")) == NULL)
+            else
             {
-                //there is no period in this, so let's ignore 404 errors as this is normal when you don't specify
-                //a page
-               b_ignore_404 = true;
+                sprintf(st_url, "%s://%s:%d/%s", b_https ? "https" : "http", st_server, i_port, uni(ws_path).to_st());
             }
             
-            if (p_action->GetMonitorError())
+            // Open internet session
+            HINTERNET hInternet = InternetOpenA("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0;)", 
+                INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
+            
+            if (hInternet)
             {
-                if ( 
-                  (  (i_result_code >= 400) && (i_result_code <= 415) )
-                    ||  (  (i_result_code >= 500) && (i_result_code <= 505) )
-
-                    )
+                // Open URL - handles HTTPS and redirects automatically
+                DWORD dwFlags = INTERNET_FLAG_RELOAD | INTERNET_FLAG_NO_CACHE_WRITE;
+                if (b_https)
                 {
-                    //bad code detected.
-                    
-                    if ( (i_result_code == 404) && !b_ignore_404)
-                    {
-                        
-                        
-                        
-                        log_msg("SITE MONITOR FAILED: Website %s returned error code %d. (%s)", uni(p_action->GetFilename()).to_st(),
-                            i_result_code, p_line);
-                        b_error = true;
-                    }
+                    dwFlags |= INTERNET_FLAG_SECURE | INTERNET_FLAG_IGNORE_CERT_CN_INVALID | INTERNET_FLAG_IGNORE_CERT_DATE_INVALID;
                 }
+                
+                HINTERNET hUrl = InternetOpenUrlA(hInternet, st_url, NULL, 0, dwFlags, 0);
+                
+                if (hUrl)
+                {
+                    // Query HTTP status code
+                    DWORD dwStatusCode = 0;
+                    DWORD dwStatusSize = sizeof(dwStatusCode);
+                    HttpQueryInfoA(hUrl, HTTP_QUERY_STATUS_CODE | HTTP_QUERY_FLAG_NUMBER, &dwStatusCode, &dwStatusSize, NULL);
+                    
+                    int i_result_code = (int)dwStatusCode;
+                    
+                    // Get status text for logging
+                    char st_status_text[256] = "";
+                    DWORD dwTextSize = sizeof(st_status_text);
+                    HttpQueryInfoA(hUrl, HTTP_QUERY_STATUS_TEXT, st_status_text, &dwTextSize, NULL);
+                    sprintf(st_result, " (HTTP/%d %s)", i_result_code, st_status_text);
+                    
+                    // Read response body for size check
+                    CTextParse parse;
+                    char st_buff[513];
+                    DWORD dwBytesRead = 0;
+                    
+                    while (InternetReadFile(hUrl, st_buff, 512, &dwBytesRead) && dwBytesRead > 0)
+                    {
+                        parse.AddText(st_buff, dwBytesRead);
+                        dwBytesRead = 0;
+                    }
+                    parse.AddText("\0", 1);
+                    
+                    bool b_ignore_404 = false;
+
+                    if (_tcsstr(ws_path, _T(".")) == NULL)
+                    {
+                        //there is no period in this, so let's ignore 404 errors as this is normal when you don't specify
+                        //a page
+                       b_ignore_404 = true;
+                    }
+                    
+                    if (p_action->GetMonitorError())
+                    {
+                        if ( 
+                          (  (i_result_code >= 400) && (i_result_code <= 415) )
+                            ||  (  (i_result_code >= 500) && (i_result_code <= 505) )
+                            )
+                        {
+                            //bad code detected.
+                            
+                            if ( !((i_result_code == 404) && b_ignore_404) )
+                            {
+                                log_msg("SITE MONITOR FAILED: Website %s returned error code %d. (%s)", uni(p_action->GetFilename()).to_st(),
+                                    i_result_code, st_status_text);
+                                b_error = true;
+                            }
+                        }
+                    }
+               
+                    if (!b_error && (p_action->GetMonitorSize()) )
+                    {
+                        //let's also check size
+                        if (int(parse.GetBuffByteSize()) < p_action->GetMonitorSizeBytes())
+                        {
+                            //it's too small.
+                            log_msg("SITE MONITOR FAILED: Website %s is less than %d bytes. (%s)", 
+                                uni(p_action->GetFilename()).to_st(),  p_action->GetMonitorSizeBytes(),
+                                st_status_text);
+                            b_error = true;
+                        }
+                    }
+                    
+                    InternetCloseHandle(hUrl);
+                }
+                else
+                {
+                    // Failed to open URL
+                    log_msg("SITE MONITOR FAILED: Could not fetch webpage %s (WinINet error %d)", uni(p_action->GetFilename()).to_st(), GetLastError());
+                    b_error = true;
+                }
+                
+                InternetCloseHandle(hInternet);
             }
-       
-          if (!b_error && (p_action->GetMonitorSize()) )
-      {
-          //let's also check size
-          if (int(parse.GetBuffByteSize()) <p_action->GetMonitorSizeBytes())
-          {
-              //it's too small.
-                        log_msg("SITE MONITOR FAILED: Website %s is less than %d bytes. (%s)", 
-                            uni(p_action->GetFilename()).to_st(),  p_action->GetMonitorSizeBytes(),
-                             p_line);
-               b_error = true;
-
-          }
-
-      }
-        
+            else
+            {
+                log_msg("SITE MONITOR FAILED: Could not initialize internet session");
+                b_error = true;
+            }
         }
         
     }
