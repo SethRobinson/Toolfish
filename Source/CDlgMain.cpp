@@ -731,8 +731,9 @@ void CDlgMain::ShutDownStuff()
         app_glo.m_timer_ident = 0;                     
     }
 
-    // Kill gamepad polling timer
+    // Kill gamepad polling timer and cleanup DirectInput resources
     KillTimer(C_GAMEPAD_TIMER_ID);
+    ShutdownGamepadTracking();
 }
 void CDlgMain::KillBitmaps()
 {

@@ -95,7 +95,7 @@ It's a bit scary to run an a system trap app that can see everything you do (esp
 
   * Getting your true IP address - It hits [rtsoft.com/htbin/ip.php](rtsoft.com/htbin/ip.php) to get your 'outside' IP address, for use with the default IP address hotkey macro
 
-  * Checking for updates - It hits [rtsoft.com/toolfish/server.txt](https://rtsoft.com/htbin/ip.php) to see what the latest version is.  Also also sends the current version of toolfish as a parm.
+  * Checking for updates - It hits [rtsoft.com/toolfish/server.txt](https://rtsoft.com/htbin/ip.php) to see what the latest version is.  Also also sends the current version of toolfish as a parm.  It does NOT auto update, it just mentions the new version in the log and gives a link.
 
 Both of these functions can be disabled in Options menu.
 
@@ -105,11 +105,11 @@ Both of these functions can be disabled in Options menu.
 
 ## History
 
-**V2.33 Feb 3nd, 2026**
+**V2.34 Feb 3nd, 2026**
 * Added "Set audio output device" action.
 * Added "modify volume knob sensitivity" option to the Smart Mute menu.
 * Added "Duplicate" to Event Manager dialog.
-* "Inactivity" detection improved, now monitors gamepads and detects Windows' "display required' state (watching movies, etc)
+* "Inactivity" detection improved, now monitors gamepads (both xinput and DirectX) and detects Windows' "display required' state (watching movies, etc)
 * Added option to autostart in admin mode, otherwise hotkeys and inactivity detection won't work with other apps that ARE running in admin mode, like Genshin Impact (I use this to auto mute it when my kid is AFK)
 * Using low level hook instead of DLL injection now, should work a bit better I guess
 * HTTPS support added for web compares/etc

@@ -124,7 +124,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>xinput.lib;wininet.lib;Ws2_32.lib;Winmm.lib;dist\sm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xinput.lib;dinput8.lib;dxguid.lib;wininet.lib;Ws2_32.lib;Winmm.lib;dist\sm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\app\toolfish_debug_9x.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -164,7 +164,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>xinput.lib;wininet.lib;Ws2_32.lib;Winmm.lib;app\sm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xinput.lib;dinput8.lib;dxguid.lib;wininet.lib;Ws2_32.lib;Winmm.lib;app\sm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\app\toolfish_9x.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ProgramDatabaseFile>.\Source___Win32_Release_ANSI/toolfish_9x.pdb</ProgramDatabaseFile>
@@ -205,7 +205,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>xinput.lib;uafxcwd.lib;Libcmtd.lib;wininet.lib;Ws2_32.lib;Winmm.lib;dist\sm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xinput.lib;dinput8.lib;dxguid.lib;uafxcwd.lib;Libcmtd.lib;wininet.lib;Ws2_32.lib;Winmm.lib;dist\sm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../SharedLib/SAPI/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -248,7 +248,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>xinput.lib;uafxcw.lib;Libcmt.lib;wininet.lib;Ws2_32.lib;Winmm.lib;app\sm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xinput.lib;dinput8.lib;dxguid.lib;uafxcw.lib;Libcmt.lib;wininet.lib;Ws2_32.lib;Winmm.lib;app\sm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ProgramDatabaseFile>$(IntDir)toolfish.pdb</ProgramDatabaseFile>
