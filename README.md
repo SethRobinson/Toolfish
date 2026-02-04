@@ -59,7 +59,7 @@ Toolfish uses a powerful event system where **Triggers** determine *when* someth
 | **Send Command To Application** | Control other windows (close, minimize, send keys) |
 | **Delay** | Wait a specified time before the next action |
 | **Logoff/Shutdown/Reboot** | Power actions for the system |
-| **Leet-Type Toggle** | Enable/disable l33t sp34k typing mode |
+| **Leet-Type Toggle** | Enable/disable l33t sp34k typing mode (Win 11 only?)|
 | **Reset Screen Resolutions** | Asks Windows to reset the displays. (useful in very specific situations) |
 
 ## Other Features

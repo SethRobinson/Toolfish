@@ -116,6 +116,7 @@ SetOutPath "$INSTDIR\events"
   File "..\app\events\hotkey_stealth.dat"
   File "..\app\events\hotkey_toggle.dat"
   File "..\app\events\macro - ip address.dat"
+  File "..\app\events\macro - super v paste.dat"
   File "..\app\events\open notes.dat"
   
 

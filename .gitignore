@@ -54,6 +54,7 @@ app/events/*
 !app/events/hotkey_stealth.dat
 !app/events/hotkey_toggle.dat
 !app/events/macro - ip address.dat
+!app/events/macro - super v paste.dat
 !app/events/open notes.dat
 
 # =============================================================================
