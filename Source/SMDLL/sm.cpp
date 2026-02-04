@@ -203,9 +203,58 @@ DLL_EXPORT LRESULT CALLBACK LowLevelKeyboardProc(
         // WH_KEYBOARD_LL doesn't send repeated events for held keys like WH_KEYBOARD did
         if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)
         {
-            // Post the virtual key code to the main app
-            // Use 0 for lParam since the main app primarily needs the vkCode
+            // Post the virtual key code to the main app for hotkey processing
             PostMessage(g_main_hwnd, WM_USER+500, pkbhs->vkCode, 0);
+            
+            // Handle leet-type overlay in the low-level hook (works with all apps, 32 and 64-bit)
+            // This replaces the WH_GETMESSAGE-based approach which only worked for same-bitness processes
+            if (b_use_key_overlay)
+            {
+                // Don't process injected keys (prevents infinite loop)
+                if (!(pkbhs->flags & LLKHF_INJECTED))
+                {
+                    // Check if this is a letter key that we want to convert
+                    // Virtual key codes for A-Z are 0x41-0x5A (same as uppercase ASCII)
+                    DWORD vk = pkbhs->vkCode;
+                    
+                    // Only convert letter keys, and only sometimes (randomize)
+                    if (vk >= 'A' && vk <= 'Z' && random_range(1, 6) > 2)
+                    {
+                        // Convert VK to lowercase character for lookup
+                        char lowercase = (char)(vk + 32); // 'A' (65) -> 'a' (97)
+                        char replacement = a_ReplaceMap[(unsigned char)lowercase];
+                        
+                        // Only process if there's actually a replacement
+                        if (replacement != lowercase)
+                        {
+                            // Suppress the original key
+                            // Inject the replacement character using SendInput
+                            INPUT input[2] = {0};
+                            
+                            // Check shift state to determine case
+                            bool bShift = (GetAsyncKeyState(VK_SHIFT) & 0x8000) != 0;
+                            bool bCapsLock = (GetKeyState(VK_CAPITAL) & 0x0001) != 0;
+                            bool bUpperCase = bShift ^ bCapsLock;
+                            
+                            // Use Unicode input for the replacement character
+                            input[0].type = INPUT_KEYBOARD;
+                            input[0].ki.wVk = 0;
+                            input[0].ki.wScan = bUpperCase ? toupper(replacement) : replacement;
+                            input[0].ki.dwFlags = KEYEVENTF_UNICODE;
+                            
+                            input[1].type = INPUT_KEYBOARD;
+                            input[1].ki.wVk = 0;
+                            input[1].ki.wScan = bUpperCase ? toupper(replacement) : replacement;
+                            input[1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+                            
+                            SendInput(2, input, sizeof(INPUT));
+                            
+                            // Block the original key
+                            return 1;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -282,16 +331,10 @@ LRESULT CALLBACK MessageProc(
             }           
            //         PostMessage(g_main_hwnd,WM_USER+500,p_msg->wParam,0);
             
-              //should we replace this key?
-              if (b_use_key_overlay) 
-              {
-               if (random_range(1, 6) > 2)
-               {
-                //randomize it a bit.  very slow, but doesn't really matter
-               p_msg->wParam = a_ReplaceMap[p_msg->wParam];
-              
-               }
-              }
+              // NOTE: Leet-type overlay is now handled in LowLevelKeyboardProc instead.
+              // The WH_GETMESSAGE hook approach only worked for same-bitness processes
+              // (32-bit DLL couldn't inject into 64-bit apps). The low-level hook works
+              // universally because it runs in Toolfish's process context.
                                     
         }
 
@@ -421,6 +464,13 @@ DLL_EXPORT bool WINAPI install_hook(HINSTANCE dll_hinstance, HWND hinstance_app)
       g_hModule = dll_hinstance;
                                                       
     g_main_hwnd = hinstance_app;
+    
+    // IMPORTANT: Reset leet-type overlay to disabled on hook installation.
+    // The shared data segment can persist stale values from previous runs
+    // if another process still has the DLL loaded. This ensures leet-type
+    // starts disabled until SetupKeyboardOverlay() is called with the
+    // correct value from the config.
+    b_use_key_overlay = false;
    
  
     

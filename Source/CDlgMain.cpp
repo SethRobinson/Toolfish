@@ -242,6 +242,11 @@ BOOL CDlgMain::OnInitDialog()
 	 log_error("Failed to create keyboard hook.");
 	}
     
+    // Set up leet-type overlay state immediately after installing hooks,
+    // before any other initialization that might process keystrokes.
+    // This ensures the correct config value is applied right away.
+    SetupKeyboardOverlay();
+    
     SetupLog();
   
     if (!glo.m_b_boot_stealth)
@@ -310,7 +315,6 @@ CHAR * st_version = "(98/ME Non-Unicode Build)";
      }
    
         BuildHotKeyInfo();
-        SetupKeyboardOverlay();
         LoadButtons();
         
     // If -show flag is present (e.g. after elevation restart), force window to foreground
