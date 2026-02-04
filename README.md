@@ -47,7 +47,7 @@ Toolfish uses a powerful event system where **Triggers** determine *when* someth
 | **Web Compare** | Check if a webpage has changed (conditional) |
 | **Run/Open File** | Execute programs, batch files, or open any file |
 | **Stealth Mode Toggle** | Hide/show the system tray icon |
-| **Check Email** | Monitor a POP3 inbox for new messages (conditional) |
+| **Check Email** | Monitor a POP3 inbox for new messages (conditional) (old feature, worthless now) |
 | **Open/Hide Toolfish Toggle** | Toggle Toolfish window visibility |
 | **Atomic Clock Time Adjust** | Sync system time from an internet time server |
 | **Enable/Disable TTS** | Turn text-to-speech on or off |
@@ -60,14 +60,14 @@ Toolfish uses a powerful event system where **Triggers** determine *when* someth
 | **Delay** | Wait a specified time before the next action |
 | **Logoff/Shutdown/Reboot** | Power actions for the system |
 | **Leet-Type Toggle** | Enable/disable l33t sp34k typing mode |
-| **Reset Screen Resolutions** | Fix display issues (NVidia workaround) |
+| **Reset Screen Resolutions** | Asks Windows to reset the displays. (useful in very specific situations) |
 
 ## Other Features
 
 * **Keyboard Spy** - Stealth keyboard logging (use responsibly!)
-* **Smart Mute** - Automatically mute your computer after inactivity, with optional volume knob control
+* **Smart Mute** - Automatically mute your computer after inactivity, with optional volume knob sensitivity controls (if your knob changes volume too slowly, this can fix that)
 * **Fun statistics** - Track how many miles you've moved your mouse, button clicks, and more
-* **Built-in hotkeys** - Comes with useful defaults like Ctrl-Shift-Alt-I to paste your IP address
+* **Includes some default useful hotkey functions** - Comes with useful defaults like Ctrl-Shift-Alt-I to paste your IP address, or Ctrl-Shift-Alt-V to "inject paste", it's like normal paste but "types" it in virtually, works in places where normal paste doesn't
 
 ## Old Original documentation is [here](https://rtsoft.com/toolfish/index.php) and [here](https://rtsoft.com/toolfish/help.htm)
 
@@ -87,7 +87,7 @@ Toolfish uses a powerful event system where **Triggers** determine *when* someth
 
 ## Safety
 
-It's a bit scary to run an a system trap app that can see everything you do (especially if you enable elevated access) so a bit about me:
+It's a bit scary to run an a system tray app that can see everything you do (especially if you enable elevated access) so a bit about me:
 
 * I am Seth A. Robinson ([Wikipedia](https://en.wikipedia.org/wiki/Robinson_Technologies)), having written over 50+ games and utilities over the last 35 years
 
@@ -95,17 +95,17 @@ It's a bit scary to run an a system trap app that can see everything you do (esp
 
   * Getting your true IP address - It hits [rtsoft.com/htbin/ip.php](rtsoft.com/htbin/ip.php) to get your 'outside' IP address, for use with the default IP address hotkey macro
 
-  * Checking for updates - It hits [rtsoft.com/toolfish/server.txt](https://rtsoft.com/htbin/ip.php) to see what the latest version is.  Also also sends the current version of toolfish as a parm.  It does NOT auto update, it just mentions the new version in the log and gives a link.
+  * Checking for updates - It hits [rtsoft.com/toolfish/server.txt](https://rtsoft.com/htbin/ip.php) to see what the latest version is.  Also sends the current version of toolfish as a parm.  It does NOT auto update, it just mentions the new version in the log and gives a link.
 
 Both of these functions can be disabled in Options menu.
 
-* The version I have here for download has been signed by Robinson Technologies Corporation, my company.  The first time you run it, Windows will popup telling you this - if it doesn't (the file isn't signed) than DON'T run it, it didn't come for me. 
+* The version I have here for download has been signed by Robinson Technologies Corporation, my company.  The first time you run it, Windows will popup telling you this - if it doesn't (the file isn't signed) than DON'T run it, it didn't come from me. 
 
 * You can also compile it yourself using Visual Studio 2026 and run that version
 
 ## History
 
-**V2.34 Feb 3nd, 2026**
+**V2.34 Feb 3rd, 2026**
 * Added "Set audio output device" action.
 * Added "modify volume knob sensitivity" option to the Smart Mute menu.
 * Added "Duplicate" to Event Manager dialog.
