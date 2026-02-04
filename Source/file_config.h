@@ -74,7 +74,6 @@ public:
     CVoice m_voice; //info about the default voice. 
     bool m_b_disable_tts;
     bool m_b_boot_stealth; //if true, no icon is display on boot loading
-    bool m_b_boot_admin;   //if true, use Task Scheduler with elevated privileges at startup
     WCHAR m_st_email[256];
     WCHAR m_st_smtp_server[256];
     bool m_b_tray_disable_blinking;
@@ -106,6 +105,7 @@ public:
 
     // New fields must be added at the end for backwards compatibility with old config files
     bool m_b_check_version_disabled; //if true, don't check for new versions on startup
+    bool m_b_boot_admin;   //if true, use Task Scheduler with elevated privileges at startup
 
     CConfig()
     {

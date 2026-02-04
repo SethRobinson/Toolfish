@@ -45,7 +45,7 @@ bool D_LOAD_FUNCTION_NAME (CConfig *sys)
         sys->m_smtp_logon = CConfig::AuthLoginMethod;
         sys->m_i_smtp_port = 25;
         sys->m_b_disable_tts = true;  // disable text to speech by default
-        
+        sys->m_b_server_ip_disabled = false;  // enable IP detection by default
 
         return true; //no error
     }

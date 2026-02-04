@@ -105,7 +105,7 @@ Both of these functions can be disabled in Options menu.
 
 ## History
 
-**V2.34 Feb 3rd, 2026**
+**V2.35 Feb 4th, 2026**
 * Added "Set audio output device" action.
 * Added "modify volume knob sensitivity" option to the Smart Mute menu.
 * Added "Duplicate" to Event Manager dialog.

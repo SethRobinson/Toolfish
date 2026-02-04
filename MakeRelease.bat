@@ -37,6 +37,13 @@ if exist %C_TARGET_DLL% (
 echo Target files are accessible.
 
 REM ============================================================================
+REM Clean intermediate directories to force full recompilation
+REM ============================================================================
+echo Cleaning intermediate files...
+if exist "build\Toolfish\Release" rd /s /q "build\Toolfish\Release"
+if exist "build\SMDLL\Release" rd /s /q "build\SMDLL\Release"
+
+REM ============================================================================
 REM Find Visual Studio 2026 installation using vswhere
 REM ============================================================================
 echo Locating Visual Studio 2026...
@@ -74,7 +81,7 @@ echo.
 echo Building %SOLUTION% [%CONFIG%^|%PLATFORM%]...
 echo.
 
-"%MSBUILD%" %SOLUTION% /p:Configuration=%CONFIG% /p:Platform=%PLATFORM% /m /verbosity:minimal
+"%MSBUILD%" %SOLUTION% /t:Rebuild /p:Configuration=%CONFIG% /p:Platform=%PLATFORM% /m /verbosity:minimal
 if errorlevel 1 (
     echo ERROR: Build failed!
     goto :error
