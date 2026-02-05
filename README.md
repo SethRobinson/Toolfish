@@ -11,6 +11,10 @@ A powerful Windows system tray utility for web monitoring, hotkeys, macros, and 
   <a href="screenshots/toolfish_ss2.gif"><img src="screenshots/toolfish_ss2.gif" width="32%" /></a>
   <a href="screenshots/toolfish_ss3.gif"><img src="screenshots/toolfish_ss3.gif" width="32%" /></a>
 </p>
+<p align="center">
+  <a href="screenshots/toolfish_set_sound_device.png"><img src="screenshots/toolfish_set_sound_device.png" width="32%" /></a>
+  <a href="screenshots/toolfish_stats.png"><img src="screenshots/toolfish_stats.png" width="32%" /></a>
+</p>
 
 ## Description
 
@@ -93,9 +97,9 @@ It's a bit scary to run an a system tray app that can see everything you do (esp
 
 * This app doesn't share your personal data at all.  It does hit RTsoft for two functions though:
 
-  * Getting your true IP address - It hits [rtsoft.com/htbin/ip.php](rtsoft.com/htbin/ip.php) to get your 'outside' IP address, for use with the default IP address hotkey macro
+  * Getting your true IP address - It hits [rtsoft.com/htbin/ip.php](https://rtsoft.com/htbin/ip.php) to get your 'outside' IP address, for use with the default IP address hotkey macro
 
-  * Checking for updates - It hits [rtsoft.com/toolfish/server.txt](https://rtsoft.com/htbin/ip.php) to see what the latest version is.  Also sends the current version of toolfish as a parm.  It does NOT auto update, it just mentions the new version in the log and gives a link.
+  * Checking for updates - It hits [rtsoft.com/toolfish/server.txt](https://rtsoft.com/toolfish/server.txt) to see what the latest version is.  Also sends the current version of toolfish as a parm.  It does NOT auto update, it just mentions the new version in the log and gives a link.
 
 Both of these functions can be disabled in Options menu.
 

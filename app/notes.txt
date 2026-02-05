@@ -1,6 +1,0 @@
-** NOTES FILE **
-
-Use this text file to scribble notes or ideas, if you don't already have something like this it's very useful.
-
-
-This experiment lets you choose a webcam input and perform impainting on the foreground parts of the image.<br>Update speed depends on number of servers connected.<br>IMPORTANT: Make sure you have an inpainting friendly model loaded.
