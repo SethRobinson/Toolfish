@@ -106,6 +106,7 @@ protected:
 	afx_msg void OnMenuVoiceMute();
 	afx_msg void OnAboutToolfish();
 	afx_msg void OnDisableSmartmute();
+	afx_msg void OnDisableGlobalHotkeys();
 	afx_msg void OnMenuWizardReminder();
 	afx_msg void OnMenuWizardAtomic();
 	afx_msg void OnMenuReadClipboard();

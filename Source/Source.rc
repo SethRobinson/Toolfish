@@ -1695,6 +1695,7 @@ BEGIN
         MENUITEM "Options...",                  ID_MENU_OPTIONS
         MENUITEM "Disable Smart Muting",        ID_DISABLE_SMARTMUTE
         MENUITEM "Disable Text To Speech",      ID_MENU_VOICE_MUTE
+        MENUITEM "Disable Global Hotkeys",      ID_DISABLE_GLOBAL_HOTKEYS
         MENUITEM "Read clipboard text out loud ", ID_MENU_READ_CLIPBOARD
         MENUITEM SEPARATOR
         MENUITEM "Exit",                        ID_MENU_EXIT

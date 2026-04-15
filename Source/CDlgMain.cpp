@@ -143,6 +143,7 @@ BEGIN_MESSAGE_MAP(CDlgMain, CBkDialogST)
 	ON_COMMAND(ID_MENU_VOICE_MUTE, OnMenuVoiceMute)
 	ON_COMMAND(ID_ABOUT_TOOLFISH, OnAboutToolfish)
 	ON_COMMAND(ID_DISABLE_SMARTMUTE, OnDisableSmartmute)
+	ON_COMMAND(ID_DISABLE_GLOBAL_HOTKEYS, OnDisableGlobalHotkeys)
 	ON_COMMAND(ID_MENU_WIZARD_REMINDER, OnMenuWizardReminder)
 	ON_COMMAND(ID_MENU_WIZARD_ATOMIC, OnMenuWizardAtomic)
 	ON_COMMAND(ID_MENU_READ_CLIPBOARD, OnMenuReadClipboard)
@@ -236,16 +237,18 @@ BOOL CDlgMain::OnInitDialog()
  
     dll_hinstance = LoadLibrary(_T("sm.dll"));
    
-    if (!install_hook(dll_hinstance, app_glo.GetHWND()))
-	{
-	  //hook failed.                                                 
-	 log_error("Failed to create keyboard hook.");
-	}
+    if (!glo.m_b_disable_global_hotkeys)
+    {
+        if (!install_hook(dll_hinstance, app_glo.GetHWND()))
+        {
+            log_error("Failed to create keyboard hook.");
+        }
     
-    // Set up leet-type overlay state immediately after installing hooks,
-    // before any other initialization that might process keystrokes.
-    // This ensures the correct config value is applied right away.
-    SetupKeyboardOverlay();
+        // Set up leet-type overlay state immediately after installing hooks,
+        // before any other initialization that might process keystrokes.
+        // This ensures the correct config value is applied right away.
+        SetupKeyboardOverlay();
+    }
     
     SetupLog();
   
@@ -1209,12 +1212,10 @@ LRESULT CDlgMain::OnTrayNotification(WPARAM uID, LPARAM lEvent)
             popup->CheckMenuItem(ID_DISABLE_SMARTMUTE, MF_CHECKED);
             }
 
-        /*
-            if (app_glo.m_b_keyboard_disabled)
+            if (glo.m_b_disable_global_hotkeys)
             {
-                popup->CheckMenuItem(ID_TRAY_DISABLE_KEYBOARD, MF_CHECKED);
+                popup->CheckMenuItem(ID_DISABLE_GLOBAL_HOTKEYS, MF_CHECKED);
             }
-        */
 
        popup->TrackPopupMenu(TPM_RIGHTBUTTON|TPM_LEFTALIGN, pt.x, pt.y, this);
         } else
@@ -1423,6 +1424,27 @@ void CDlgMain::OnAboutToolfish()
 void CDlgMain::OnDisableSmartmute() 
 {
 	glo.m_b_smart_mute = !glo.m_b_smart_mute;
+}
+
+void CDlgMain::OnDisableGlobalHotkeys() 
+{
+	glo.m_b_disable_global_hotkeys = !glo.m_b_disable_global_hotkeys;
+
+	if (glo.m_b_disable_global_hotkeys)
+	{
+		kill_hooks();
+		LogMsg(_T("Global hotkeys disabled."));
+	}
+	else
+	{
+		if (!install_hook(dll_hinstance, app_glo.GetHWND()))
+		{
+			log_error("Failed to create keyboard hook.");
+		}
+		BuildHotKeyInfo();
+		SetupKeyboardOverlay();
+		LogMsg(_T("Global hotkeys enabled."));
+	}
 }
 
 void CDlgMain::OnMenuWizardReminder() 

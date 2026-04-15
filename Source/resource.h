@@ -325,13 +325,14 @@
 #define ID_MENU_WIZARD_REMINDER_1_MONTH 32797
 #define ID_MENU_WIZARD_REMINDER_20      32798
 #define ID_MENU_WIZARD_REMINDER_45      32799
+#define ID_DISABLE_GLOBAL_HOTKEYS      32800
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        208
-#define _APS_NEXT_COMMAND_VALUE         32800
+#define _APS_NEXT_COMMAND_VALUE         32801
 #define _APS_NEXT_CONTROL_VALUE         1213
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

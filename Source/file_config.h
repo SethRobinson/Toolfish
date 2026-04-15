@@ -106,6 +106,7 @@ public:
     // New fields must be added at the end for backwards compatibility with old config files
     bool m_b_check_version_disabled; //if true, don't check for new versions on startup
     bool m_b_boot_admin;   //if true, use Task Scheduler with elevated privileges at startup
+    bool m_b_disable_global_hotkeys;
 
     CConfig()
     {
