@@ -64,6 +64,7 @@ Toolfish uses a powerful event system where **Triggers** determine *when* someth
 | **Delay** | Wait a specified time before the next action |
 | **Logoff/Shutdown/Reboot** | Power actions for the system |
 | **Leet-Type Toggle** | Enable/disable l33t sp34k typing mode (Win 11 only?)|
+| **Adjust Active Window Volume** | Adjust the volume of the currently active window's process |
 | **Reset Screen Resolutions** | Asks Windows to reset the displays. (useful in very specific situations) |
 
 ## Other Features
@@ -108,6 +109,9 @@ Both of these functions can be disabled in Options menu.
 * You can also compile it yourself using Visual Studio 2026 and run that version
 
 ## History
+
+**V2.36 Apr 16th, 2026**
+* Added "Adjust active window volume" action with default hotkey events for Ctrl-Alt-Volume Wheel and Ctrl-Alt-Minus/Plus
 
 **V2.35 Feb 4th, 2026**
 * Added "Set audio output device" action.
