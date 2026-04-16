@@ -20,6 +20,8 @@
 #include <direct.h>
 #include "MicAdjust.h"
 #include "SoundOutputUtil.h"
+#include "AppVolumeUtil.h"
+#include "CToastWindow.h"
 
 
 extern bool g_b_tray_active;
@@ -546,6 +548,31 @@ void ProcessMessage(CEvent *p_event, int i_index)
                           // Set the sound output device by substring match
                           uni deviceMatch(p_event->GetAction(i)->GetFilename());
                           SetDefaultOutputDevice(deviceMatch.to_st());
+                      }
+                     if (p_event->GetAction(i)->GetActionType() == C_ACTION_APP_VOLUME)
+                      {
+                          TCHAR appName[64] = {0};
+                          int result = SetActiveWindowVolume(
+                              p_event->GetAction(i)->GetVolume(),
+                              p_event->GetAction(i)->GetFade(),
+                              appName, 64);
+                          if (result >= 0)
+                          {
+                              if (appName[0])
+                                  LogMsg(_T("%s volume set to %d%%"), appName, result);
+                              else
+                                  LogMsg(_T("App volume set to %d%%"), result);
+
+                              if (p_event->GetAction(i)->GetTTS())
+                              {
+                                  TCHAR msg[128];
+                                  if (appName[0])
+                                      _stprintf(msg, _T("%s volume: %d%%"), appName, result);
+                                  else
+                                      _stprintf(msg, _T("App volume: %d%%"), result);
+                                  ToastWindow::ShowToast(msg);
+                              }
+                          }
                       }
                      
      

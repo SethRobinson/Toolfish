@@ -28,6 +28,7 @@
 #include "CDlgQuit.h"
 #include "DlgWizardOTReminder.h"
 #include "CDlgWizardRecurrentReminder.h"
+#include "CToastWindow.h"
 #include "CDlgWizardAtomic.h"
 #include "CDlgAlert.h"
 #include "CDlgWizardEmail.h"
@@ -992,6 +993,17 @@ LRESULT CDlgMain::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
        {
            Log("Got a null!");
        }
+   }
+
+   if (message == WM_SHOW_TOAST)
+   {
+       TCHAR* msg = (TCHAR*)lParam;
+       if (msg)
+       {
+           ToastWindow::ShowToastOnUIThread(msg);
+           delete[] msg;
+       }
+       return 0;
    }
 
     

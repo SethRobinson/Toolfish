@@ -176,6 +176,12 @@
     <ClCompile Include="Source\SoundOutputUtil.cpp">
       <Filter>Source\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Source\AppVolumeUtil.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CToastWindow.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
     <ClCompile Include="Source\mute_util.cpp">
       <Filter>Source\Util</Filter>
     </ClCompile>
@@ -245,6 +251,9 @@
       <Filter>Source\Dialogs\Actions</Filter>
     </ClCompile>
     <ClCompile Include="Source\CDlgActionSoundOutput.cpp">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CDlgActionAppVolume.cpp">
       <Filter>Source\Dialogs\Actions</Filter>
     </ClCompile>
     <ClCompile Include="Source\CDlgActionRun.cpp">
@@ -481,6 +490,12 @@
     <ClInclude Include="Source\SoundOutputUtil.h">
       <Filter>Source\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Source\AppVolumeUtil.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CToastWindow.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
     <ClInclude Include="Source\IPolicyConfig.h">
       <Filter>Source\Util</Filter>
     </ClInclude>
@@ -550,6 +565,9 @@
       <Filter>Source\Dialogs\Actions</Filter>
     </ClInclude>
     <ClInclude Include="Source\CDlgActionSoundOutput.h">
+      <Filter>Source\Dialogs\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDlgActionAppVolume.h">
       <Filter>Source\Dialogs\Actions</Filter>
     </ClInclude>
     <ClInclude Include="Source\CDlgActionRun.h">

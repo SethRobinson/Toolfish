@@ -183,6 +183,16 @@ TCHAR * CEvent::GetAutoName(bool b_long)
               _tcscpy(ws_action, p_action->GetName(b_long));
           }
           else
+       if (p_action = FindAction(C_ACTION_SOUND_OUTPUT))
+          {
+              _tcscpy(ws_action, p_action->GetName(b_long));
+          }
+          else
+       if (p_action = FindAction(C_ACTION_APP_VOLUME))
+          {
+              _tcscpy(ws_action, p_action->GetName(b_long));
+          }
+          else
 
        if (p_action = FindAction(C_ACTION_DELAY))
      {

@@ -271,6 +271,14 @@ TCHAR * CAction::GetName(bool b_long)
 		   _stprintf(g_action_buf, _T("Set Mic Volume to %d%%"), GetVolume());
 		   return ((TCHAR*)&g_action_buf);
 	   }
+	   if (GetActionType() == C_ACTION_APP_VOLUME)
+	   {
+		   if (GetFade())
+			   _stprintf(g_action_buf, _T("Adjust Active Window Vol by %d%%"), GetVolume());
+		   else
+			   _stprintf(g_action_buf, _T("Set Active Window Vol to %d%%"), GetVolume());
+		   return ((TCHAR*)&g_action_buf);
+	   }
        if (GetActionType() == C_ACTION_MONITOR)
        {
 #ifdef _UNICODE

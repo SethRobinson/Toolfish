@@ -299,6 +299,10 @@
 #define IDC_ADMIN_EXPLANATION           1210
 #define IDC_ADMIN_STATUS                1211
 #define IDC_B_CHECK_NEW_VERSIONS        1212
+#define IDD_ACTION_APP_VOLUME           208
+#define IDC_APP_VOL_EDIT                1213
+#define IDC_APP_VOL_RELATIVE            1214
+#define IDC_APP_VOL_SHOW_TOAST          1215
 #define ID_MENU_EXIT                    32772
 #define ID_MENU_OPTIONS                 32773
 #define ID_MENU_COPY                    32774
@@ -331,9 +335,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        208
+#define _APS_NEXT_RESOURCE_VALUE        209
 #define _APS_NEXT_COMMAND_VALUE         32801
-#define _APS_NEXT_CONTROL_VALUE         1213
+#define _APS_NEXT_CONTROL_VALUE         1216
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

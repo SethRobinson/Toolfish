@@ -62,6 +62,7 @@ const int WM_TOGGLE_TOOLFISH = WM_USER+13;
 const int WM_TRAY_BLINK_ON = WM_USER+14;
 const int WM_TRAY_BLINK_OFF = WM_USER+15;
 const int WM_TOGGLE_TTS = WM_USER+16; //turn text to speech on or off
+const int WM_SHOW_TOAST = WM_USER+600;
 
 class CEventList; //forward for speed
 

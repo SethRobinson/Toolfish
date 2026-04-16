@@ -21,6 +21,7 @@
 #include "DlgMicVolume.h"
 #include "CDlgActionRez.h"
 #include "CDlgActionSoundOutput.h"
+#include "CDlgActionAppVolume.h"
 
 const int C_ACTION_MAX_NAME_SIZE = 50;
 
@@ -96,6 +97,7 @@ enum eActionTypes
 	C_ACTION_MIC_VOLUME = 17,
     C_ACTION_CHANGE_REZ = 18,
     C_ACTION_SOUND_OUTPUT = 19,
+    C_ACTION_APP_VOLUME = 20,
 
     //Add more above
     C_ACTION_TYPES_COUNT
@@ -134,6 +136,7 @@ public:
 		_tcscpy(m_action[C_ACTION_MIC_VOLUME].st_name, _T("Set Mic Input Volume"));
         _tcscpy(m_action[C_ACTION_CHANGE_REZ].st_name, _T("Reset screen resolutions (NVidia fix)"));
         _tcscpy(m_action[C_ACTION_SOUND_OUTPUT].st_name, _T("Set Sound Output Device"));
+        _tcscpy(m_action[C_ACTION_APP_VOLUME].st_name, _T("Set Active Window Volume"));
 
 	   }
 
@@ -239,6 +242,12 @@ public:
                        ((CDlgActionSoundOutput*)p_dlg)->SetActionPointer(p_action);
                    }
                    else
+                   if (i_action_type == C_ACTION_APP_VOLUME)
+                   {
+                       p_dlg = new CDlgActionAppVolume();
+                       ((CDlgActionAppVolume*)p_dlg)->SetActionPointer(p_action);
+                   }
+                   else
 
         if (i_action_type == C_ACTION_MONITOR)
            {
@@ -327,6 +336,13 @@ public:
 	 if (m_i_action_type == C_ACTION_MIC_VOLUME)
 	 {
 		 SetVolume(100); //default should be max
+	 }
+
+	 if (m_i_action_type == C_ACTION_APP_VOLUME)
+	 {
+		 SetVolume(50);
+		 SetFade(false);
+		 SetTTS(true);
 	 }
 
      if (m_i_action_type == C_ACTION_MONITOR)

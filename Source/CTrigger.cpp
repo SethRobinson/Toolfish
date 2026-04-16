@@ -185,6 +185,18 @@ TCHAR * CTrigger::GetName()
         if (m_vk_key == VK_CAPITAL)  _stprintf(st_key, _T("Caps Lock"));
         if (m_vk_key == char(VK_NUMLOCK))  _stprintf(st_key, _T("Num Lock"));
 
+        // OEM / punctuation keys
+        if (m_vk_key == char(VK_OEM_MINUS))  _stprintf(st_key, _T("-"));
+        if (m_vk_key == char(VK_OEM_PLUS))   _stprintf(st_key, _T("="));
+        if (m_vk_key == char(VK_OEM_COMMA))  _stprintf(st_key, _T(","));
+        if (m_vk_key == char(VK_OEM_PERIOD)) _stprintf(st_key, _T("."));
+        if (m_vk_key == char(VK_OEM_1))      _stprintf(st_key, _T(";"));
+        if (m_vk_key == char(VK_OEM_7))      _stprintf(st_key, _T("'"));
+        if (m_vk_key == char(VK_OEM_4))      _stprintf(st_key, _T("["));
+        if (m_vk_key == char(VK_OEM_6))      _stprintf(st_key, _T("]"));
+        if (m_vk_key == char(VK_OEM_5))      _stprintf(st_key, _T("\\"));
+        if (m_vk_key == char(VK_OEM_3))      _stprintf(st_key, _T("`"));
+
         _stprintf(g_trigger_buf, _T("Hotkey: %s%s%s%s"), ws_control, ws_alt, ws_shift, st_key);
         return ((TCHAR*)&g_trigger_buf);
     }

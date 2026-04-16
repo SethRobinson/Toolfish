@@ -206,6 +206,29 @@ DLL_EXPORT LRESULT CALLBACK LowLevelKeyboardProc(
             // Post the virtual key code to the main app for hotkey processing
             PostMessage(g_main_hwnd, WM_USER+500, pkbhs->vkCode, 0);
             
+            // Check if this key+modifiers matches a registered hotkey with passthrough disabled.
+            // This is critical for keys like VK_VOLUME_UP/DOWN that Windows processes at the
+            // system level -- WH_GETMESSAGE filtering happens too late for those.
+            if (!b_disable_keys)
+            {
+                bool bShiftDown = (GetAsyncKeyState(VK_SHIFT) & 0x8000) != 0;
+                bool bCtrlDown = (GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0;
+                bool bAltDown = (GetAsyncKeyState(VK_MENU) & 0x8000) != 0;
+                byte vkPressed = (byte)pkbhs->vkCode;
+
+                for (int i = 0; i < g_i_key_size; i++)
+                {
+                    if (vkPressed == a_keys[i].vk_key &&
+                        bShiftDown == a_keys[i].b_shift &&
+                        bCtrlDown == a_keys[i].b_control &&
+                        bAltDown == a_keys[i].b_alt &&
+                        !a_keys[i].b_passthrough)
+                    {
+                        return 1;
+                    }
+                }
+            }
+
             // Handle leet-type overlay in the low-level hook (works with all apps, 32 and 64-bit)
             // This replaces the WH_GETMESSAGE-based approach which only worked for same-bitness processes
             if (b_use_key_overlay)

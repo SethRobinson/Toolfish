@@ -1302,6 +1302,9 @@
     </ClCompile>
     <ClCompile Include="Source\MicAdjust.cpp" />
     <ClCompile Include="Source\SoundOutputUtil.cpp" />
+    <ClCompile Include="Source\AppVolumeUtil.cpp" />
+    <ClCompile Include="Source\CToastWindow.cpp" />
+    <ClCompile Include="Source\CDlgActionAppVolume.cpp" />
     <ClCompile Include="Source\mute_util.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug ANSI|Win32'">Disabled</Optimization>
       <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug ANSI|Win32'">EnableFastChecks</BasicRuntimeChecks>
@@ -1500,6 +1503,9 @@
     <ClInclude Include="Source\mfc_all_u.h" />
     <ClInclude Include="Source\MicAdjust.h" />
     <ClInclude Include="Source\SoundOutputUtil.h" />
+    <ClInclude Include="Source\AppVolumeUtil.h" />
+    <ClInclude Include="Source\CToastWindow.h" />
+    <ClInclude Include="Source\CDlgActionAppVolume.h" />
     <ClInclude Include="Source\IPolicyConfig.h" />
     <ClInclude Include="Source\mute_util.h" />
     <ClInclude Include="Source\gamepad_util.h" />

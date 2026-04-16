@@ -118,6 +118,8 @@ SetOutPath "$INSTDIR\events"
   File "..\app\events\macro - ip address.dat"
   File "..\app\events\macro - super v paste.dat"
   File "..\app\events\open notes.dat"
+  File "..\app\events\event_app_vol_down.dat"
+  File "..\app\events\event_app_vol_up.dat"
   
 
 CreateDirectory "$SMPROGRAMS\${_TITLE_}"

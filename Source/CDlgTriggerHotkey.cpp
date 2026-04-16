@@ -170,17 +170,18 @@ void CDlgTriggerHotkey::PopulateCombo()
     AddComboItem(_T("Y"), 'Y');
     AddComboItem(_T("Z"), 'Z');
 
-    // Punctuation
-    AddComboItem(_T(","), ',');
-    AddComboItem(_T("."), '.');
-    AddComboItem(_T(";"), ';');
-    AddComboItem(_T("'"), '\'');
-    AddComboItem(_T("["), '[');
-    AddComboItem(_T("]"), ']');
-    AddComboItem(_T("-"), '-');
-    AddComboItem(_T("="), '=');
-    AddComboItem(_T("\\"), '\\');
-    AddComboItem(_T("`"), '`');
+    // Punctuation / OEM keys (must use VK_OEM_* codes, not ASCII chars,
+    // because the low-level keyboard hook reports VK_OEM_* virtual key codes)
+    AddComboItem(_T("- (Minus)"), VK_OEM_MINUS);
+    AddComboItem(_T("= (Equals)"), VK_OEM_PLUS);
+    AddComboItem(_T(", (Comma)"), VK_OEM_COMMA);
+    AddComboItem(_T(". (Period)"), VK_OEM_PERIOD);
+    AddComboItem(_T("; (Semicolon)"), VK_OEM_1);
+    AddComboItem(_T("' (Quote)"), VK_OEM_7);
+    AddComboItem(_T("[ (Left Bracket)"), VK_OEM_4);
+    AddComboItem(_T("] (Right Bracket)"), VK_OEM_6);
+    AddComboItem(_T("\\ (Backslash)"), VK_OEM_5);
+    AddComboItem(_T("` (Backtick)"), VK_OEM_3);
 
     // Navigation keys
     AddComboItem(_T("Tab"), VK_TAB);
