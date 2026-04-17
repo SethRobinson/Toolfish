@@ -110,6 +110,10 @@ Both of these functions can be disabled in Options menu.
 
 ## History
 
+**V2.37 Apr 17th, 2026**
+* Improved the volume overlay shown when adjusting the active app's audio
+* Fixed bug where using the volume wheel in a hotkey could still modify system audio as well
+
 **V2.36 Apr 16th, 2026**
 * Added "Adjust active window volume" action with default hotkey events for Ctrl-Alt-Volume Wheel and Ctrl-Alt-Minus/Plus
 

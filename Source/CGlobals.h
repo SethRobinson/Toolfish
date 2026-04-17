@@ -19,7 +19,7 @@ void LogMsg(char * lpFormat, ...);
 #endif
 const int C_MAX_URL_SIZE = 2024;
 
-const float C_F_VERSION = 2.36f;
+const float C_F_VERSION = 2.37f;
 
 //these macros assume 1 equals a second, like with CTime
 
