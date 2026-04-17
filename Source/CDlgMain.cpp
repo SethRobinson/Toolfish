@@ -997,12 +997,7 @@ LRESULT CDlgMain::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 
    if (message == WM_SHOW_TOAST)
    {
-       TCHAR* msg = (TCHAR*)lParam;
-       if (msg)
-       {
-           ToastWindow::ShowToastOnUIThread(msg);
-           delete[] msg;
-       }
+       ToastWindow::HandleShowToastMessage(lParam);
        return 0;
    }
 

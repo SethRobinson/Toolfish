@@ -2,8 +2,50 @@
 #include "mute_util.h"
 #include "mmsystem.h"
 #include "CDlgMute.h"
+#include "CEvent.h"
+#include "CEventList.h"
+#include "CTrigger.h"
+#include "CGlobals.h"
 #include <mmdeviceapi.h>
 #include <endpointvolume.h>
+
+// Returns true if any enabled event has a hotkey trigger matching the given
+// VK + currently-held modifier state. Used to bail out of side-effect processing
+// (e.g. volume-knob sensitivity) when the key is being consumed as a hotkey.
+//
+// Modifier matching is "subset": every modifier the trigger requires must be
+// held, but extra modifiers being held is fine. This mirrors the suppression
+// logic in sm.cpp's LowLevelKeyboardProc so the two stay in sync.
+static bool AnyHotkeyMatches(WPARAM vk)
+{
+    bool b_shift = (GetAsyncKeyState(VK_SHIFT)   & 0x8000) != 0;
+    bool b_ctrl  = (GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0;
+    bool b_alt   = (GetAsyncKeyState(VK_MENU)    & 0x8000) != 0;
+
+    CEventList* pList = app_glo.GetEventList();
+    if (!pList) return false;
+
+    int count = pList->GetCount();
+    for (int e = 0; e < count; e++)
+    {
+        CEvent* pEvent = pList->GetEvent(e);
+        if (!pEvent || !pEvent->GetEnabled()) continue;
+
+        int trigCount = pEvent->GetTriggerCount();
+        for (int t = 0; t < trigCount; t++)
+        {
+            CTrigger* pTrig = pEvent->GetTrigger(t);
+            if (!pTrig) continue;
+            if (pTrig->GetTriggerType() != C_TRIGGER_HOTKEY) continue;
+            if ((char)vk != pTrig->m_vk_key) continue;
+            if (pTrig->m_b_shift && !b_shift) continue;
+            if (pTrig->m_b_ctrl  && !b_ctrl)  continue;
+            if (pTrig->m_b_alt   && !b_alt)   continue;
+            return true;
+        }
+    }
+    return false;
+}
 
 // GUIDs for Core Audio API
 static const GUID CLSID_MMDeviceEnumerator_local = { 0xBCDE0395, 0xE52F, 0x467C, {0x8E, 0x3D, 0xC4, 0x57, 0x92, 0x91, 0x69, 0x2E} };
@@ -83,6 +125,15 @@ bool ProcessVolumeKnobKey(WPARAM wParam)
 
     // Check if feature is enabled
     if (!glo.m_b_volume_knob_sensitivity)
+        return false;
+
+    // If a registered hotkey matches this key+modifiers, the volume key is
+    // being used as a custom hotkey (e.g. Ctrl+Alt+Volume Wheel for "Adjust
+    // active window volume"), not as a system volume control. Bail so we
+    // don't also nudge the master endpoint volume in the background -- which
+    // would silently change system volume with no OSD, since the keyboard
+    // hook is suppressing Windows' own handler.
+    if (AnyHotkeyMatches(wParam))
         return false;
 
     // Check if shift-only mode is enabled and shift is not pressed

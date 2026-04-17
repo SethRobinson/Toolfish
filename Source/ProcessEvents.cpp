@@ -552,10 +552,11 @@ void ProcessMessage(CEvent *p_event, int i_index)
                      if (p_event->GetAction(i)->GetActionType() == C_ACTION_APP_VOLUME)
                       {
                           TCHAR appName[64] = {0};
+                          HWND  hwndApp = NULL;
                           int result = SetActiveWindowVolume(
                               p_event->GetAction(i)->GetVolume(),
                               p_event->GetAction(i)->GetFade(),
-                              appName, 64);
+                              appName, 64, &hwndApp);
                           if (result >= 0)
                           {
                               if (appName[0])
@@ -567,10 +568,14 @@ void ProcessMessage(CEvent *p_event, int i_index)
                               {
                                   TCHAR msg[128];
                                   if (appName[0])
-                                      _stprintf(msg, _T("%s volume: %d%%"), appName, result);
+                                      _stprintf(msg, _T("%s"), appName);
                                   else
-                                      _stprintf(msg, _T("App volume: %d%%"), result);
-                                  ToastWindow::ShowToast(msg);
+                                      _stprintf(msg, _T("App volume"));
+
+                                  ToastWindow::Options opts;
+                                  opts.anchorWindow = hwndApp;
+                                  opts.progress     = result;
+                                  ToastWindow::ShowToast(msg, opts);
                               }
                           }
                       }

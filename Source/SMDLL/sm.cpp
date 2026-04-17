@@ -198,9 +198,15 @@ DLL_EXPORT LRESULT CALLBACK LowLevelKeyboardProc(
     if (nCode == HC_ACTION)
     {
         KBDLLHOOKSTRUCT* pkbhs = (KBDLLHOOKSTRUCT*)lParam;
-        
-        // Only process key-down events (WM_KEYDOWN or WM_SYSKEYDOWN)
-        // WH_KEYBOARD_LL doesn't send repeated events for held keys like WH_KEYBOARD did
+
+        // Track which VKs we suppressed on KEYDOWN so we can also swallow the
+        // matching KEYUP. This is critical for media keys like VK_VOLUME_UP/DOWN:
+        // if we only block the down event, Windows still processes the up event
+        // at the system level and changes the master volume anyway. Also, by the
+        // time KEYUP fires the user may have released the modifier keys (Ctrl/Alt),
+        // so we can't re-evaluate the hotkey match -- we have to remember.
+        static bool s_suppressed_vk[256] = {0};
+
         if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)
         {
             // Post the virtual key code to the main app for hotkey processing
@@ -218,16 +224,46 @@ DLL_EXPORT LRESULT CALLBACK LowLevelKeyboardProc(
 
                 for (int i = 0; i < g_i_key_size; i++)
                 {
-                    if (vkPressed == a_keys[i].vk_key &&
-                        bShiftDown == a_keys[i].b_shift &&
-                        bCtrlDown == a_keys[i].b_control &&
-                        bAltDown == a_keys[i].b_alt &&
-                        !a_keys[i].b_passthrough)
-                    {
-                        return 1;
-                    }
+                    if (vkPressed != a_keys[i].vk_key) continue;
+                    if (a_keys[i].b_passthrough) continue;
+
+                    // SUBSET match on modifiers: every modifier the trigger
+                    // requires must be held, but extra modifiers being held
+                    // is fine. The previous exact-equality check (==) was
+                    // racy for media keys: PostMessage to the main app
+                    // dispatches the action asynchronously, so the deferred
+                    // ProcessHotkeyEvents could see a slightly different
+                    // GetAsyncKeyState snapshot than this hook callback
+                    // sees at synchronous capture time. The action would
+                    // then fire while suppression silently bailed out,
+                    // letting Windows process VK_VOLUME_UP/DOWN at the
+                    // system level. Subset match is robust to that.
+                    if (a_keys[i].b_shift   && !bShiftDown) continue;
+                    if (a_keys[i].b_control && !bCtrlDown)  continue;
+                    if (a_keys[i].b_alt     && !bAltDown)   continue;
+
+                    // Bare unmodified key with no modifiers required would
+                    // also match here, which we want (existing behavior).
+                    s_suppressed_vk[vkPressed] = true;
+                    return 1;
                 }
             }
+        }
+        else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP)
+        {
+            // Mirror the down-side suppression on the up event so Windows never
+            // sees a half-event for keys we ate. Otherwise media keys like
+            // VK_VOLUME_UP/DOWN still bubble through to the OS volume handler.
+            byte vkReleased = (byte)pkbhs->vkCode;
+            if (s_suppressed_vk[vkReleased])
+            {
+                s_suppressed_vk[vkReleased] = false;
+                return 1;
+            }
+        }
+
+        if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)
+        {
 
             // Handle leet-type overlay in the low-level hook (works with all apps, 32 and 64-bit)
             // This replaces the WH_GETMESSAGE-based approach which only worked for same-bitness processes

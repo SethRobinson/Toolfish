@@ -1,5 +1,6 @@
 #pragma once
 
+#include <windows.h>
 #include <tchar.h>
 
 // Set (or adjust) the per-app volume for the current foreground window's process.
@@ -7,5 +8,8 @@
 // relative:   if true, 'volume' is added to the current level
 // appNameOut: if non-NULL, receives the process name (e.g. "firefox"). Buffer must be >= appNameSize TCHARs.
 // appNameSize: size of appNameOut buffer in TCHARs
+// outHwnd:    if non-NULL, receives the foreground HWND that was targeted (useful for anchoring UI)
 // Returns the resulting volume percentage (0-100), or -1 on failure.
-int SetActiveWindowVolume(int volume, bool relative, TCHAR* appNameOut = NULL, int appNameSize = 0);
+int SetActiveWindowVolume(int volume, bool relative,
+                          TCHAR* appNameOut = NULL, int appNameSize = 0,
+                          HWND* outHwnd = NULL);

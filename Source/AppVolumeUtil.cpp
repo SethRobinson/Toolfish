@@ -135,10 +135,14 @@ static int TrySetVolumeForPids(IAudioSessionEnumerator* pSessionEnum,
     return -1;
 }
 
-int SetActiveWindowVolume(int volume, bool relative, TCHAR* appNameOut, int appNameSize)
+int SetActiveWindowVolume(int volume, bool relative,
+                          TCHAR* appNameOut, int appNameSize,
+                          HWND* outHwnd)
 {
     if (appNameOut && appNameSize > 0)
         appNameOut[0] = _T('\0');
+    if (outHwnd)
+        *outHwnd = NULL;
 
     HWND hwndFG = GetForegroundWindow();
     if (!hwndFG)
@@ -146,6 +150,9 @@ int SetActiveWindowVolume(int volume, bool relative, TCHAR* appNameOut, int appN
         LogMsg(_T("App volume: No foreground window found."));
         return -1;
     }
+
+    if (outHwnd)
+        *outHwnd = hwndFG;
 
     DWORD targetPid = 0;
     GetWindowThreadProcessId(hwndFG, &targetPid);

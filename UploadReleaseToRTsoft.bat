@@ -1,1 +1,2 @@
 call %RT_PROJECTS%\UploadFileToRTsoftSSH.bat dist\ToolfishFullInstaller.exe ./
+pause
