@@ -2,7 +2,7 @@
 
 A powerful Windows system tray utility for web monitoring, hotkeys, macros, and automation.
 
-## [Download latest version](https://rtsoft.com/ToolfishFullInstaller.exe) (For Windows, signed by RTsoft)
+## [Download latest version](https://rtsoft.com/ToolfishFullInstaller.exe) (For Windows, codesigned by Seth A. Robinson)
 
 ## Screenshots
 
