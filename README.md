@@ -104,7 +104,7 @@ It's a bit scary to run an a system tray app that can see everything you do (esp
 
 Both of these functions can be disabled in Options menu.
 
-* The version I have here for download has been signed by Robinson Technologies Corporation, my company.  The first time you run it, Windows will popup telling you this - if it doesn't (the file isn't signed) than DON'T run it, it didn't come from me. 
+* The version I have here for download has been code signed by Seth A. Robinson. (me) The first time you run it, Windows will probably popup a dialog telling you this - if instead it warns you that the file isn't signed and dangerous, DON'T run it, it didn't come from me!
 
 * You can also compile it yourself using Visual Studio 2026 and run that version
 
